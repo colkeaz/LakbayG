@@ -1,0 +1,558 @@
+{
+  "version": 1,
+  "services": [
+    {
+      "id": "taal-birth",
+      "agency": "Taal Municipal Local Civil Registrar",
+      "verified": false,
+      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/",
+      "title": {
+        "en": "Local birth-record copy",
+        "fil": "Lokal na kopya ng tala ng kapanganakan"
+      },
+      "summary": {
+        "en": "For your own existing birth record registered in Taal. A local copy is different from a PSA-issued certificate.",
+        "fil": "Para sa sarili mong umiiral na tala ng kapanganakan na nakarehistro sa Taal. Iba ang lokal na kopya sa sertipiko mula sa PSA."
+      },
+      "location": {
+        "en": "Taal, Batangas. Confirm the current office address and service counter with the municipal civil registrar before travelling.",
+        "fil": "Taal, Batangas. Kumpirmahin muna sa municipal civil registrar ang kasalukuyang address at tanggapan bago bumiyahe."
+      },
+      "notice": {
+        "en": "Current procedure not yet confirmed. The available charter is older. Contact the municipal civil registrar for requirements, office directions and copy issuance steps. No document checklist is published yet.",
+        "fil": "Hindi pa kumpirmado ang kasalukuyang proseso. Luma ang makukuhang charter. Makipag-ugnayan sa municipal civil registrar para sa mga kailangan, direksyon at hakbang. Wala pang inilalathalang checklist ng dokumento."
+      },
+      "steps": [],
+      "requirements": [],
+      "sources": [
+        "taal"
+      ]
+    },
+    {
+      "id": "pnp",
+      "agency": "Philippine National Police",
+      "verified": true,
+      "url": "https://pnpclearance.ph/",
+      "title": {
+        "en": "National Police Clearance",
+        "fil": "National Police Clearance"
+      },
+      "summary": {
+        "en": "Standard first-time, in-person application for an adult requesting their own clearance.",
+        "fil": "Karaniwang unang aplikasyon na may personal na pagpunta para sa nasa hustong gulang na kumukuha ng sariling clearance."
+      },
+      "location": {
+        "en": "Choose a participating police station and available schedule in the official portal.",
+        "fil": "Pumili ng kalahok na police station at iskedyul sa opisyal na portal."
+      },
+      "notice": {
+        "en": "Source checked; independent team review pending. Confirm accepted ID and current instructions in the portal. Fee exemptions and renewals need separate official guidance.",
+        "fil": "Nasuri ang sanggunian; hinihintay pa ang hiwalay na pagsusuri ng pangkat. Kumpirmahin sa portal ang tinatanggap na ID at mga tagubilin. May hiwalay na gabay para sa exemption sa bayad at renewal."
+      },
+      "steps": [
+        {
+          "title": {
+            "en": "Create an account",
+            "fil": "Gumawa ng account"
+          },
+          "detail": {
+            "en": "Register on the NPCS portal and complete your profile.",
+            "fil": "Magrehistro sa NPCS portal at kumpletuhin ang iyong profile."
+          },
+          "place": {
+            "en": "Official portal",
+            "fil": "Opisyal na portal"
+          }
+        },
+        {
+          "title": {
+            "en": "Choose your appointment",
+            "fil": "Pumili ng appointment"
+          },
+          "detail": {
+            "en": "Start a clearance application; select your purpose, station and date. Keep the reference number.",
+            "fil": "Simulan ang aplikasyon; piliin ang layunin, istasyon at petsa. Itabi ang reference number."
+          },
+          "place": {
+            "en": "Official portal",
+            "fil": "Opisyal na portal"
+          }
+        },
+        {
+          "title": {
+            "en": "Follow payment instructions",
+            "fil": "Sundin ang tagubilin sa pagbabayad"
+          },
+          "detail": {
+            "en": "Use the portal payment options and keep the payment confirmation.",
+            "fil": "Gamitin ang mga opsyon sa portal at itabi ang kumpirmasyon ng bayad."
+          },
+          "place": {
+            "en": "Official portal",
+            "fil": "Opisyal na portal"
+          }
+        },
+        {
+          "title": {
+            "en": "Attend and complete processing",
+            "fil": "Pumunta at kumpletuhin ang proseso"
+          },
+          "detail": {
+            "en": "Bring your ID, payment confirmation and reference number. Complete photo, fingerprints and signature capture; follow release instructions.",
+            "fil": "Dalhin ang ID, kumpirmasyon ng bayad at reference number. Magpakuha ng larawan, fingerprint at lagda; sundin ang tagubilin sa pagkuha."
+          },
+          "place": {
+            "en": "Your selected police station",
+            "fil": "Napiling police station"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "pnp-id-v1",
+          "text": {
+            "en": "One valid government-issued ID accepted by PNP",
+            "fil": "Isang balidong government-issued ID na tinatanggap ng PNP"
+          }
+        },
+        {
+          "id": "pnp-payment-v1",
+          "text": {
+            "en": "Proof of payment / payment confirmation",
+            "fil": "Katibayan o kumpirmasyon ng bayad"
+          }
+        },
+        {
+          "id": "pnp-reference-v1",
+          "text": {
+            "en": "NPC appointment reference number",
+            "fil": "Reference number ng NPC appointment"
+          }
+        }
+      ],
+      "sources": [
+        "pnp-guide"
+      ]
+    },
+    {
+      "id": "nbi",
+      "agency": "National Bureau of Investigation",
+      "verified": true,
+      "url": "https://clearance.nbi.gov.ph/",
+      "title": {
+        "en": "NBI Clearance",
+        "fil": "NBI Clearance"
+      },
+      "summary": {
+        "en": "Standard first-time, in-person application for an adult requesting their own clearance.",
+        "fil": "Karaniwang unang aplikasyon na may personal na pagpunta para sa nasa hustong gulang na kumukuha ng sariling clearance."
+      },
+      "location": {
+        "en": "Choose a branch and schedule in the official NBI application portal.",
+        "fil": "Pumili ng sangay at iskedyul sa opisyal na NBI application portal."
+      },
+      "notice": {
+        "en": "Source checked; independent team review pending. Confirm accepted IDs and current instructions with NBI. Special cases and first-time jobseeker benefits need separate official guidance.",
+        "fil": "Nasuri ang sanggunian; hinihintay pa ang hiwalay na pagsusuri ng pangkat. Kumpirmahin sa NBI ang tinatanggap na ID at tagubilin. May hiwalay na gabay para sa espesyal na kaso at benepisyo ng first-time jobseeker."
+      },
+      "steps": [
+        {
+          "title": {
+            "en": "Register and complete your profile",
+            "fil": "Magrehistro at kumpletuhin ang profile"
+          },
+          "detail": {
+            "en": "Use the official portal. Review your personal details against your identification.",
+            "fil": "Gamitin ang opisyal na portal. Ihambing ang personal na detalye sa iyong ID."
+          },
+          "place": {
+            "en": "Official portal",
+            "fil": "Opisyal na portal"
+          }
+        },
+        {
+          "title": {
+            "en": "Apply and select a branch",
+            "fil": "Mag-apply at pumili ng sangay"
+          },
+          "detail": {
+            "en": "Choose the ID you will bring, branch and available appointment. Retain your reference number.",
+            "fil": "Piliin ang dadalhing ID, sangay at available na appointment. Itabi ang reference number."
+          },
+          "place": {
+            "en": "Official portal",
+            "fil": "Opisyal na portal"
+          }
+        },
+        {
+          "title": {
+            "en": "Complete portal payment",
+            "fil": "Bayaran ayon sa portal"
+          },
+          "detail": {
+            "en": "Follow the displayed payment instructions; retain proof and check payment status.",
+            "fil": "Sundin ang ipinapakitang tagubilin; itabi ang katibayan at tingnan ang status ng bayad."
+          },
+          "place": {
+            "en": "Official portal",
+            "fil": "Opisyal na portal"
+          }
+        },
+        {
+          "title": {
+            "en": "Visit the selected branch",
+            "fil": "Pumunta sa napiling sangay"
+          },
+          "detail": {
+            "en": "Present your reference, payment proof and IDs. Complete biometrics and data review. Follow the officer’s release or follow-up instructions.",
+            "fil": "Ipakita ang reference, katibayan ng bayad at mga ID. Kumpletuhin ang biometrics at pagsusuri ng datos. Sundin ang tagubilin sa pagkuha o pagbabalik."
+          },
+          "place": {
+            "en": "Your selected NBI branch",
+            "fil": "Napiling sangay ng NBI"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "nbi-ids-v1",
+          "text": {
+            "en": "Two original, valid government-issued IDs accepted by NBI",
+            "fil": "Dalawang orihinal at balidong government-issued ID na tinatanggap ng NBI"
+          }
+        },
+        {
+          "id": "nbi-reference-v1",
+          "text": {
+            "en": "Application reference number or QR code",
+            "fil": "Reference number o QR code ng aplikasyon"
+          }
+        },
+        {
+          "id": "nbi-payment-v1",
+          "text": {
+            "en": "Proof of payment / receipt",
+            "fil": "Katibayan ng bayad o resibo"
+          }
+        }
+      ],
+      "sources": [
+        "nbi-guide",
+        "nbi-charter"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "pnp-guide",
+      "title": "PNP application tutorial",
+      "url": "https://pnpclearance.ph/how_to_apply_v2.pdf",
+      "section": "Pages 2–14: first-time appearance application",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "nbi-guide",
+      "title": "NBI: How to apply",
+      "url": "https://nbi.gov.ph/how-to-apply-nbi-clearance/",
+      "section": "Online application and physical branch appearance",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "nbi-charter",
+      "title": "NBI Citizen’s Charter",
+      "url": "https://nbi.gov.ph/citizens-charter/nbi-clearance-application/",
+      "section": "Identification requirements; fees conflict with newer guide and are omitted",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "taal",
+      "title": "Taal Municipal Local Civil Registrar",
+      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/",
+      "section": "Links a charter under a 2019 upload path; current copy-issuance details unconfirmed",
+      "checked": "2026-11-04"
+    }
+  ],
+  "questions": [
+    {
+      "id": "start",
+      "text": {
+        "en": "What do you need help with?",
+        "fil": "Saan mo kailangan ng tulong?"
+      },
+      "choices": [
+        {
+          "id": "birth",
+          "text": {
+            "en": "A birth-record copy",
+            "fil": "Kopya ng tala ng kapanganakan"
+          },
+          "next": "birth-type"
+        },
+        {
+          "id": "clearance",
+          "text": {
+            "en": "A clearance",
+            "fil": "Clearance"
+          },
+          "next": "clearance-type"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "general-referral"
+        }
+      ]
+    },
+    {
+      "id": "birth-type",
+      "text": {
+        "en": "Which birth document was requested?",
+        "fil": "Anong dokumento ng kapanganakan ang hinihingi?"
+      },
+      "choices": [
+        {
+          "id": "local",
+          "text": {
+            "en": "Local civil-registry copy",
+            "fil": "Kopya mula sa lokal na civil registry"
+          },
+          "next": "birth-location"
+        },
+        {
+          "id": "psa",
+          "text": {
+            "en": "PSA-issued certificate",
+            "fil": "Sertipiko mula sa PSA"
+          },
+          "next": "psa-referral"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "psa-referral"
+        }
+      ]
+    },
+    {
+      "id": "birth-location",
+      "text": {
+        "en": "Is the existing record registered in Taal?",
+        "fil": "Nakarehistro ba sa Taal ang umiiral na tala?"
+      },
+      "choices": [
+        {
+          "id": "yes",
+          "text": {
+            "en": "Yes",
+            "fil": "Oo"
+          },
+          "next": "birth-owner"
+        },
+        {
+          "id": "no",
+          "text": {
+            "en": "No",
+            "fil": "Hindi"
+          },
+          "next": "taal-referral"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "taal-referral"
+        }
+      ]
+    },
+    {
+      "id": "birth-owner",
+      "text": {
+        "en": "Are you an adult requesting your own existing record, without corrections?",
+        "fil": "Nasa hustong gulang ka ba at sarili mong umiiral na tala ang hinihingi, nang walang pagwawasto?"
+      },
+      "choices": [
+        {
+          "id": "yes",
+          "text": {
+            "en": "Yes",
+            "fil": "Oo"
+          },
+          "next": "service:taal-birth"
+        },
+        {
+          "id": "no",
+          "text": {
+            "en": "No / special case",
+            "fil": "Hindi / espesyal na kaso"
+          },
+          "next": "taal-referral"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "taal-referral"
+        }
+      ]
+    },
+    {
+      "id": "clearance-type",
+      "text": {
+        "en": "Which clearance does the requesting institution specify?",
+        "fil": "Anong clearance ang tinukoy ng humihinging institusyon?"
+      },
+      "choices": [
+        {
+          "id": "pnp",
+          "text": {
+            "en": "National Police Clearance (PNP)",
+            "fil": "National Police Clearance (PNP)"
+          },
+          "next": "pnp-scope"
+        },
+        {
+          "id": "nbi",
+          "text": {
+            "en": "NBI Clearance",
+            "fil": "NBI Clearance"
+          },
+          "next": "nbi-scope"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not specified / not sure",
+            "fil": "Hindi tinukoy / hindi sigurado"
+          },
+          "next": "clearance-referral"
+        }
+      ]
+    },
+    {
+      "id": "pnp-scope",
+      "text": {
+        "en": "Are you an adult applying for your own clearance for the first time under the standard process?",
+        "fil": "Nasa hustong gulang ka ba at unang beses na kumukuha ng sariling clearance sa karaniwang proseso?"
+      },
+      "choices": [
+        {
+          "id": "yes",
+          "text": {
+            "en": "Yes — standard first-time application",
+            "fil": "Oo — karaniwang unang aplikasyon"
+          },
+          "next": "service:pnp"
+        },
+        {
+          "id": "no",
+          "text": {
+            "en": "Renewal, representative, fee exemption or special case",
+            "fil": "Renewal, kinatawan, exemption sa bayad o espesyal na kaso"
+          },
+          "next": "pnp-referral"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "pnp-referral"
+        }
+      ]
+    },
+    {
+      "id": "nbi-scope",
+      "text": {
+        "en": "Are you an adult applying for your own clearance for the first time under the standard process?",
+        "fil": "Nasa hustong gulang ka ba at unang beses na kumukuha ng sariling clearance sa karaniwang proseso?"
+      },
+      "choices": [
+        {
+          "id": "yes",
+          "text": {
+            "en": "Yes — standard first-time application",
+            "fil": "Oo — karaniwang unang aplikasyon"
+          },
+          "next": "service:nbi"
+        },
+        {
+          "id": "no",
+          "text": {
+            "en": "Renewal, representative, fee exemption or special case",
+            "fil": "Renewal, kinatawan, exemption sa bayad o espesyal na kaso"
+          },
+          "next": "nbi-referral"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "nbi-referral"
+        }
+      ]
+    }
+  ],
+  "referrals": [
+    {
+      "id": "general-referral",
+      "reason": {
+        "en": "Ask the institution requesting your document to identify the exact service. TuDok covers only three sample journeys.",
+        "fil": "Tanungin ang humihinging institusyon kung anong eksaktong serbisyo ang kailangan. Tatlong halimbawang proseso lamang ang saklaw ng TuDok."
+      },
+      "url": "https://arta.gov.ph/"
+    },
+    {
+      "id": "psa-referral",
+      "reason": {
+        "en": "A PSA-issued certificate is outside this local-copy journey. Confirm the required document with the requesting institution and consult PSA.",
+        "fil": "Hindi saklaw ng lokal na kopya ang sertipiko mula sa PSA. Kumpirmahin ang hinihinging dokumento at kumonsulta sa PSA."
+      },
+      "url": "https://psa.gov.ph/"
+    },
+    {
+      "id": "taal-referral",
+      "reason": {
+        "en": "This pilot covers only your own existing record registered in Taal. Ask the relevant civil registrar about your case before visiting.",
+        "fil": "Sarili mong umiiral na talang nakarehistro sa Taal lamang ang saklaw. Magtanong muna sa kaukulang civil registrar tungkol sa iyong kaso."
+      },
+      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/"
+    },
+    {
+      "id": "clearance-referral",
+      "reason": {
+        "en": "PNP and NBI clearances are different services. Ask the requesting institution which one it accepts; employment alone does not determine the answer.",
+        "fil": "Magkaibang serbisyo ang PNP at NBI clearance. Itanong kung alin ang tinatanggap; hindi sapat ang layuning trabaho upang pumili."
+      },
+      "url": "https://pnpclearance.ph/"
+    },
+    {
+      "id": "pnp-referral",
+      "reason": {
+        "en": "Consult PNP for renewal, first-time jobseeker benefits or special cases. This pilot only covers standard first-time appearance applications.",
+        "fil": "Kumonsulta sa PNP para sa renewal, benepisyo ng first-time jobseeker o espesyal na kaso. Karaniwang unang aplikasyon na may pagpunta lamang ang saklaw."
+      },
+      "url": "https://pnpclearance.ph/"
+    },
+    {
+      "id": "nbi-referral",
+      "reason": {
+        "en": "Consult NBI for renewal, first-time jobseeker benefits or special cases. This pilot only covers standard first-time appearance applications.",
+        "fil": "Kumonsulta sa NBI para sa renewal, benepisyo ng first-time jobseeker o espesyal na kaso. Karaniwang unang aplikasyon na may pagpunta lamang ang saklaw."
+      },
+      "url": "https://nbi.gov.ph/how-to-apply-nbi-clearance/"
+    }
+  ]
+}

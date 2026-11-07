@@ -1,0 +1,174 @@
+# ==============================================================================
+# Flutter / Dart / Pub
+# ==============================================================================
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+build/
+**/doc/api/
+.widget_preview/
+
+# ==============================================================================
+# Android
+# ==============================================================================
+# Gradle & Android Studio build artifacts
+**/.gradle/
+**/android/.gradle/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+**/android/captures/
+**/android/.cxx/
+
+# Machine-specific SDK paths & local config
+**/android/local.properties
+local.properties
+
+# Signing keys & keystores (never commit credentials!)
+**/android/key.properties
+key.properties
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+
+# ==============================================================================
+# iOS & macOS (CocoaPods, ephemeral files, Xcode)
+# ==============================================================================
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/profile/
+**/ios/debug/
+**/ios/release/
+
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/.symlinks/
+
+# Xcode user state & derived data
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcuserstate
+xcuserdata/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ==============================================================================
+# Desktop (Windows, Linux) & Web
+# ==============================================================================
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/web/.last_build_id
+
+# ==============================================================================
+# IDEs & Text Editors
+# ==============================================================================
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Eclipse & Sublime
+.project
+.classpath
+.cproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ==============================================================================
+# Environment Variables & Secrets
+# ==============================================================================
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# ==============================================================================
+# Local Database & SQLite Artifacts (Runtime files for sqflite)
+# ==============================================================================
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+
+# ==============================================================================
+# Testing & Code Coverage
+# ==============================================================================
+/coverage/
+coverage/
+test/coverage/
+*.lcov
+lcov.info
+
+# ==============================================================================
+# Symbolication & Obfuscation
+# ==============================================================================
+app.*.symbols
+app.*.map.json
+
+# ==============================================================================
+# Operating System Files
+# ==============================================================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ==============================================================================
+# Miscellaneous / Logs / Temporary
+# ==============================================================================
+*.class
+*.log
+*.pyc
+*.swp
+*.swo
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+*.crash
+*.stackdump
