@@ -1,4 +1,4 @@
-# TuDok â€” Tulong-Dokyumento
+# LakbayG: An assistant to hlep process your Goverment documents
 
 Android-first Flutter student prototype: need-first service navigation, source-linked roadmaps, and persistent preparation checklists in English and Filipino.
 
