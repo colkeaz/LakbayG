@@ -48,5 +48,23 @@
   "loadError": "TuDok could not load its local content or saved data. Retry without clearing app data.",
   "step": "Step",
   "offline": "Guidance available offline",
-  "linksNeedInternet": "Official websites need an internet connection."
+  "linksNeedInternet": "Official websites need an internet connection.",
+  "greeting": "Welcome to TuDok",
+  "quickActions": "Quick actions",
+  "myGuides": "My guides",
+  "searchHint": "Search a service or agency",
+  "notSure": "Not sure which service? Answer a few questions.",
+  "noResults": "No matching service found. Try another word.",
+  "steps": "Step by step",
+  "whatToBring": "What to bring",
+  "goTo": "Go to",
+  "progress": "Your progress",
+  "itemsReady": "items ready",
+  "guidesStarted": "guides started",
+  "openGuide": "Open guide",
+  "questionCount": "Question {count}",
+  "@questionCount": {
+    "description": "Progress label in the service questionnaire. A decision tree has no fixed length, so no total is shown.",
+    "parameters": ["count"]
+  }
 }

@@ -165,4 +165,49 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get linksNeedInternet =>
       'Kailangan ng internet para sa opisyal na website.';
+
+  @override
+  String get greeting => 'Maligayang pagdating sa TuDok';
+
+  @override
+  String get quickActions => 'Mga mabilis na aksyon';
+
+  @override
+  String get myGuides => 'Mga gabay ko';
+
+  @override
+  String get searchHint => 'Hanapin ang serbisyo o ahensya';
+
+  @override
+  String get notSure => 'Hindi alam ang serbisyo? Sagutin ang ilang tanong.';
+
+  @override
+  String get noResults =>
+      'Walang natumbang serbisyo. Subukan ang ibang salita.';
+
+  @override
+  String get steps => 'Hakbang-hakbang';
+
+  @override
+  String get whatToBring => 'Mga dalahin';
+
+  @override
+  String get goTo => 'Pupuntahan';
+
+  @override
+  String get progress => 'Iyong progreso';
+
+  @override
+  String get itemsReady => 'item na handa';
+
+  @override
+  String get guidesStarted => 'gabay na sinimulan';
+
+  @override
+  String get openGuide => 'Buksan ang gabay';
+
+  @override
+  String questionCount(Object count) {
+    return 'Tanong $count';
+  }
 }

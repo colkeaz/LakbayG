@@ -11,6 +11,21 @@ void main() {
   runApp(const Bootstrap());
 }
 
+/// A single-hue blue system: deep navy for anchors, one primary blue for
+/// actions, and soft blue tints for grouping. No gradients, no competing
+/// accent colors — flat values stay calm and readable for low-vision users.
+abstract final class Palette {
+  static const background = Color(0xffF2F6FC);
+  static const surface = Colors.white;
+  static const ink = Color(0xff142A47);
+  static const muted = Color(0xff4E6686);
+  static const primary = Color(0xff1B4E91);
+  static const navy = Color(0xff143866);
+  static const blueSoft = Color(0xffE6EFFA);
+  static const blueWarn = Color(0xffCFE0F5);
+  static const line = Color(0xffDDE7F4);
+}
+
 class Bootstrap extends StatefulWidget {
   const Bootstrap({super.key});
   @override
@@ -47,6 +62,11 @@ class _BootstrapState extends State<Bootstrap> {
         );
       }
       return MaterialApp(
+        theme: ThemeData(
+          useMaterial3: true,
+          scaffoldBackgroundColor: Palette.background,
+          colorScheme: ColorScheme.fromSeed(seedColor: Palette.primary),
+        ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: Builder(
@@ -120,20 +140,64 @@ class TuDokApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff1b4e91)),
           useMaterial3: true,
-          scaffoldBackgroundColor: const Color(0xfff6f8fc),
-          appBarTheme: const AppBarTheme(backgroundColor: Color(0xfff6f8fc)),
-          cardTheme: const CardThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Palette.primary),
+          scaffoldBackgroundColor: Palette.background,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Palette.background,
+            surfaceTintColor: Colors.transparent,
+            foregroundColor: Palette.ink,
+          ),
+          cardTheme: CardThemeData(
             elevation: 0,
-            margin: EdgeInsets.symmetric(vertical: 6),
-            color: Colors.white,
+            color: Palette.surface,
+            surfaceTintColor: Colors.transparent,
+            margin: const EdgeInsets.symmetric(vertical: 7),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
           ),
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Palette.surface,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 14,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Palette.line),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Palette.line),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Palette.primary, width: 1.5),
+            ),
           ),
-          navigationBarTheme: const NavigationBarThemeData(
-            backgroundColor: Colors.white,
+          navigationBarTheme: NavigationBarThemeData(
+            backgroundColor: Palette.surface,
+            surfaceTintColor: Colors.transparent,
+            indicatorColor: Palette.blueSoft,
+            height: 72,
+            labelTextStyle: WidgetStateProperty.all(
+              const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Palette.ink,
+              ),
+            ),
+          ),
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(fontSize: 18, color: Palette.ink, height: 1.4),
+            bodyMedium: TextStyle(fontSize: 16, color: Palette.ink, height: 1.4),
+            bodySmall: TextStyle(
+              fontSize: 14,
+              color: Palette.muted,
+              height: 1.35,
+            ),
           ),
         ),
         home: controller.firstLaunch
@@ -141,6 +205,30 @@ class TuDokApp extends StatelessWidget {
             : const HomeShell(),
       ),
     ),
+  );
+}
+
+/// Flat rounded container used instead of cards where a soft tint helps
+/// group related information without adding visual noise.
+class SoftTile extends StatelessWidget {
+  final Color color;
+  final Widget child;
+  final EdgeInsetsGeometry padding;
+  const SoftTile({
+    super.key,
+    required this.color,
+    required this.child,
+    this.padding = const EdgeInsets.all(18),
+  });
+  @override
+  Widget build(BuildContext context) => Container(
+    margin: const EdgeInsets.symmetric(vertical: 6),
+    padding: padding,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: child,
   );
 }
 
@@ -161,37 +249,54 @@ class LanguageScreen extends StatelessWidget {
                 const Icon(
                   Icons.description_outlined,
                   size: 72,
-                  color: Color(0xff1b4e91),
+                  color: Palette.primary,
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   'TuDok',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.w800,
+                    color: Palette.ink,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Text(
                   context.l.chooseLanguage,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: Palette.ink,
+                  ),
                 ),
                 const SizedBox(height: 8),
-                Text(context.l.languageHelp),
-                const SizedBox(height: 24),
+                Text(
+                  context.l.languageHelp,
+                  style: const TextStyle(fontSize: 16, color: Palette.muted),
+                ),
+                const SizedBox(height: 28),
                 for (final item in [('en', 'English'), ('fil', 'Filipino')])
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: FilledButton.tonal(
-                      onPressed: context.state.busy
-                          ? null
-                          : () async {
-                              final ok = await context.state.changeLanguage(
-                                item.$1,
-                              );
-                              if (context.mounted) {
-                                context.saveResult(ok);
-                              }
-                            },
-                      child: Text(item.$2),
+                    padding: const EdgeInsets.only(bottom: 14),
+                    child: SizedBox(
+                      height: 56,
+                      child: FilledButton(
+                        onPressed: context.state.busy
+                            ? null
+                            : () async {
+                                final ok = await context.state.changeLanguage(
+                                  item.$1,
+                                );
+                                if (context.mounted) {
+                                  context.saveResult(ok);
+                                }
+                              },
+                        child: Text(
+                          item.$2,
+                          style: const TextStyle(fontSize: 17),
+                        ),
+                      ),
                     ),
                   ),
               ],
@@ -214,15 +319,16 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text(
-        'TuDok',
-        style: TextStyle(fontWeight: FontWeight.w800, letterSpacing: -0.7),
-      ),
-      actions: [const LanguageMenu()],
+      title: const Text('TuDok'),
+      actions: const [LanguageMenu()],
     ),
     body: IndexedStack(
       index: index,
-      children: const [HomeView(), ChecklistsView(), SettingsView()],
+      children: [
+        HomeView(onTab: (value) => setState(() => index = value)),
+        const ChecklistsView(),
+        const SettingsView(),
+      ],
     ),
     bottomNavigationBar: NavigationBar(
       selectedIndex: index,
@@ -251,7 +357,7 @@ class LanguageMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) => PopupMenuButton<String>(
     tooltip: context.l.language,
-    icon: const Icon(Icons.translate),
+    icon: const Icon(Icons.translate, color: Palette.primary),
     onSelected: (value) async {
       final ok = await context.state.changeLanguage(value);
       if (context.mounted) {
@@ -270,7 +376,7 @@ class PageBody extends StatelessWidget {
   const PageBody({super.key, required this.children});
   @override
   Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
+    padding: const EdgeInsets.fromLTRB(18, 10, 18, 32),
     children: [
       Center(
         child: ConstrainedBox(
@@ -290,11 +396,14 @@ class Section extends StatelessWidget {
   const Section(this.title, {super.key});
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 24, bottom: 10),
+    padding: const EdgeInsets.only(top: 22, bottom: 10),
     child: Text(
       title,
-      style: Theme.of(context).textTheme.titleLarge
-          ?.copyWith(fontWeight: FontWeight.w700),
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        color: Palette.ink,
+      ),
     ),
   );
 }
@@ -304,86 +413,244 @@ class Notice extends StatelessWidget {
   final bool warning;
   const Notice(this.text, {super.key, this.warning = false});
   @override
-  Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.symmetric(vertical: 10),
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: warning ? const Color(0xfffff1d6) : const Color(0xffe8effb),
-      borderRadius: BorderRadius.circular(16),
-    ),
+  Widget build(BuildContext context) => SoftTile(
+    color: warning ? Palette.blueWarn : Palette.blueSoft,
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(warning ? Icons.info_outline : Icons.shield_outlined, size: 22),
+        const Icon(Icons.info_outline, size: 22, color: Palette.ink),
         const SizedBox(width: 12),
-        Expanded(child: Text(text)),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 15, color: Palette.ink, height: 1.4),
+          ),
+        ),
       ],
     ),
   );
 }
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+Future<void> pickLanguage(BuildContext context) async {
+  final value = await showDialog<String>(
+    context: context,
+    builder: (c) => SimpleDialog(
+      title: Text(c.l.chooseLanguage),
+      children: [
+        SimpleDialogOption(
+          onPressed: () => Navigator.pop(c, 'en'),
+          child: const Text('English'),
+        ),
+        SimpleDialogOption(
+          onPressed: () => Navigator.pop(c, 'fil'),
+          child: const Text('Filipino'),
+        ),
+      ],
+    ),
+  );
+  if (!context.mounted || value == null || value == context.state.language) {
+    return;
+  }
+  context.saveResult(await context.state.changeLanguage(value));
+}
+
+class _QuickAction extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final VoidCallback onTap;
+  const _QuickAction({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.onTap,
+  });
   @override
-  Widget build(BuildContext context) => PageBody(
-    children: [
-      Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: const Color(0xff173f77),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Icon(Icons.explore_outlined, color: Colors.white, size: 38),
-            const SizedBox(height: 22),
-            Text(
-              context.l.tagline,
-              style: Theme.of(context).textTheme.headlineMedium
-                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w700),
+  Widget build(BuildContext context) => Expanded(
+    child: Material(
+      color: color,
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(18),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 112),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(icon, size: 28, color: Palette.primary),
+                const SizedBox(height: 14),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: Palette.ink,
+                    height: 1.25,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 12),
-            Text(
-              context.l.intro,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            ),
-            const SizedBox(height: 24),
-            FilledButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xff173f77),
-            ).let(
-              (style) => FilledButton.icon(
-                style: style,
-                onPressed: () => context.open(const NavigatorScreen()),
-                icon: const Icon(Icons.arrow_forward),
-                label: Text(context.l.findService),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: Wrap(
-          spacing: 8,
-          children: [
-            Chip(
-              avatar: const Icon(Icons.offline_pin_outlined, size: 18),
-              label: Text(context.l.offline),
-            ),
-          ],
-        ),
-      ),
-      Section(context.l.explore),
-      for (final s in context.catalog.services) ServiceCard(service: s),
-      Notice(context.l.studentNotice),
-    ],
+    ),
   );
 }
 
-extension Let<T> on T {
-  R let<R>(R Function(T) f) => f(this);
+class HomeView extends StatefulWidget {
+  final ValueChanged<int> onTab;
+  const HomeView({super.key, required this.onTab});
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  String query = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l;
+    final state = context.state;
+    final services = context.catalog.services.where((s) {
+      if (query.trim().isEmpty) return true;
+      final q = query.trim().toLowerCase();
+      return context.tr(s.title).toLowerCase().contains(q) ||
+          s.agency.toLowerCase().contains(q);
+    }).toList();
+    final total = context.catalog.services.fold<int>(
+      0,
+      (n, s) => n + s.requirements.length,
+    );
+    final done = context.catalog.services.fold<int>(
+      0,
+      (n, s) =>
+          n + s.requirements.where((r) => state.checked(s.id, r.id)).length,
+    );
+    final started = context.catalog.services
+        .where((s) => s.requirements.any((r) => state.checked(s.id, r.id)))
+        .length;
+
+    return PageBody(
+      children: [
+        Text(
+          l.greeting,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            color: Palette.ink,
+          ),
+        ),
+        SoftTile(
+          color: Palette.navy,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.fact_check_outlined,
+                    size: 22,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    l.progress,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+              Text(
+                '$done / $total ${l.itemsReady}',
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: total == 0 ? 0 : done / total,
+                  minHeight: 10,
+                  backgroundColor: Colors.white54,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '$started ${l.guidesStarted}',
+                style: const TextStyle(fontSize: 14, color: Colors.white70),
+              ),
+            ],
+          ),
+        ),
+        Section(l.quickActions),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _QuickAction(
+                icon: Icons.search_rounded,
+                label: l.findService,
+                color: Palette.blueSoft,
+                onTap: () => context.open(NavigatorScreen()),
+              ),
+              const SizedBox(width: 10),
+              _QuickAction(
+                icon: Icons.checklist_rounded,
+                label: l.myGuides,
+                color: Palette.blueSoft,
+                onTap: () => widget.onTab(1),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _QuickAction(
+                icon: Icons.translate_rounded,
+                label: l.language,
+                color: Palette.blueSoft,
+                onTap: () => pickLanguage(context),
+              ),
+              const SizedBox(width: 10),
+              _QuickAction(
+                icon: Icons.info_outline_rounded,
+                label: l.settings,
+                color: Palette.blueSoft,
+                onTap: () => widget.onTab(2),
+              ),
+            ],
+          ),
+        ),
+        Section(l.explore),
+        TextField(
+          onChanged: (value) => setState(() => query = value),
+          decoration: InputDecoration(
+            hintText: l.searchHint,
+            prefixIcon: const Icon(Icons.search_rounded, color: Palette.muted),
+          ),
+        ),
+        const SizedBox(height: 8),
+        if (services.isEmpty)
+          SoftTile(color: Palette.surface, child: Text(l.noResults)),
+        for (final s in services) ServiceCard(service: s),
+        Notice(l.studentNotice),
+      ],
+    );
+  }
 }
 
 class ServiceCard extends StatelessWidget {
@@ -398,35 +665,46 @@ class ServiceCard extends StatelessWidget {
         .length;
     return Card(
       child: ListTile(
+        key: ValueKey<String>('service-${s.id}'),
         contentPadding: const EdgeInsets.all(16),
-        leading: Icon(
-          s.id == 'taal-birth'
-              ? Icons.description_outlined
-              : s.id == 'pnp'
-              ? Icons.local_police_outlined
-              : Icons.badge_outlined,
-          color: Theme.of(context).colorScheme.primary,
+        leading: Container(
+          width: 46,
+          height: 46,
+          decoration: BoxDecoration(
+            color: Palette.blueSoft,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Icon(
+            s.id == 'taal-birth'
+                ? Icons.description_outlined
+                : s.id == 'pnp'
+                ? Icons.local_police_outlined
+                : Icons.badge_outlined,
+            color: Palette.primary,
+            size: 24,
+          ),
         ),
         title: Text(
           context.tr(s.title),
-          style: const TextStyle(fontWeight: FontWeight.w700),
+          style: const TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w700,
+            color: Palette.ink,
+          ),
         ),
         subtitle: Padding(
-          padding: const EdgeInsets.only(top: 8),
+          padding: const EdgeInsets.only(top: 6),
           child: Text(
             !s.verified
                 ? context.l.pending
                 : checklist
                 ? '$count / ${s.requirements.length} ${context.l.prepared}'
                 : s.agency,
+            style: const TextStyle(fontSize: 14, color: Palette.muted),
           ),
         ),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: () => context.open(
-          checklist && s.verified
-              ? ChecklistScreen(service: s)
-              : RoadmapScreen(service: s),
-        ),
+        trailing: const Icon(Icons.chevron_right, color: Palette.muted),
+        onTap: () => context.open(ChecklistScreen(service: s)),
       ),
     );
   }
@@ -438,8 +716,23 @@ class ChecklistsView extends StatelessWidget {
   Widget build(BuildContext context) => PageBody(
     children: [
       Section(context.l.checklists),
-      Text(context.l.empty),
-      const SizedBox(height: 12),
+      SoftTile(
+        color: Palette.blueSoft,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.lightbulb_outline, size: 22, color: Palette.primary),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                context.l.empty,
+                style: const TextStyle(fontSize: 15, color: Palette.ink),
+              ),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 8),
       for (final s in context.catalog.services)
         ServiceCard(service: s, checklist: true),
     ],
@@ -452,26 +745,49 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) => PageBody(
     children: [
       Section(context.l.about),
-      Text(context.l.aboutBody),
+      SoftTile(
+        color: Palette.surface,
+        child: Text(
+          context.l.aboutBody,
+          style: const TextStyle(fontSize: 16, color: Palette.ink, height: 1.5),
+        ),
+      ),
       Section(context.l.language),
-      SegmentedButton<String>(
-        segments: const [
-          ButtonSegment(value: 'en', label: Text('English')),
-          ButtonSegment(value: 'fil', label: Text('Filipino')),
-        ],
-        selected: {context.state.language},
-        onSelectionChanged: context.state.busy
-            ? null
-            : (values) async {
-                final ok = await context.state.changeLanguage(values.first);
-                if (context.mounted) {
-                  context.saveResult(ok);
-                }
-              },
+      SoftTile(
+        color: Palette.surface,
+        child: SegmentedButton<String>(
+          segments: const [
+            ButtonSegment(value: 'en', label: Text('English')),
+            ButtonSegment(value: 'fil', label: Text('Filipino')),
+          ],
+          selected: {context.state.language},
+          onSelectionChanged: context.state.busy
+              ? null
+              : (values) async {
+                  final ok = await context.state.changeLanguage(values.first);
+                  if (context.mounted) {
+                    context.saveResult(ok);
+                  }
+                },
+        ),
       ),
       Notice(context.l.studentNotice),
       Notice(context.l.reviewNotice, warning: true),
-      Text(context.l.linksNeedInternet),
+      SoftTile(
+        color: Palette.blueSoft,
+        child: Row(
+          children: [
+            const Icon(Icons.wifi_off, size: 20, color: Palette.primary),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                context.l.linksNeedInternet,
+                style: const TextStyle(fontSize: 15, color: Palette.ink),
+              ),
+            ),
+          ],
+        ),
+      ),
       Section(context.l.sources),
       for (final s in context.catalog.sources) SourceCard(source: s),
     ],
@@ -484,9 +800,13 @@ class SourceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
     child: ListTile(
-      title: Text(source.title),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      title: Text(
+        source.title,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+      ),
       subtitle: Text('${context.l.lastChecked}: ${source.checked}'),
-      trailing: const Icon(Icons.open_in_new),
+      trailing: const Icon(Icons.open_in_new, color: Palette.muted),
       onTap: () => openOfficial(context, source.url),
     ),
   );
@@ -526,90 +846,355 @@ Future<void> openOfficial(BuildContext context, String url) async {
   );
 }
 
-class RoadmapScreen extends StatelessWidget {
+/// One screen for the whole journey: where to go, the steps, and what to
+/// bring. Previously the steps lived on a separate roadmap screen that was
+/// lost as soon as the user opened their checklist.
+class ChecklistScreen extends StatefulWidget {
   final Service service;
-  const RoadmapScreen({super.key, required this.service});
+  const ChecklistScreen({super.key, required this.service});
+  @override
+  State<ChecklistScreen> createState() => _ChecklistScreenState();
+}
+
+class _ChecklistScreenState extends State<ChecklistScreen> {
+  bool missing = false;
+
   @override
   Widget build(BuildContext context) {
-    final s = service;
+    final s = widget.service;
+    final state = context.state;
+    final l = context.l;
+    final count = s.requirements.where((r) => state.checked(s.id, r.id)).length;
+    final total = s.requirements.length;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l.roadmap),
+        title: Text(l.checklists),
         actions: const [LanguageMenu()],
       ),
       body: PageBody(
         children: [
-          Text(
-            context.tr(s.title),
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const SizedBox(height: 8),
-          Text(s.agency),
-          Notice(
-            s.verified ? context.l.sourceChecked : context.l.pending,
-            warning: !s.verified,
-          ),
-          Section(context.l.scope),
-          Text(context.tr(s.summary)),
-          Notice(context.tr(s.notice), warning: true),
-          Section(context.l.location),
-          Text(context.tr(s.location)),
-          const SizedBox(height: 16),
-          OutlinedButton.icon(
-            onPressed: () => openOfficial(context, s.url),
-            icon: const Icon(Icons.open_in_new),
-            label: Text(context.l.openOfficial),
-          ),
-          if (s.verified) ...[
-            Section(context.l.roadmap),
-            for (final (index, step) in s.steps.indexed)
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${context.l.step} ${index + 1} · ${context.tr(step.title)}',
-                        style: Theme.of(context).textTheme.titleMedium,
+          SoftTile(
+            color: Palette.navy,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                      const SizedBox(height: 8),
-                      Text(context.tr(step.detail)),
-                      const SizedBox(height: 8),
-                      Text(
-                        context.tr(step.place),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                      child: const Icon(
+                        Icons.description_outlined,
+                        color: Colors.white,
+                        size: 24,
                       ),
-                    ],
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.tr(s.title),
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            s.agency,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    _Chip(
+                      icon: s.verified ? Icons.verified_outlined : Icons.schedule,
+                      label: s.verified ? l.sourceChecked : l.pending,
+                    ),
+                    _Chip(
+                      icon: Icons.numbers,
+                      label: '${s.steps.length} ${l.steps}',
+                    ),
+                    _Chip(
+                      icon: Icons.checklist_outlined,
+                      label: '$total ${l.whatToBring}',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Section(l.location),
+          SoftTile(
+            color: Palette.blueSoft,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.place_outlined, size: 22, color: Palette.primary),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    context.tr(s.location),
+                    style: const TextStyle(fontSize: 16, color: Palette.ink),
                   ),
                 ),
-              ),
-            Section(context.l.requirements),
-            for (final r in s.requirements)
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.check_circle_outline),
-                title: Text(context.tr(r.text)),
-              ),
-            const SizedBox(height: 16),
-            FilledButton.icon(
-              onPressed: () => context.open(ChecklistScreen(service: s)),
-              icon: const Icon(Icons.checklist),
-              label: Text(context.l.prepare),
+              ],
             ),
+          ),
+          if (s.verified && s.steps.isNotEmpty) ...[
+            Section(l.steps),
+            for (final (index, step) in s.steps.indexed)
+              SoftTile(
+                color: Palette.surface,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 34,
+                          height: 34,
+                          decoration: const BoxDecoration(
+                            color: Palette.blueSoft,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${index + 1}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Palette.primary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            context.tr(step.title),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: Palette.ink,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      context.tr(step.detail),
+                      style: const TextStyle(fontSize: 16, color: Palette.ink),
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.place_outlined,
+                          size: 18,
+                          color: Palette.primary,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            '${l.goTo}: ${context.tr(step.place)}',
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Palette.ink,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
           ],
-          Section(context.l.sources),
+          Section(l.scope),
+          Text(
+            context.tr(s.summary),
+            style: const TextStyle(fontSize: 16, color: Palette.ink),
+          ),
+          Notice(context.tr(s.notice), warning: true),
+          Section(l.whatToBring),
+          SoftTile(
+            color: Palette.blueSoft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$count / $total ${l.prepared}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                    color: Palette.ink,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: LinearProgressIndicator(
+                    value: total == 0 ? 0 : count / total,
+                    minHeight: 10,
+                    backgroundColor: Palette.surface,
+                    color: Palette.primary,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${total - count} ${l.remaining}',
+                  style: const TextStyle(fontSize: 14, color: Palette.muted),
+                ),
+              ],
+            ),
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              l.missingOnly,
+              style: const TextStyle(fontSize: 16, color: Palette.ink),
+            ),
+            value: missing,
+            onChanged: (v) => setState(() => missing = v),
+          ),
+          for (final r in s.requirements.where(
+            (r) => !missing || !state.checked(s.id, r.id),
+          ))
+            Card(
+              child: CheckboxListTile(
+                controlAffinity: ListTileControlAffinity.leading,
+                title: Text(
+                  context.tr(r.text),
+                  style: const TextStyle(fontSize: 16, color: Palette.ink),
+                ),
+                value: state.checked(s.id, r.id),
+                onChanged: state.busy
+                    ? null
+                    : (value) async {
+                        final ok = await state.toggle(
+                          s.id,
+                          r.id,
+                          value ?? false,
+                        );
+                        if (context.mounted) {
+                          context.saveResult(ok);
+                        }
+                      },
+              ),
+            ),
+          if (total > 0 && count == total) Notice(l.complete),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 52,
+            child: OutlinedButton.icon(
+              onPressed: state.busy
+                  ? null
+                  : () async {
+                      final confirm = await showDialog<bool>(
+                        context: context,
+                        builder: (c) => AlertDialog(
+                          title: Text(c.l.resetConfirm),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(c, false),
+                              child: Text(c.l.cancel),
+                            ),
+                            FilledButton(
+                              onPressed: () => Navigator.pop(c, true),
+                              child: Text(c.l.reset),
+                            ),
+                          ],
+                        ),
+                      );
+                      if (confirm == true) {
+                        final ok = await state.reset(s.id);
+                        if (context.mounted) {
+                          context.saveResult(ok);
+                        }
+                      }
+                    },
+              icon: const Icon(Icons.restart_alt),
+              label: Text(l.reset),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 52,
+            child: FilledButton.icon(
+              onPressed: () => openOfficial(context, s.url),
+              icon: const Icon(Icons.open_in_new),
+              label: Text(l.openOfficial),
+            ),
+          ),
+          Section(l.sources),
           for (final id in s.sources)
             SourceCard(
               source: context.catalog.sources.firstWhere((r) => r.id == id),
             ),
-          Notice(context.l.studentNotice),
+          Notice(l.studentNotice),
         ],
       ),
     );
   }
+}
+
+class _Chip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  const _Chip({required this.icon, required this.label});
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    decoration: BoxDecoration(
+      color: Palette.surface,
+      borderRadius: BorderRadius.circular(14),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 16, color: Palette.primary),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 13, color: Palette.ink),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Longest chain of questions still reachable from [id]. Referrals and
+/// services are terminals and contribute zero.
+int questionsRemaining(Catalog catalog, String id) {
+  final current = catalog.questions.where((q) => q.id == id);
+  if (current.isEmpty) {
+    return 0;
+  }
+  return 1 +
+      current.single.choices
+          .map((c) => questionsRemaining(catalog, c.next))
+          .reduce((a, b) => a > b ? a : b);
 }
 
 class NavigatorScreen extends StatefulWidget {
@@ -621,6 +1206,7 @@ class NavigatorScreen extends StatefulWidget {
 class _NavigatorScreenState extends State<NavigatorScreen> {
   NavigationEngine? engine;
   bool validation = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -638,6 +1224,11 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   Widget build(BuildContext context) {
     final e = engine!;
     final question = e.isQuestion ? context.catalog.question(e.current) : null;
+    // The questionnaire is a decision tree, not a fixed list: different
+    // answers end after 1 to 4 questions. Count only the questions still
+    // reachable from here so the progress bar matches the actual path.
+    final remaining = questionsRemaining(context.catalog, e.current);
+    final branchLength = e.position + 1 + remaining;
     final service = e.current.startsWith('service:')
         ? context.catalog.service(e.current.substring(8))
         : null;
@@ -655,6 +1246,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
         appBar: AppBar(
           title: Text(context.l.findService),
           leading: BackButton(
+            color: Palette.primary,
             onPressed: () {
               if (e.position > 0) {
                 back();
@@ -668,76 +1260,123 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
         body: PageBody(
           children: [
             if (question != null) ...[
-              LinearProgressIndicator(value: (e.position + 1) / 5),
+              Text(
+                context.l.questionCount(e.position + 1),
+                style: const TextStyle(fontSize: 14, color: Palette.muted),
+              ),
+              const SizedBox(height: 8),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: (e.position + 1) / branchLength,
+                  minHeight: 10,
+                  backgroundColor: Palette.line,
+                  color: Palette.primary,
+                ),
+              ),
               const SizedBox(height: 28),
               Text(
                 context.tr(question.text),
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: Palette.ink,
+                ),
               ),
               const SizedBox(height: 20),
               for (final c in question.choices)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(18),
-                      backgroundColor: e.answers[e.current] == c.id
-                          ? Theme.of(context).colorScheme.primaryContainer
-                          : Colors.white,
-                    ),
-                    onPressed: () => setState(() {
-                      e.select(c.id);
-                      validation = false;
-                    }),
-                    child: Row(
-                      children: [
-                        Icon(
-                          e.answers[e.current] == c.id
-                              ? Icons.radio_button_checked
-                              : Icons.radio_button_off,
+                  child: Material(
+                    color: e.answers[e.current] == c.id
+                        ? Palette.blueSoft
+                        : Palette.surface,
+                    borderRadius: BorderRadius.circular(16),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () => setState(() {
+                        e.select(c.id);
+                        validation = false;
+                      }),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            Icon(
+                              e.answers[e.current] == c.id
+                                  ? Icons.radio_button_checked
+                                  : Icons.radio_button_off,
+                              color: Palette.primary,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                context.tr(c.text),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Palette.ink,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 12),
-                        Expanded(child: Text(context.tr(c.text))),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               if (validation) Notice(context.l.selectAnswer, warning: true),
               const SizedBox(height: 12),
-              FilledButton(
-                onPressed: () => setState(() {
-                  validation = !e.next();
-                }),
-                child: Text(context.l.next),
+              SizedBox(
+                height: 52,
+                child: FilledButton(
+                  onPressed: () => setState(() {
+                    validation = !e.next();
+                  }),
+                  child: Text(context.l.next),
+                ),
               ),
             ] else ...[
-              const Icon(Icons.explore_outlined, size: 56),
+              const Icon(Icons.explore_outlined, size: 56, color: Palette.primary),
               const SizedBox(height: 20),
               Text(
                 service != null ? context.l.result : context.l.referral,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: Palette.ink,
+                ),
               ),
               const SizedBox(height: 16),
               Text(
                 service != null
                     ? context.l.match
                     : context.tr(referral!.reason),
+                style: const TextStyle(fontSize: 16, color: Palette.ink),
               ),
               if (service != null) ...[
                 Section(context.tr(service.title)),
-                Text(context.tr(service.summary)),
+                Text(
+                  context.tr(service.summary),
+                  style: const TextStyle(fontSize: 16, color: Palette.ink),
+                ),
                 const SizedBox(height: 20),
-                FilledButton(
-                  onPressed: () =>
-                      context.open(RoadmapScreen(service: service)),
-                  child: Text(context.l.viewRoadmap),
+                SizedBox(
+                  height: 52,
+                  child: FilledButton.icon(
+                    onPressed: () =>
+                        context.open(ChecklistScreen(service: service)),
+                    icon: const Icon(Icons.menu_book_outlined),
+                    label: Text(context.l.openGuide),
+                  ),
                 ),
               ] else ...[
                 const SizedBox(height: 20),
-                OutlinedButton(
-                  onPressed: () => openOfficial(context, referral!.url),
-                  child: Text(context.l.openOfficial),
+                SizedBox(
+                  height: 52,
+                  child: OutlinedButton(
+                    onPressed: () => openOfficial(context, referral!.url),
+                    child: Text(context.l.openOfficial),
+                  ),
                 ),
               ],
             ],
@@ -752,111 +1391,6 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ChecklistScreen extends StatefulWidget {
-  final Service service;
-  const ChecklistScreen({super.key, required this.service});
-  @override
-  State<ChecklistScreen> createState() => _ChecklistScreenState();
-}
-
-class _ChecklistScreenState extends State<ChecklistScreen> {
-  bool missing = false;
-  @override
-  Widget build(BuildContext context) {
-    final s = widget.service, state = context.state;
-    final count = s.requirements.where((r) => state.checked(s.id, r.id)).length;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l.checklists),
-        actions: const [LanguageMenu()],
-      ),
-      body: PageBody(
-        children: [
-          Text(
-            context.tr(s.title),
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          const SizedBox(height: 24),
-          Text(
-            '$count / ${s.requirements.length} ${context.l.prepared}',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const SizedBox(height: 12),
-          LinearProgressIndicator(
-            value: s.requirements.isEmpty ? 0 : count / s.requirements.length,
-            minHeight: 8,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          const SizedBox(height: 10),
-          Text('${s.requirements.length - count} ${context.l.remaining}'),
-          const SizedBox(height: 20),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(context.l.missingOnly),
-            value: missing,
-            onChanged: (v) => setState(() => missing = v),
-          ),
-          for (final r in s.requirements.where(
-            (r) => !missing || !state.checked(s.id, r.id),
-          ))
-            Card(
-              child: CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                title: Text(context.tr(r.text)),
-                value: state.checked(s.id, r.id),
-                onChanged: state.busy
-                    ? null
-                    : (value) async {
-                        final ok = await state.toggle(
-                          s.id,
-                          r.id,
-                          value ?? false,
-                        );
-                        if (context.mounted) {
-                          context.saveResult(ok);
-                        }
-                      },
-              ),
-            ),
-          if (count == s.requirements.length) Notice(context.l.complete),
-          const SizedBox(height: 20),
-          OutlinedButton.icon(
-            onPressed: state.busy
-                ? null
-                : () async {
-                    final confirm = await showDialog<bool>(
-                      context: context,
-                      builder: (c) => AlertDialog(
-                        title: Text(c.l.resetConfirm),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(c, false),
-                            child: Text(c.l.cancel),
-                          ),
-                          FilledButton(
-                            onPressed: () => Navigator.pop(c, true),
-                            child: Text(c.l.reset),
-                          ),
-                        ],
-                      ),
-                    );
-                    if (confirm == true) {
-                      final ok = await state.reset(s.id);
-                      if (context.mounted) {
-                        context.saveResult(ok);
-                      }
-                    }
-                  },
-            icon: const Icon(Icons.restart_alt),
-            label: Text(context.l.reset),
-          ),
-          Notice(context.l.studentNotice),
-        ],
       ),
     );
   }

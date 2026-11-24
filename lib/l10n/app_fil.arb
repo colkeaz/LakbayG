@@ -48,5 +48,19 @@
   "loadError": "Hindi ma-load ng TuDok ang lokal na nilalaman o datos. Subukang muli nang hindi binubura ang app data.",
   "step": "Hakbang",
   "offline": "Magagamit ang gabay nang offline",
-  "linksNeedInternet": "Kailangan ng internet para sa opisyal na website."
+  "linksNeedInternet": "Kailangan ng internet para sa opisyal na website.",
+  "greeting": "Maligayang pagdating sa TuDok",
+  "quickActions": "Mga mabilis na aksyon",
+  "myGuides": "Mga gabay ko",
+  "searchHint": "Hanapin ang serbisyo o ahensya",
+  "notSure": "Hindi alam ang serbisyo? Sagutin ang ilang tanong.",
+  "noResults": "Walang natumbang serbisyo. Subukan ang ibang salita.",
+  "steps": "Hakbang-hakbang",
+  "whatToBring": "Mga dalahin",
+  "goTo": "Pupuntahan",
+  "progress": "Iyong progreso",
+  "itemsReady": "item na handa",
+  "guidesStarted": "gabay na sinimulan",
+  "openGuide": "Buksan ang gabay",
+  "questionCount": "Tanong {count}"
 }

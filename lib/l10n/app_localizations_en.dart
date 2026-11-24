@@ -164,4 +164,48 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get linksNeedInternet =>
       'Official websites need an internet connection.';
+
+  @override
+  String get greeting => 'Welcome to TuDok';
+
+  @override
+  String get quickActions => 'Quick actions';
+
+  @override
+  String get myGuides => 'My guides';
+
+  @override
+  String get searchHint => 'Search a service or agency';
+
+  @override
+  String get notSure => 'Not sure which service? Answer a few questions.';
+
+  @override
+  String get noResults => 'No matching service found. Try another word.';
+
+  @override
+  String get steps => 'Step by step';
+
+  @override
+  String get whatToBring => 'What to bring';
+
+  @override
+  String get goTo => 'Go to';
+
+  @override
+  String get progress => 'Your progress';
+
+  @override
+  String get itemsReady => 'items ready';
+
+  @override
+  String get guidesStarted => 'guides started';
+
+  @override
+  String get openGuide => 'Open guide';
+
+  @override
+  String questionCount(Object count) {
+    return 'Question $count';
+  }
 }

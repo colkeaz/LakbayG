@@ -391,6 +391,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Official websites need an internet connection.'**
   String get linksNeedInternet;
+
+  /// No description provided for @greeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to TuDok'**
+  String get greeting;
+
+  /// No description provided for @quickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick actions'**
+  String get quickActions;
+
+  /// No description provided for @myGuides.
+  ///
+  /// In en, this message translates to:
+  /// **'My guides'**
+  String get myGuides;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search a service or agency'**
+  String get searchHint;
+
+  /// No description provided for @notSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sure which service? Answer a few questions.'**
+  String get notSure;
+
+  /// No description provided for @noResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching service found. Try another word.'**
+  String get noResults;
+
+  /// No description provided for @steps.
+  ///
+  /// In en, this message translates to:
+  /// **'Step by step'**
+  String get steps;
+
+  /// No description provided for @whatToBring.
+  ///
+  /// In en, this message translates to:
+  /// **'What to bring'**
+  String get whatToBring;
+
+  /// No description provided for @goTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to'**
+  String get goTo;
+
+  /// No description provided for @progress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get progress;
+
+  /// No description provided for @itemsReady.
+  ///
+  /// In en, this message translates to:
+  /// **'items ready'**
+  String get itemsReady;
+
+  /// No description provided for @guidesStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'guides started'**
+  String get guidesStarted;
+
+  /// No description provided for @openGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Open guide'**
+  String get openGuide;
+
+  /// Progress label in the service questionnaire. A decision tree has no fixed length, so no total is shown.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {count}'**
+  String questionCount(Object count);
 }
 
 class _AppLocalizationsDelegate
