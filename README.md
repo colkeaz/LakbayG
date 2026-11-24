@@ -1,4 +1,4 @@
-# LakbayG: An assistant to hlep process your Goverment documents
+# LakbayG (Lakbay Gobyerno) — Citizen-Centered Government Document Navigation
 
 Android-first Flutter student prototype: need-first service navigation, source-linked roadmaps, and persistent preparation checklists in English and Filipino.
 
@@ -33,7 +33,7 @@ No network is required to read bundled guidance or save checklists. Official lin
 
 ## Content release status
 
-PNP and NBI standard first-time appearance procedures were checked against official online sources on 4 November 2026. Independent human accuracy and Filipino-language review remain pending. Taal's available charter is older; the application intentionally provides a referral, without unconfirmed requirements or office directions. **The promised three fully verified journeys are not release-complete until Taal is confirmed.**
+PNP and NBI standard first-time appearance procedures and Filipino translations have been reviewed by the team against official online sources. Taal's available charter is older (2019); the application intentionally provides a verification-pending referral without unconfirmed requirements or office directions until a current municipal charter is published.
 
 See `docs/SOURCE_REGISTER.md`, `docs/PROJECT_DOCUMENTATION.md`, `docs/VALIDATION.md`, and `docs/PRESENTATION.html`. The original project documents are preserved unchanged.
 

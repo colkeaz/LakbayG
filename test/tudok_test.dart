@@ -203,7 +203,7 @@ void main() {
   );
   testWidgets('Language onboarding persists Filipino choice', (tester) async {
     await tester.pumpWidget(
-      TuDokApp(catalog: fixture(), controller: controller),
+      LakbayGApp(catalog: fixture(), controller: controller),
     );
     await tester.pumpAndSettle();
     expect(find.text('Choose your language'), findsOneWidget);
@@ -224,7 +224,7 @@ void main() {
     (tester) async {
       await tester.runAsync(() => controller.changeLanguage('en'));
       await tester.pumpWidget(
-        TuDokApp(catalog: fixture(), controller: controller),
+        LakbayGApp(catalog: fixture(), controller: controller),
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text('Find the right service'));
@@ -257,8 +257,8 @@ void main() {
           child: ListenableBuilder(
             listenable: controller,
             builder: (context, _) => MaterialApp(
-              localizationsDelegates: const TuDokLocalizations().delegates,
-              supportedLocales: const TuDokLocalizations().locales,
+              localizationsDelegates: const LakbayGLocalizations().delegates,
+              supportedLocales: const LakbayGLocalizations().locales,
               home: ChecklistScreen(service: service),
             ),
           ),
@@ -301,7 +301,7 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
     await tester.runAsync(() => controller.changeLanguage('fil'));
     await tester.pumpWidget(
-      TuDokApp(catalog: fixture(), controller: controller),
+      LakbayGApp(catalog: fixture(), controller: controller),
     );
     await tester.pumpAndSettle();
     tester.platformDispatcher.textScaleFactorTestValue = 2;
@@ -310,6 +310,189 @@ void main() {
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox());
   });
+  testWidgets(
+    'Bottom navigation tabs, empty state visibility, and unverified service routing',
+    (tester) async {
+      await tester.runAsync(() => controller.changeLanguage('en'));
+      await tester.pumpWidget(
+        LakbayGApp(catalog: fixture(), controller: controller),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('My Checklists'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Your preparation starts here. Open a journey to build its checklist.',
+        ),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Local birth-record copy'));
+      await tester.pumpAndSettle();
+      expect(find.text('Official confirmation needed'), findsOneWidget);
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('National Police Clearance'));
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        await tester.tap(find.byType(Checkbox).first);
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Your preparation starts here. Open a journey to build its checklist.',
+        ),
+        findsNothing,
+      );
+      expect(find.text('1 / 3 prepared'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+  testWidgets(
+    'Cancel reset keeps items, and failed save shows error SnackBar',
+    (tester) async {
+      await tester.runAsync(() => controller.changeLanguage('en'));
+      await tester.runAsync(() => controller.toggle('pnp', 'pnp-id-v1', true));
+      final service = fixture().service('pnp');
+      await tester.pumpWidget(
+        AppScope(
+          catalog: fixture(),
+          controller: controller,
+          child: ListenableBuilder(
+            listenable: controller,
+            builder: (context, _) => MaterialApp(
+              localizationsDelegates: const LakbayGLocalizations().delegates,
+              supportedLocales: const LakbayGLocalizations().locales,
+              home: ChecklistScreen(service: service),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('1 / 3 prepared'), findsOneWidget);
+      await tester.ensureVisible(find.text('Reset checklist'));
+      await tester.tap(find.text('Reset checklist'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Cancel'));
+      await tester.pumpAndSettle();
+      expect(find.text('1 / 3 prepared'), findsOneWidget);
+
+      final failing = AppController(
+        FailingChecklist(store),
+        SettingsRepository(store),
+      );
+      await tester.runAsync(() => failing.initialize());
+      await tester.pumpWidget(
+        AppScope(
+          catalog: fixture(),
+          controller: failing,
+          child: ListenableBuilder(
+            listenable: failing,
+            builder: (context, _) => MaterialApp(
+              localizationsDelegates: const LakbayGLocalizations().delegates,
+              supportedLocales: const LakbayGLocalizations().locales,
+              home: ChecklistScreen(service: service),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        await tester.tap(find.byType(Checkbox).at(1));
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Could not save. Your previous saved state is unchanged. Please try again.',
+        ),
+        findsOneWidget,
+      );
+      expect(failing.checked('pnp', 'pnp-payment-v1'), false);
+      await tester.pumpWidget(const SizedBox());
+      failing.dispose();
+    },
+  );
+  testWidgets(
+    'Settings segmented language switch, sources list, and offline link fallback dialog',
+    (tester) async {
+      await tester.runAsync(() => controller.changeLanguage('en'));
+      await tester.pumpWidget(
+        LakbayGApp(catalog: fixture(), controller: controller),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('About & Settings'));
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        await tester.tap(find.text('Filipino'));
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(find.text('Tungkol sa LakbayG'), findsOneWidget);
+      await tester.runAsync(() async {
+        await tester.tap(find.text('English'));
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(find.text('About LakbayG'), findsOneWidget);
+      await tester.scrollUntilVisible(
+        find.text('PNP application tutorial'),
+        200,
+        scrollable: find.descendant(
+          of: find.byType(SettingsView),
+          matching: find.byType(Scrollable),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        await tester.tap(find.text('PNP application tutorial'));
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Could not open the link. Copy it and try in your browser when connected.',
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.text('https://pnpclearance.ph/how_to_apply_v2.pdf'),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Close'));
+      await tester.pumpAndSettle();
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+  testWidgets(
+    'Navigator back button steps through question history before popping',
+    (tester) async {
+      await tester.runAsync(() => controller.changeLanguage('en'));
+      await tester.pumpWidget(
+        LakbayGApp(catalog: fixture(), controller: controller),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Find the right service'));
+      await tester.pumpAndSettle();
+      expect(find.text('What do you need help with?'), findsOneWidget);
+      await tester.tap(find.text('A clearance'));
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Which clearance does the requesting institution specify?'),
+        findsOneWidget,
+      );
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(find.text('What do you need help with?'), findsOneWidget);
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(find.text('Find the right service'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
   testWidgets('Capture actual rendered home and roadmap screenshots', (
     tester,
   ) async {
@@ -322,7 +505,7 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: key,
-        child: TuDokApp(catalog: fixture(), controller: controller),
+        child: LakbayGApp(catalog: fixture(), controller: controller),
       ),
     );
     await tester.pumpAndSettle();

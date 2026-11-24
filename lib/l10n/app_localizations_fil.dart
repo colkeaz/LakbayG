@@ -139,22 +139,22 @@ class AppLocalizationsFil extends AppLocalizations {
   String get close => 'Isara';
 
   @override
-  String get about => 'Tungkol sa TuDok';
+  String get about => 'Tungkol sa LakbayG';
 
   @override
   String get aboutBody =>
-      'Tinutulungan ka ng Tulong-Dokyumento na pumili ng serbisyo, tingnan ang opisyal na gabay at mag-save ng checklist. Nananatili sa device na ito ang checklist at wika. Walang kinokolektang account o personal na dokumento.';
+      'Tinutulungan ka ng LakbayG (Lakbay Gobyerno) na pumili ng serbisyo, tingnan ang opisyal na gabay at mag-save ng checklist. Nananatili sa device na ito ang checklist at wika. Walang kinokolektang account o personal na dokumento.';
 
   @override
   String get reviewNotice =>
-      'Kailangan pa ng hiwalay na pagsusuri ng pangkat sa nilalaman at salin sa Filipino. Hindi pa handa para sa release ang proseso sa Taal.';
+      'Saklaw lamang ng gabay sa PNP at NBI ang karaniwang unang aplikasyon. Mananatiling referral sa opisyal na tanggapan ang proseso sa Taal habang wala pang kasalukuyang charter.';
 
   @override
   String get retry => 'Subukang muli';
 
   @override
   String get loadError =>
-      'Hindi ma-load ng TuDok ang lokal na nilalaman o datos. Subukang muli nang hindi binubura ang app data.';
+      'Hindi ma-load ng LakbayG ang lokal na nilalaman o datos. Subukang muli nang hindi binubura ang app data.';
 
   @override
   String get step => 'Hakbang';

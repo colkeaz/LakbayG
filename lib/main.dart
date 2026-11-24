@@ -41,7 +41,7 @@ class _BootstrapState extends State<Bootstrap> {
     future: loading,
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        return TuDokApp(
+        return LakbayGApp(
           catalog: snapshot.data!.$1,
           controller: snapshot.data!.$2,
         );
@@ -103,10 +103,10 @@ extension ViewContext on BuildContext {
   }
 }
 
-class TuDokApp extends StatelessWidget {
+class LakbayGApp extends StatelessWidget {
   final Catalog catalog;
   final AppController controller;
-  const TuDokApp({super.key, required this.catalog, required this.controller});
+  const LakbayGApp({super.key, required this.catalog, required this.controller});
   @override
   Widget build(BuildContext context) => AppScope(
     catalog: catalog,
@@ -114,7 +114,7 @@ class TuDokApp extends StatelessWidget {
     child: ListenableBuilder(
       listenable: controller,
       builder: (context, _) => MaterialApp(
-        title: 'TuDok',
+        title: 'LakbayG',
         debugShowCheckedModeBanner: false,
         locale: Locale(controller.language),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -165,7 +165,7 @@ class LanguageScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'TuDok',
+                  'LakbayG',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
@@ -215,7 +215,7 @@ class _HomeShellState extends State<HomeShell> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: const Text(
-        'TuDok',
+        'LakbayG',
         style: TextStyle(fontWeight: FontWeight.w800, letterSpacing: -0.7),
       ),
       actions: [const LanguageMenu()],
@@ -438,8 +438,10 @@ class ChecklistsView extends StatelessWidget {
   Widget build(BuildContext context) => PageBody(
     children: [
       Section(context.l.checklists),
-      Text(context.l.empty),
-      const SizedBox(height: 12),
+      if (context.state.prepared.values.every((items) => items.isEmpty)) ...[
+        Text(context.l.empty),
+        const SizedBox(height: 12),
+      ],
       for (final s in context.catalog.services)
         ServiceCard(service: s, checklist: true),
     ],

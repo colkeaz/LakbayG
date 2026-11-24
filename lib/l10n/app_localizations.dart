@@ -347,19 +347,19 @@ abstract class AppLocalizations {
   /// No description provided for @about.
   ///
   /// In en, this message translates to:
-  /// **'About TuDok'**
+  /// **'About LakbayG'**
   String get about;
 
   /// No description provided for @aboutBody.
   ///
   /// In en, this message translates to:
-  /// **'Tulong-Dokyumento helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.'**
+  /// **'LakbayG (Lakbay Gobyerno) helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.'**
   String get aboutBody;
 
   /// No description provided for @reviewNotice.
   ///
   /// In en, this message translates to:
-  /// **'Content and Filipino wording still require independent team review. The Taal procedure is not release-ready.'**
+  /// **'PNP and NBI guides cover standard first-time applications only. The Taal birth-record journey remains an official referral pending a current municipal charter.'**
   String get reviewNotice;
 
   /// No description provided for @retry.
@@ -371,7 +371,7 @@ abstract class AppLocalizations {
   /// No description provided for @loadError.
   ///
   /// In en, this message translates to:
-  /// **'TuDok could not load its local content or saved data. Retry without clearing app data.'**
+  /// **'LakbayG could not load its local content or saved data. Retry without clearing app data.'**
   String get loadError;
 
   /// No description provided for @step.
