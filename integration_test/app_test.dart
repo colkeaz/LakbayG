@@ -34,14 +34,12 @@ void main() {
         'Continue',
         'Yes — standard first-time application',
         'Continue',
-        'View roadmap',
+        'Open guide',
       ]) {
         await tester.tap(find.text(label));
         await tester.pumpAndSettle();
       }
-      await tester.scrollUntilVisible(find.text('Prepare my checklist'), 300);
-      await tester.tap(find.text('Prepare my checklist'));
-      await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(find.byType(Checkbox).first, 300);
       await tester.tap(find.byType(Checkbox).first);
       await tester.pumpAndSettle();
       while (controller.busy) {

@@ -248,6 +248,10 @@ void main() {
   testWidgets(
     'Checklist save, missing filter, completion and confirmed reset',
     (tester) async {
+      tester.view.physicalSize = const Size(800, 2000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
       await tester.runAsync(() => controller.changeLanguage('en'));
       final service = fixture().service('pnp');
       await tester.pumpWidget(
@@ -265,16 +269,17 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      await tester.tap(find.byType(Checkbox).first);
       await tester.runAsync(() async {
-        await tester.tap(find.byType(Checkbox).first);
-        await Future<void>.delayed(const Duration(milliseconds: 100));
+        while (controller.busy) {
+          await Future<void>.delayed(const Duration(milliseconds: 5));
+        }
       });
       await tester.pumpAndSettle();
       expect(find.text('1 / 3 prepared'), findsOneWidget);
       await tester.tap(find.byType(Switch));
       await tester.pumpAndSettle();
       expect(find.byType(Checkbox), findsNWidgets(2));
-      await tester.ensureVisible(find.text('Reset checklist'));
       await tester.tap(find.text('Reset checklist'));
       await tester.pumpAndSettle();
       await tester.runAsync(() async {
@@ -313,7 +318,7 @@ void main() {
   testWidgets('Capture actual rendered home and roadmap screenshots', (
     tester,
   ) async {
-    tester.view.physicalSize = const Size(430, 932);
+    tester.view.physicalSize = const Size(430, 1800);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -347,11 +352,8 @@ void main() {
     await capture('home-fil');
     await tester.runAsync(() => controller.changeLanguage('en'));
     await tester.pumpAndSettle();
-    await tester.scrollUntilVisible(
-      find.text('National Police Clearance'),
-      200,
-    );
-    await tester.tap(find.text('National Police Clearance'));
+    final target = find.byKey(const ValueKey<String>('service-pnp')).first;
+    await tester.tap(target);
     await tester.pumpAndSettle();
     await capture('pnp-roadmap');
     await tester.pumpWidget(const SizedBox());
