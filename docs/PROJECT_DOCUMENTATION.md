@@ -1,8 +1,8 @@
-# TuDok — Project documentation
+# LakbayG (Lakbay Gobyerno) — Project documentation
 
 ## Problem, purpose and users
 
-First-time or infrequent applicants can confuse document types, agencies, requirements and processing locations. TuDok helps users identify a supported service and prepare before a visit. Students are the primary pilot audience. Anecdotal experiences motivate the prototype; reduced real-world delay has not been established.
+First-time or infrequent applicants can confuse document types, agencies, requirements and processing locations. LakbayG helps users identify a supported service and prepare before a visit. Students are the primary pilot audience. Anecdotal experiences motivate the prototype; reduced real-world delay has not been established.
 
 ## Objectives and features
 

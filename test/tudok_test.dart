@@ -203,7 +203,7 @@ void main() {
   );
   testWidgets('Language onboarding persists Filipino choice', (tester) async {
     await tester.pumpWidget(
-      TuDokApp(catalog: fixture(), controller: controller),
+      LakbayGApp(catalog: fixture(), controller: controller),
     );
     await tester.pumpAndSettle();
     expect(find.text('Choose your language'), findsOneWidget);
@@ -224,7 +224,7 @@ void main() {
     (tester) async {
       await tester.runAsync(() => controller.changeLanguage('en'));
       await tester.pumpWidget(
-        TuDokApp(catalog: fixture(), controller: controller),
+        LakbayGApp(catalog: fixture(), controller: controller),
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text('Find the right service'));
@@ -257,8 +257,8 @@ void main() {
           child: ListenableBuilder(
             listenable: controller,
             builder: (context, _) => MaterialApp(
-              localizationsDelegates: const TuDokLocalizations().delegates,
-              supportedLocales: const TuDokLocalizations().locales,
+              localizationsDelegates: const LakbayGLocalizations().delegates,
+              supportedLocales: const LakbayGLocalizations().locales,
               home: ChecklistScreen(service: service),
             ),
           ),
@@ -301,7 +301,7 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
     await tester.runAsync(() => controller.changeLanguage('fil'));
     await tester.pumpWidget(
-      TuDokApp(catalog: fixture(), controller: controller),
+      LakbayGApp(catalog: fixture(), controller: controller),
     );
     await tester.pumpAndSettle();
     tester.platformDispatcher.textScaleFactorTestValue = 2;
@@ -315,7 +315,7 @@ void main() {
     (tester) async {
       await tester.runAsync(() => controller.changeLanguage('en'));
       await tester.pumpWidget(
-        TuDokApp(catalog: fixture(), controller: controller),
+        LakbayGApp(catalog: fixture(), controller: controller),
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text('My Checklists'));
@@ -363,8 +363,8 @@ void main() {
           child: ListenableBuilder(
             listenable: controller,
             builder: (context, _) => MaterialApp(
-              localizationsDelegates: const TuDokLocalizations().delegates,
-              supportedLocales: const TuDokLocalizations().locales,
+              localizationsDelegates: const LakbayGLocalizations().delegates,
+              supportedLocales: const LakbayGLocalizations().locales,
               home: ChecklistScreen(service: service),
             ),
           ),
@@ -391,8 +391,8 @@ void main() {
           child: ListenableBuilder(
             listenable: failing,
             builder: (context, _) => MaterialApp(
-              localizationsDelegates: const TuDokLocalizations().delegates,
-              supportedLocales: const TuDokLocalizations().locales,
+              localizationsDelegates: const LakbayGLocalizations().delegates,
+              supportedLocales: const LakbayGLocalizations().locales,
               home: ChecklistScreen(service: service),
             ),
           ),
@@ -420,7 +420,7 @@ void main() {
     (tester) async {
       await tester.runAsync(() => controller.changeLanguage('en'));
       await tester.pumpWidget(
-        TuDokApp(catalog: fixture(), controller: controller),
+        LakbayGApp(catalog: fixture(), controller: controller),
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text('About & Settings'));
@@ -430,13 +430,13 @@ void main() {
         await Future<void>.delayed(const Duration(milliseconds: 100));
       });
       await tester.pumpAndSettle();
-      expect(find.text('Tungkol sa TuDok'), findsOneWidget);
+      expect(find.text('Tungkol sa LakbayG'), findsOneWidget);
       await tester.runAsync(() async {
         await tester.tap(find.text('English'));
         await Future<void>.delayed(const Duration(milliseconds: 100));
       });
       await tester.pumpAndSettle();
-      expect(find.text('About TuDok'), findsOneWidget);
+      expect(find.text('About LakbayG'), findsOneWidget);
       await tester.scrollUntilVisible(
         find.text('PNP application tutorial'),
         200,
@@ -471,7 +471,7 @@ void main() {
     (tester) async {
       await tester.runAsync(() => controller.changeLanguage('en'));
       await tester.pumpWidget(
-        TuDokApp(catalog: fixture(), controller: controller),
+        LakbayGApp(catalog: fixture(), controller: controller),
       );
       await tester.pumpAndSettle();
       await tester.tap(find.text('Find the right service'));
@@ -505,7 +505,7 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: key,
-        child: TuDokApp(catalog: fixture(), controller: controller),
+        child: LakbayGApp(catalog: fixture(), controller: controller),
       ),
     );
     await tester.pumpAndSettle();

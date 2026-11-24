@@ -1,4 +1,4 @@
-# TuDok(Tulong-Dokyumento)
+# LakbayG(Lakbay Gobyerno)
 
 ## *Citizen-Centered Government Document Navigation Application*
 

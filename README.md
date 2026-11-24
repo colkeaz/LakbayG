@@ -1,4 +1,4 @@
-# TuDok (Tulong-Dokyumento) — Citizen-Centered Government Document Navigation
+# LakbayG (Lakbay Gobyerno) — Citizen-Centered Government Document Navigation
 
 Android-first Flutter student prototype: need-first service navigation, source-linked roadmaps, and persistent preparation checklists in English and Filipino.
 

@@ -1,4 +1,4 @@
-# TuDok validation results — 24 November 2026
+# LakbayG (Lakbay Gobyerno) validation results — 24 November 2026
 
 Environment: Flutter 3.47.5 stable, Dart 3.13.4, Windows, Android SDK, JDK supplied by Android Studio.
 

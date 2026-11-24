@@ -138,11 +138,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get close => 'Close';
 
   @override
-  String get about => 'About TuDok';
+  String get about => 'About LakbayG';
 
   @override
   String get aboutBody =>
-      'Tulong-Dokyumento helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.';
+      'LakbayG (Lakbay Gobyerno) helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.';
 
   @override
   String get reviewNotice =>
@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadError =>
-      'TuDok could not load its local content or saved data. Retry without clearing app data.';
+      'LakbayG could not load its local content or saved data. Retry without clearing app data.';
 
   @override
   String get step => 'Step';

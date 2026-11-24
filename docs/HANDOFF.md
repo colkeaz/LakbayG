@@ -1,4 +1,4 @@
-# TuDok — Team Handoff & Final Defense Guide
+# LakbayG (Lakbay Gobyerno) — Team Handoff & Final Defense Guide
 
 ## 1. Current Repository & Verification Status
 

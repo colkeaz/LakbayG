@@ -21,7 +21,7 @@ void main() {
       await controller.initialize();
       await controller.changeLanguage('en');
       await tester.pumpWidget(
-        TuDokApp(catalog: catalog, controller: controller),
+        LakbayGApp(catalog: catalog, controller: controller),
       );
       await tester.pumpAndSettle();
       expect(find.text('Find the right service'), findsOneWidget);
@@ -73,7 +73,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Tungkol at Mga Setting'));
       await tester.pumpAndSettle();
-      expect(find.text('Tungkol sa TuDok'), findsOneWidget);
+      expect(find.text('Tungkol sa LakbayG'), findsOneWidget);
       await tester.pumpWidget(const Placeholder());
     } finally {
       await checklists.set(
