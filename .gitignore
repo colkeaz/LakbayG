@@ -172,3 +172,9 @@ $RECYCLE.BIN/
 migrate_working_dir/
 *.crash
 *.stackdump
+
+# ==============================================================================
+# Internal Team Planning & Private Working Notes
+# ==============================================================================
+TEAM_WORKPLAN.md
+

@@ -59,6 +59,21 @@ void main() {
         (tester.widget(find.byType(Checkbox).first) as Checkbox).value,
         isTrue,
       );
+      while (find.byType(BackButton).evaluate().isNotEmpty) {
+        await tester.tap(find.byType(BackButton));
+        await tester.pumpAndSettle();
+      }
+      await tester.tap(find.text('Mga Checklist'));
+      await tester.pumpAndSettle();
+      expect(find.text('1 / 3 handa'), findsOneWidget);
+      await tester.tap(find.text('Lokal na kopya ng tala ng kapanganakan'));
+      await tester.pumpAndSettle();
+      expect(find.text('Kailangan ng opisyal na kumpirmasyon'), findsOneWidget);
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Tungkol at Mga Setting'));
+      await tester.pumpAndSettle();
+      expect(find.text('Tungkol sa TuDok'), findsOneWidget);
       await tester.pumpWidget(const Placeholder());
     } finally {
       await checklists.set(

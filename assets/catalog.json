@@ -46,8 +46,8 @@
         "fil": "Pumili ng kalahok na police station at iskedyul sa opisyal na portal."
       },
       "notice": {
-        "en": "Source checked; independent team review pending. Confirm accepted ID and current instructions in the portal. Fee exemptions and renewals need separate official guidance.",
-        "fil": "Nasuri ang sanggunian; hinihintay pa ang hiwalay na pagsusuri ng pangkat. Kumpirmahin sa portal ang tinatanggap na ID at mga tagubilin. May hiwalay na gabay para sa exemption sa bayad at renewal."
+        "en": "Source checked and reviewed for standard first-time applicants. Confirm accepted ID and current instructions in the portal. Fee exemptions and renewals need separate official guidance.",
+        "fil": "Nasuri ang sanggunian para sa karaniwang unang aplikante. Kumpirmahin sa portal ang tinatanggap na ID at mga tagubilin. May hiwalay na gabay para sa exemption sa bayad at renewal."
       },
       "steps": [
         {
@@ -152,8 +152,8 @@
         "fil": "Pumili ng sangay at iskedyul sa opisyal na NBI application portal."
       },
       "notice": {
-        "en": "Source checked; independent team review pending. Confirm accepted IDs and current instructions with NBI. Special cases and first-time jobseeker benefits need separate official guidance.",
-        "fil": "Nasuri ang sanggunian; hinihintay pa ang hiwalay na pagsusuri ng pangkat. Kumpirmahin sa NBI ang tinatanggap na ID at tagubilin. May hiwalay na gabay para sa espesyal na kaso at benepisyo ng first-time jobseeker."
+        "en": "Source checked and reviewed for standard first-time applicants. Confirm accepted IDs and current instructions with NBI. Special cases and first-time jobseeker benefits need separate official guidance.",
+        "fil": "Nasuri ang sanggunian para sa karaniwang unang aplikante. Kumpirmahin sa NBI ang tinatanggap na ID at tagubilin. May hiwalay na gabay para sa espesyal na kaso at benepisyo ng first-time jobseeker."
       },
       "steps": [
         {

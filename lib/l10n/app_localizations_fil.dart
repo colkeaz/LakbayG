@@ -147,7 +147,7 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get reviewNotice =>
-      'Kailangan pa ng hiwalay na pagsusuri ng pangkat sa nilalaman at salin sa Filipino. Hindi pa handa para sa release ang proseso sa Taal.';
+      'Saklaw lamang ng gabay sa PNP at NBI ang karaniwang unang aplikasyon. Mananatiling referral sa opisyal na tanggapan ang proseso sa Taal habang wala pang kasalukuyang charter.';
 
   @override
   String get retry => 'Subukang muli';

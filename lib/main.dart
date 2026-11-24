@@ -438,8 +438,10 @@ class ChecklistsView extends StatelessWidget {
   Widget build(BuildContext context) => PageBody(
     children: [
       Section(context.l.checklists),
-      Text(context.l.empty),
-      const SizedBox(height: 12),
+      if (context.state.prepared.values.every((items) => items.isEmpty)) ...[
+        Text(context.l.empty),
+        const SizedBox(height: 12),
+      ],
       for (final s in context.catalog.services)
         ServiceCard(service: s, checklist: true),
     ],

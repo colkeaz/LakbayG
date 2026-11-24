@@ -43,7 +43,7 @@
   "close": "Close",
   "about": "About TuDok",
   "aboutBody": "Tulong-Dokyumento helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.",
-  "reviewNotice": "Content and Filipino wording still require independent team review. The Taal procedure is not release-ready.",
+  "reviewNotice": "PNP and NBI guides cover standard first-time applications only. The Taal birth-record journey remains an official referral pending a current municipal charter.",
   "retry": "Retry",
   "loadError": "TuDok could not load its local content or saved data. Retry without clearing app data.",
   "step": "Step",

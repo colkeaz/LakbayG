@@ -359,7 +359,7 @@ abstract class AppLocalizations {
   /// No description provided for @reviewNotice.
   ///
   /// In en, this message translates to:
-  /// **'Content and Filipino wording still require independent team review. The Taal procedure is not release-ready.'**
+  /// **'PNP and NBI guides cover standard first-time applications only. The Taal birth-record journey remains an official referral pending a current municipal charter.'**
   String get reviewNotice;
 
   /// No description provided for @retry.

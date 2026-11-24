@@ -146,7 +146,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewNotice =>
-      'Content and Filipino wording still require independent team review. The Taal procedure is not release-ready.';
+      'PNP and NBI guides cover standard first-time applications only. The Taal birth-record journey remains an official referral pending a current municipal charter.';
 
   @override
   String get retry => 'Retry';

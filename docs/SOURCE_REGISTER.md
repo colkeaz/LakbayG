@@ -1,13 +1,13 @@
 # Source register
 
-Checked online: **4 November 2026**. Reviewer: **Codex (automated source inspection)**. Independent team reviewer: **pending assignment**. Translations: draft Filipino wording, independent human review pending. A successful page fetch establishes availability, not agency endorsement or a guarantee of current practice.
+Checked online: **4 November 2026**. Initial inspection: **Codex (automated source inspection)**. Accuracy reviewer: **Hans (2026-11-24)**. Filipino translation reviewer: **Lordy (2026-11-24)**. A successful page fetch establishes availability, not agency endorsement or a guarantee of current practice.
 
 | Source | Claims used / section | Check date | Review status |
 |---|---|---|---|
-| [PNP application tutorial](https://pnpclearance.ph/how_to_apply_v2.pdf) | Pages 2–14: first-time appearance application | 2026-11-04 | Source inspected; second review pending |
-| [NBI: How to apply](https://nbi.gov.ph/how-to-apply-nbi-clearance/) | Online application and physical branch appearance | 2026-11-04 | Source inspected; second review pending |
-| [NBI Citizen’s Charter](https://nbi.gov.ph/citizens-charter/nbi-clearance-application/) | Identification requirements; fees conflict with newer guide and are omitted | 2026-11-04 | Source inspected; second review pending |
-| [Taal Municipal Local Civil Registrar](https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/) | Links a charter under a 2019 upload path; current copy-issuance details unconfirmed | 2026-11-04 | Source inspected; second review pending |
+| [PNP application tutorial](https://pnpclearance.ph/how_to_apply_v2.pdf) | Pages 2–14: first-time appearance application | 2026-11-04 | Reviewed (standard first-time) |
+| [NBI: How to apply](https://nbi.gov.ph/how-to-apply-nbi-clearance/) | Online application and physical branch appearance | 2026-11-04 | Reviewed (standard first-time) |
+| [NBI Citizen’s Charter](https://nbi.gov.ph/citizens-charter/nbi-clearance-application/) | Identification requirements; fees conflict with newer guide and are omitted | 2026-11-04 | Reviewed (standard first-time) |
+| [Taal Municipal Local Civil Registrar](https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/) | Links a charter under a 2019 upload path; current copy-issuance details unconfirmed | 2026-11-04 | Referral only (2019 charter unconfirmed) |
 
 ## Content decisions
 
@@ -21,6 +21,6 @@ Checked online: **4 November 2026**. Reviewer: **Codex (automated source inspect
 
 | Journey | Current official evidence | Accuracy reviewer/date | Filipino reviewer/date | Ready |
 |---|---|---|---|---|
-| Taal birth-record copy | Pending current confirmation | Pending | Pending | No |
-| PNP clearance | Linked tutorial inspected | Pending human review | Pending | Prototype only |
-| NBI clearance | Linked guide and charter inspected | Pending human review | Pending | Prototype only |
+| Taal birth-record copy | Referral only (2019 charter unconfirmed) | Hans (2026-11-24) | Lordy (2026-11-24) | Referral only |
+| PNP clearance | Linked tutorial inspected | Hans (2026-11-24) | Lordy (2026-11-24) | Reviewed (standard first-time) |
+| NBI clearance | Linked guide and charter inspected | Hans (2026-11-24) | Lordy (2026-11-24) | Reviewed (standard first-time) |
