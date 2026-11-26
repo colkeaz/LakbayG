@@ -41,15 +41,15 @@
   "linkError": "Could not open the link. Copy it and try in your browser when connected.",
   "copyLink": "Copy link",
   "close": "Close",
-  "about": "About TuDok",
-  "aboutBody": "Tulong-Dokyumento helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.",
+  "about": "About LakbayG",
+  "aboutBody": "LakbayG helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.",
   "reviewNotice": "Content and Filipino wording still require independent team review. The Taal procedure is not release-ready.",
   "retry": "Retry",
-  "loadError": "TuDok could not load its local content or saved data. Retry without clearing app data.",
+  "loadError": "LakbayG could not load its local content or saved data. Retry without clearing app data.",
   "step": "Step",
   "offline": "Guidance available offline",
   "linksNeedInternet": "Official websites need an internet connection.",
-  "greeting": "Welcome to TuDok",
+  "greeting": "Welcome to LakbayG",
   "quickActions": "Quick actions",
   "myGuides": "My guides",
   "searchHint": "Search a service or agency",
@@ -65,6 +65,12 @@
   "questionCount": "Question {count}",
   "@questionCount": {
     "description": "Progress label in the service questionnaire. A decision tree has no fixed length, so no total is shown.",
-    "parameters": ["count"]
-  }
+    "parameters": [
+      "count"
+    ]
+  },
+  "documentQuestion": "What document do you need?",
+  "resumeGuide": "Continue preparing",
+  "inProgress": "In progress",
+  "readyGroup": "Prepared"
 }

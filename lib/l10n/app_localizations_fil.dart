@@ -139,11 +139,11 @@ class AppLocalizationsFil extends AppLocalizations {
   String get close => 'Isara';
 
   @override
-  String get about => 'Tungkol sa TuDok';
+  String get about => 'Tungkol sa LakbayG';
 
   @override
   String get aboutBody =>
-      'Tinutulungan ka ng Tulong-Dokyumento na pumili ng serbisyo, tingnan ang opisyal na gabay at mag-save ng checklist. Nananatili sa device na ito ang checklist at wika. Walang kinokolektang account o personal na dokumento.';
+      'Tinutulungan ka ng LakbayG na pumili ng serbisyo, tingnan ang opisyal na gabay at mag-save ng checklist. Nananatili sa device na ito ang checklist at wika. Walang kinokolektang account o personal na dokumento.';
 
   @override
   String get reviewNotice =>
@@ -154,7 +154,7 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get loadError =>
-      'Hindi ma-load ng TuDok ang lokal na nilalaman o datos. Subukang muli nang hindi binubura ang app data.';
+      'Hindi ma-load ng LakbayG ang lokal na nilalaman o datos. Subukang muli nang hindi binubura ang app data.';
 
   @override
   String get step => 'Hakbang';
@@ -167,7 +167,7 @@ class AppLocalizationsFil extends AppLocalizations {
       'Kailangan ng internet para sa opisyal na website.';
 
   @override
-  String get greeting => 'Maligayang pagdating sa TuDok';
+  String get greeting => 'Maligayang pagdating sa LakbayG';
 
   @override
   String get quickActions => 'Mga mabilis na aksyon';
@@ -210,4 +210,16 @@ class AppLocalizationsFil extends AppLocalizations {
   String questionCount(Object count) {
     return 'Tanong $count';
   }
+
+  @override
+  String get documentQuestion => 'Anong dokumento ang kailangan mo?';
+
+  @override
+  String get resumeGuide => 'Ipagpatuloy ang paghahanda';
+
+  @override
+  String get inProgress => 'Inihahanda';
+
+  @override
+  String get readyGroup => 'Handa na';
 }

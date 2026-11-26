@@ -35,7 +35,10 @@ void main() {
         'Yes — standard first-time application',
         'Continue',
         'Open guide',
+        'What to bring',
       ]) {
+        await tester.ensureVisible(find.text(label));
+        await tester.pumpAndSettle();
         await tester.tap(find.text(label));
         await tester.pumpAndSettle();
       }
@@ -52,7 +55,7 @@ void main() {
       restored.dispose();
       await controller.changeLanguage('fil');
       await tester.pumpAndSettle();
-      expect(find.text('Mga Checklist'), findsOneWidget);
+      expect(find.text('Mga dalahin'), findsOneWidget);
       expect(
         (tester.widget(find.byType(Checkbox).first) as Checkbox).value,
         isTrue,
