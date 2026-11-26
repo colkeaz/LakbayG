@@ -227,6 +227,8 @@ void main() {
         TuDokApp(catalog: fixture(), controller: controller),
       );
       await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Find the right service'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Find the right service'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Continue'));
@@ -263,7 +265,7 @@ void main() {
             builder: (context, _) => MaterialApp(
               localizationsDelegates: const TuDokLocalizations().delegates,
               supportedLocales: const TuDokLocalizations().locales,
-              home: ChecklistScreen(service: service),
+              home: ChecklistScreen(service: service, packing: true),
             ),
           ),
         ),
@@ -297,6 +299,48 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     },
   );
+  testWidgets('Resume opens packing and saved guides move between groups', (
+    tester,
+  ) async {
+    final catalog = fixture();
+    await tester.runAsync(() async {
+      await controller.changeLanguage('en');
+      await controller.toggle(
+        'pnp',
+        catalog.service('pnp').requirements.first.id,
+        true,
+      );
+    });
+    await tester.pumpWidget(TuDokApp(catalog: catalog, controller: controller));
+    await tester.pumpAndSettle();
+    expect(find.text('Continue preparing'), findsOneWidget);
+    await tester.tap(find.text('National Police Clearance').first);
+    await tester.pumpAndSettle();
+    expect(find.byType(Checkbox), findsNWidgets(3));
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.runAsync(() async {
+      for (final r in catalog.service('pnp').requirements) {
+        await controller.toggle('pnp', r.id, true);
+      }
+      await controller.toggle(
+        'nbi',
+        catalog.service('nbi').requirements.first.id,
+        true,
+      );
+    });
+    await tester.tap(find.byIcon(Icons.checklist_outlined).last);
+    await tester.pumpAndSettle();
+    expect(find.text('Prepared'), findsOneWidget);
+    expect(find.text('In progress'), findsOneWidget);
+    await tester.runAsync(() async {
+      await controller.reset('pnp');
+      await controller.reset('nbi');
+    });
+    await tester.pumpAndSettle();
+    expect(find.text('Explore the journeys'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
   testWidgets('Small phone with 200% text has no layout errors', (
     tester,
   ) async {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'domain.dart';
+import 'pip.dart';
 import 'storage.dart';
 import 'l10n/app_localizations.dart';
 
@@ -11,19 +12,16 @@ void main() {
   runApp(const Bootstrap());
 }
 
-/// A single-hue blue system: deep navy for anchors, one primary blue for
-/// actions, and soft blue tints for grouping. No gradients, no competing
-/// accent colors — flat values stay calm and readable for low-vision users.
 abstract final class Palette {
-  static const background = Color(0xffF2F6FC);
+  static const background = Color(0xffFAF7EF);
   static const surface = Colors.white;
-  static const ink = Color(0xff142A47);
-  static const muted = Color(0xff4E6686);
-  static const primary = Color(0xff1B4E91);
-  static const navy = Color(0xff143866);
-  static const blueSoft = Color(0xffE6EFFA);
-  static const blueWarn = Color(0xffCFE0F5);
-  static const line = Color(0xffDDE7F4);
+  static const ink = Color(0xff17344A);
+  static const muted = Color(0xff506358);
+  static const primary = Color(0xff176658);
+  static const navy = Color(0xff17344A);
+  static const blueSoft = Color(0xffE4EEE4);
+  static const blueWarn = Color(0xffF6E7BC);
+  static const line = Color(0xffD8DFD3);
 }
 
 class Bootstrap extends StatefulWidget {
@@ -134,7 +132,7 @@ class TuDokApp extends StatelessWidget {
     child: ListenableBuilder(
       listenable: controller,
       builder: (context, _) => MaterialApp(
-        title: 'TuDok',
+        title: 'LakbayG',
         debugShowCheckedModeBanner: false,
         locale: Locale(controller.language),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -192,7 +190,11 @@ class TuDokApp extends StatelessWidget {
           ),
           textTheme: const TextTheme(
             bodyLarge: TextStyle(fontSize: 18, color: Palette.ink, height: 1.4),
-            bodyMedium: TextStyle(fontSize: 16, color: Palette.ink, height: 1.4),
+            bodyMedium: TextStyle(
+              fontSize: 16,
+              color: Palette.ink,
+              height: 1.4,
+            ),
             bodySmall: TextStyle(
               fontSize: 14,
               color: Palette.muted,
@@ -253,7 +255,7 @@ class LanguageScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'TuDok',
+                  'LakbayG',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 36,
@@ -319,14 +321,14 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('TuDok'),
+      title: const Text('LakbayG'),
       actions: const [LanguageMenu()],
     ),
     body: IndexedStack(
       index: index,
       children: [
         HomeView(onTab: (value) => setState(() => index = value)),
-        const ChecklistsView(),
+        ChecklistsView(explore: () => setState(() => index = 0)),
         const SettingsView(),
       ],
     ),
@@ -376,7 +378,7 @@ class PageBody extends StatelessWidget {
   const PageBody({super.key, required this.children});
   @override
   Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.fromLTRB(18, 10, 18, 32),
+    padding: const EdgeInsets.fromLTRB(16, 10, 16, 32),
     children: [
       Center(
         child: ConstrainedBox(
@@ -423,82 +425,21 @@ class Notice extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(fontSize: 15, color: Palette.ink, height: 1.4),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-Future<void> pickLanguage(BuildContext context) async {
-  final value = await showDialog<String>(
-    context: context,
-    builder: (c) => SimpleDialog(
-      title: Text(c.l.chooseLanguage),
-      children: [
-        SimpleDialogOption(
-          onPressed: () => Navigator.pop(c, 'en'),
-          child: const Text('English'),
-        ),
-        SimpleDialogOption(
-          onPressed: () => Navigator.pop(c, 'fil'),
-          child: const Text('Filipino'),
-        ),
-      ],
-    ),
-  );
-  if (!context.mounted || value == null || value == context.state.language) {
-    return;
-  }
-  context.saveResult(await context.state.changeLanguage(value));
-}
-
-class _QuickAction extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-  const _QuickAction({
-    required this.icon,
-    required this.label,
-    required this.color,
-    required this.onTap,
-  });
-  @override
-  Widget build(BuildContext context) => Expanded(
-    child: Material(
-      color: color,
-      borderRadius: BorderRadius.circular(18),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 112),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(icon, size: 28, color: Palette.primary),
-                const SizedBox(height: 14),
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Palette.ink,
-                    height: 1.25,
-                  ),
-                ),
-              ],
+            style: const TextStyle(
+              fontSize: 15,
+              color: Palette.ink,
+              height: 1.4,
             ),
           ),
         ),
-      ),
+      ],
     ),
   );
 }
+
+int preparedCount(BuildContext context, Service service) => service.requirements
+    .where((r) => context.state.checked(service.id, r.id))
+    .length;
 
 class HomeView extends StatefulWidget {
   final ValueChanged<int> onTab;
@@ -513,129 +454,52 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final l = context.l;
-    final state = context.state;
     final services = context.catalog.services.where((s) {
       if (query.trim().isEmpty) return true;
       final q = query.trim().toLowerCase();
       return context.tr(s.title).toLowerCase().contains(q) ||
           s.agency.toLowerCase().contains(q);
     }).toList();
-    final total = context.catalog.services.fold<int>(
-      0,
-      (n, s) => n + s.requirements.length,
-    );
-    final done = context.catalog.services.fold<int>(
-      0,
-      (n, s) =>
-          n + s.requirements.where((r) => state.checked(s.id, r.id)).length,
-    );
-    final started = context.catalog.services
-        .where((s) => s.requirements.any((r) => state.checked(s.id, r.id)))
-        .length;
 
+    final active = context.catalog.services.where((s) {
+      final count = preparedCount(context, s);
+      return count > 0 && count < s.requirements.length;
+    }).toList();
     return PageBody(
       children: [
-        Text(
-          l.greeting,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-            color: Palette.ink,
-          ),
-        ),
-        SoftTile(
-          color: Palette.navy,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.fact_check_outlined,
-                    size: 22,
-                    color: Colors.white,
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    l.progress,
+        if (active.isEmpty)
+          SoftTile(
+            color: Palette.blueSoft,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l.documentQuestion,
                     style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
+                      height: 1.12,
+                      color: Palette.ink,
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 14),
-              Text(
-                '$done / $total ${l.itemsReady}',
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
                 ),
-              ),
-              const SizedBox(height: 10),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: LinearProgressIndicator(
-                  value: total == 0 ? 0 : done / total,
-                  minHeight: 10,
-                  backgroundColor: Colors.white54,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                '$started ${l.guidesStarted}',
-                style: const TextStyle(fontSize: 14, color: Colors.white70),
-              ),
-            ],
-          ),
-        ),
-        Section(l.quickActions),
-        IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _QuickAction(
-                icon: Icons.search_rounded,
-                label: l.findService,
-                color: Palette.blueSoft,
-                onTap: () => context.open(NavigatorScreen()),
-              ),
-              const SizedBox(width: 10),
-              _QuickAction(
-                icon: Icons.checklist_rounded,
-                label: l.myGuides,
-                color: Palette.blueSoft,
-                onTap: () => widget.onTab(1),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _QuickAction(
-                icon: Icons.translate_rounded,
-                label: l.language,
-                color: Palette.blueSoft,
-                onTap: () => pickLanguage(context),
-              ),
-              const SizedBox(width: 10),
-              _QuickAction(
-                icon: Icons.info_outline_rounded,
-                label: l.settings,
-                color: Palette.blueSoft,
-                onTap: () => widget.onTab(2),
-              ),
-            ],
-          ),
-        ),
-        Section(l.explore),
+                if (MediaQuery.textScalerOf(context).scale(16) < 28)
+                  const Pip(PipPose.map),
+              ],
+            ),
+          )
+        else ...[
+          Section(l.resumeGuide),
+          if (active.length == 1)
+            ServiceCard(service: active.single, checklist: true)
+          else
+            ListTile(
+              title: Text(l.checklists),
+              subtitle: Text('${active.length} ${l.guidesStarted}'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => widget.onTab(1),
+            ),
+        ],
         TextField(
           onChanged: (value) => setState(() => query = value),
           decoration: InputDecoration(
@@ -647,6 +511,11 @@ class _HomeViewState extends State<HomeView> {
         if (services.isEmpty)
           SoftTile(color: Palette.surface, child: Text(l.noResults)),
         for (final s in services) ServiceCard(service: s),
+        OutlinedButton.icon(
+          onPressed: () => context.open(NavigatorScreen()),
+          icon: const Icon(Icons.alt_route),
+          label: Text(l.findService),
+        ),
         Notice(l.studentNotice),
       ],
     );
@@ -663,80 +532,94 @@ class ServiceCard extends StatelessWidget {
     final count = s.requirements
         .where((r) => context.state.checked(s.id, r.id))
         .length;
-    return Card(
-      child: ListTile(
-        key: ValueKey<String>('service-${s.id}'),
-        contentPadding: const EdgeInsets.all(16),
-        leading: Container(
-          width: 46,
-          height: 46,
-          decoration: BoxDecoration(
-            color: Palette.blueSoft,
-            borderRadius: BorderRadius.circular(14),
+    return Column(
+      children: [
+        ListTile(
+          key: ValueKey<String>('service-${s.id}'),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 4,
+            vertical: 10,
           ),
-          child: Icon(
-            s.id == 'taal-birth'
-                ? Icons.description_outlined
-                : s.id == 'pnp'
-                ? Icons.local_police_outlined
-                : Icons.badge_outlined,
-            color: Palette.primary,
-            size: 24,
+          leading: Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: Palette.blueSoft,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(
+              s.id == 'taal-birth'
+                  ? Icons.description_outlined
+                  : s.id == 'pnp'
+                  ? Icons.local_police_outlined
+                  : Icons.badge_outlined,
+              color: Palette.primary,
+              size: 24,
+            ),
           ),
+          title: Text(
+            context.tr(s.title),
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: Palette.ink,
+            ),
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Text(
+              [
+                s.agency,
+                if (!s.verified) context.l.pending,
+                if (checklist)
+                  '$count / ${s.requirements.length} ${context.l.prepared}',
+              ].join('\n'),
+              style: const TextStyle(fontSize: 14, color: Palette.muted),
+            ),
+          ),
+          trailing: const Icon(Icons.chevron_right, color: Palette.muted),
+          onTap: () =>
+              context.open(ChecklistScreen(service: s, packing: checklist)),
         ),
-        title: Text(
-          context.tr(s.title),
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: Palette.ink,
-          ),
-        ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top: 6),
-          child: Text(
-            !s.verified
-                ? context.l.pending
-                : checklist
-                ? '$count / ${s.requirements.length} ${context.l.prepared}'
-                : s.agency,
-            style: const TextStyle(fontSize: 14, color: Palette.muted),
-          ),
-        ),
-        trailing: const Icon(Icons.chevron_right, color: Palette.muted),
-        onTap: () => context.open(ChecklistScreen(service: s)),
-      ),
+        const Divider(height: 1, color: Palette.line),
+      ],
     );
   }
 }
 
 class ChecklistsView extends StatelessWidget {
-  const ChecklistsView({super.key});
+  final VoidCallback explore;
+  const ChecklistsView({super.key, required this.explore});
   @override
-  Widget build(BuildContext context) => PageBody(
-    children: [
-      Section(context.l.checklists),
-      SoftTile(
-        color: Palette.blueSoft,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Icon(Icons.lightbulb_outline, size: 22, color: Palette.primary),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                context.l.empty,
-                style: const TextStyle(fontSize: 15, color: Palette.ink),
-              ),
-            ),
+  Widget build(BuildContext context) {
+    final started = context.catalog.services.where(
+      (s) => preparedCount(context, s) > 0,
+    );
+    return PageBody(
+      children: [
+        Section(context.l.checklists),
+        if (started.isEmpty) ...[
+          const Center(child: Pip(PipPose.point)),
+          Text(context.l.empty),
+          FilledButton(onPressed: explore, child: Text(context.l.explore)),
+        ],
+        for (final complete in [false, true])
+          if (started.any(
+            (s) =>
+                (preparedCount(context, s) == s.requirements.length) ==
+                complete,
+          )) ...[
+            Section(complete ? context.l.readyGroup : context.l.inProgress),
+            for (final s in started.where(
+              (s) =>
+                  (preparedCount(context, s) == s.requirements.length) ==
+                  complete,
+            ))
+              ServiceCard(service: s, checklist: true),
           ],
-        ),
-      ),
-      const SizedBox(height: 8),
-      for (final s in context.catalog.services)
-        ServiceCard(service: s, checklist: true),
-    ],
-  );
+      ],
+    );
+  }
 }
 
 class SettingsView extends StatelessWidget {
@@ -851,12 +734,18 @@ Future<void> openOfficial(BuildContext context, String url) async {
 /// lost as soon as the user opened their checklist.
 class ChecklistScreen extends StatefulWidget {
   final Service service;
-  const ChecklistScreen({super.key, required this.service});
+  final bool packing;
+  const ChecklistScreen({
+    super.key,
+    required this.service,
+    this.packing = false,
+  });
   @override
   State<ChecklistScreen> createState() => _ChecklistScreenState();
 }
 
 class _ChecklistScreenState extends State<ChecklistScreen> {
+  late bool packing = widget.packing;
   bool missing = false;
 
   @override
@@ -869,275 +758,240 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l.checklists),
+        title: Text(context.tr(s.title)),
         actions: const [LanguageMenu()],
       ),
       body: PageBody(
         children: [
-          SoftTile(
-            color: Palette.navy,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 46,
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: Colors.white24,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Icon(
-                        Icons.description_outlined,
-                        color: Colors.white,
-                        size: 24,
-                      ),
+          Text(s.agency, style: Theme.of(context).textTheme.titleMedium),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Chip(
+              avatar: Icon(
+                s.verified ? Icons.fact_check_outlined : Icons.schedule,
+                size: 18,
+              ),
+              label: Text(s.verified ? l.sourceChecked : l.pending),
+            ),
+          ),
+          if (!s.verified) Notice(context.tr(s.notice), warning: true),
+          SegmentedButton<bool>(
+            showSelectedIcon: false,
+            segments: [
+              ButtonSegment(value: false, label: Text(l.steps)),
+              ButtonSegment(value: true, label: Text(l.whatToBring)),
+            ],
+            selected: {packing},
+            onSelectionChanged: (v) => setState(() => packing = v.single),
+          ),
+          if (!packing) ...[
+            Section(l.scope),
+            Text(
+              context.tr(s.summary),
+              style: const TextStyle(fontSize: 16, color: Palette.ink),
+            ),
+            if (s.verified) Notice(context.tr(s.notice), warning: true),
+            Section(l.location),
+            SoftTile(
+              color: Palette.blueSoft,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.place_outlined,
+                    size: 22,
+                    color: Palette.primary,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      context.tr(s.location),
+                      style: const TextStyle(fontSize: 16, color: Palette.ink),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
+                  ),
+                ],
+              ),
+            ),
+            if (s.verified && s.steps.isNotEmpty) ...[
+              Section(l.steps),
+              for (final (index, step) in s.steps.indexed)
+                SoftTile(
+                  color: Palette.surface,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            context.tr(s.title),
-                            style: const TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
+                          Container(
+                            width: 34,
+                            height: 34,
+                            decoration: const BoxDecoration(
+                              color: Palette.blueSoft,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${index + 1}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: Palette.primary,
+                                ),
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            s.agency,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.white70,
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              context.tr(step.title),
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: Palette.ink,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    _Chip(
-                      icon: s.verified ? Icons.verified_outlined : Icons.schedule,
-                      label: s.verified ? l.sourceChecked : l.pending,
-                    ),
-                    _Chip(
-                      icon: Icons.numbers,
-                      label: '${s.steps.length} ${l.steps}',
-                    ),
-                    _Chip(
-                      icon: Icons.checklist_outlined,
-                      label: '$total ${l.whatToBring}',
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Section(l.location),
-          SoftTile(
-            color: Palette.blueSoft,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(Icons.place_outlined, size: 22, color: Palette.primary),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    context.tr(s.location),
-                    style: const TextStyle(fontSize: 16, color: Palette.ink),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (s.verified && s.steps.isNotEmpty) ...[
-            Section(l.steps),
-            for (final (index, step) in s.steps.indexed)
-              SoftTile(
-                color: Palette.surface,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 34,
-                          height: 34,
-                          decoration: const BoxDecoration(
-                            color: Palette.blueSoft,
-                            shape: BoxShape.circle,
+                      const SizedBox(height: 10),
+                      Text(
+                        context.tr(step.detail),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Palette.ink,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.place_outlined,
+                            size: 18,
+                            color: Palette.primary,
                           ),
-                          child: Center(
+                          const SizedBox(width: 8),
+                          Expanded(
                             child: Text(
-                              '${index + 1}',
+                              '${l.goTo}: ${context.tr(step.place)}',
                               style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w800,
-                                color: Palette.primary,
+                                fontSize: 15,
+                                color: Palette.ink,
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            context.tr(step.title),
-                            style: const TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: Palette.ink,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ] else if (total > 0) ...[
+            SoftTile(
+              color: Palette.blueSoft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$count / $total ${l.prepared}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Palette.ink,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      context.tr(step.detail),
-                      style: const TextStyle(fontSize: 16, color: Palette.ink),
+                  ),
+                  const SizedBox(height: 10),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: LinearProgressIndicator(
+                      value: total == 0 ? 0 : count / total,
+                      minHeight: 10,
+                      backgroundColor: Palette.surface,
+                      color: Palette.primary,
                     ),
-                    const SizedBox(height: 12),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.place_outlined,
-                          size: 18,
-                          color: Palette.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            '${l.goTo}: ${context.tr(step.place)}',
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Palette.ink,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${total - count} ${l.remaining}',
+                    style: const TextStyle(fontSize: 14, color: Palette.muted),
+                  ),
+                ],
+              ),
+            ),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                l.missingOnly,
+                style: const TextStyle(fontSize: 16, color: Palette.ink),
+              ),
+              value: missing,
+              onChanged: (v) => setState(() => missing = v),
+            ),
+            for (final r in s.requirements.where(
+              (r) => !missing || !state.checked(s.id, r.id),
+            ))
+              Card(
+                child: CheckboxListTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: Text(
+                    context.tr(r.text),
+                    style: const TextStyle(fontSize: 16, color: Palette.ink),
+                  ),
+                  value: state.checked(s.id, r.id),
+                  onChanged: state.busy
+                      ? null
+                      : (value) async {
+                          final ok = await state.toggle(
+                            s.id,
+                            r.id,
+                            value ?? false,
+                          );
+                          if (context.mounted) {
+                            context.saveResult(ok);
+                          }
+                        },
                 ),
               ),
-          ],
-          Section(l.scope),
-          Text(
-            context.tr(s.summary),
-            style: const TextStyle(fontSize: 16, color: Palette.ink),
-          ),
-          Notice(context.tr(s.notice), warning: true),
-          Section(l.whatToBring),
-          SoftTile(
-            color: Palette.blueSoft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$count / $total ${l.prepared}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
-                    color: Palette.ink,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: LinearProgressIndicator(
-                    value: total == 0 ? 0 : count / total,
-                    minHeight: 10,
-                    backgroundColor: Palette.surface,
-                    color: Palette.primary,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '${total - count} ${l.remaining}',
-                  style: const TextStyle(fontSize: 14, color: Palette.muted),
-                ),
-              ],
-            ),
-          ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(
-              l.missingOnly,
-              style: const TextStyle(fontSize: 16, color: Palette.ink),
-            ),
-            value: missing,
-            onChanged: (v) => setState(() => missing = v),
-          ),
-          for (final r in s.requirements.where(
-            (r) => !missing || !state.checked(s.id, r.id),
-          ))
-            Card(
-              child: CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                title: Text(
-                  context.tr(r.text),
-                  style: const TextStyle(fontSize: 16, color: Palette.ink),
-                ),
-                value: state.checked(s.id, r.id),
-                onChanged: state.busy
+            if (total > 0 && count == total) ...[
+              const Center(child: Pip(PipPose.perch)),
+              Notice(l.complete),
+            ],
+            const SizedBox(height: 12),
+            SizedBox(
+              height: 52,
+              child: OutlinedButton.icon(
+                onPressed: state.busy
                     ? null
-                    : (value) async {
-                        final ok = await state.toggle(
-                          s.id,
-                          r.id,
-                          value ?? false,
+                    : () async {
+                        final confirm = await showDialog<bool>(
+                          context: context,
+                          builder: (c) => AlertDialog(
+                            title: Text(c.l.resetConfirm),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(c, false),
+                                child: Text(c.l.cancel),
+                              ),
+                              FilledButton(
+                                onPressed: () => Navigator.pop(c, true),
+                                child: Text(c.l.reset),
+                              ),
+                            ],
+                          ),
                         );
-                        if (context.mounted) {
-                          context.saveResult(ok);
+                        if (confirm == true) {
+                          final ok = await state.reset(s.id);
+                          if (context.mounted) {
+                            context.saveResult(ok);
+                          }
                         }
                       },
+                icon: const Icon(Icons.restart_alt),
+                label: Text(l.reset),
               ),
             ),
-          if (total > 0 && count == total) Notice(l.complete),
-          const SizedBox(height: 12),
-          SizedBox(
-            height: 52,
-            child: OutlinedButton.icon(
-              onPressed: state.busy
-                  ? null
-                  : () async {
-                      final confirm = await showDialog<bool>(
-                        context: context,
-                        builder: (c) => AlertDialog(
-                          title: Text(c.l.resetConfirm),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(c, false),
-                              child: Text(c.l.cancel),
-                            ),
-                            FilledButton(
-                              onPressed: () => Navigator.pop(c, true),
-                              child: Text(c.l.reset),
-                            ),
-                          ],
-                        ),
-                      );
-                      if (confirm == true) {
-                        final ok = await state.reset(s.id);
-                        if (context.mounted) {
-                          context.saveResult(ok);
-                        }
-                      }
-                    },
-              icon: const Icon(Icons.restart_alt),
-              label: Text(l.reset),
-            ),
-          ),
+          ],
           const SizedBox(height: 10),
           SizedBox(
             height: 52,
@@ -1157,31 +1011,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
       ),
     );
   }
-}
-
-class _Chip extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  const _Chip({required this.icon, required this.label});
-  @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    decoration: BoxDecoration(
-      color: Palette.surface,
-      borderRadius: BorderRadius.circular(14),
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 16, color: Palette.primary),
-        const SizedBox(width: 6),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 13, color: Palette.ink),
-        ),
-      ],
-    ),
-  );
 }
 
 /// Longest chain of questions still reachable from [id]. Referrals and
@@ -1336,7 +1165,11 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                 ),
               ),
             ] else ...[
-              const Icon(Icons.explore_outlined, size: 56, color: Palette.primary),
+              const Icon(
+                Icons.explore_outlined,
+                size: 56,
+                color: Palette.primary,
+              ),
               const SizedBox(height: 20),
               Text(
                 service != null ? context.l.result : context.l.referral,

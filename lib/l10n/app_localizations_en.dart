@@ -138,11 +138,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get close => 'Close';
 
   @override
-  String get about => 'About TuDok';
+  String get about => 'About LakbayG';
 
   @override
   String get aboutBody =>
-      'Tulong-Dokyumento helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.';
+      'LakbayG helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.';
 
   @override
   String get reviewNotice =>
@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadError =>
-      'TuDok could not load its local content or saved data. Retry without clearing app data.';
+      'LakbayG could not load its local content or saved data. Retry without clearing app data.';
 
   @override
   String get step => 'Step';
@@ -166,7 +166,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Official websites need an internet connection.';
 
   @override
-  String get greeting => 'Welcome to TuDok';
+  String get greeting => 'Welcome to LakbayG';
 
   @override
   String get quickActions => 'Quick actions';
@@ -208,4 +208,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String questionCount(Object count) {
     return 'Question $count';
   }
+
+  @override
+  String get documentQuestion => 'What document do you need?';
+
+  @override
+  String get resumeGuide => 'Continue preparing';
+
+  @override
+  String get inProgress => 'In progress';
+
+  @override
+  String get readyGroup => 'Prepared';
 }
