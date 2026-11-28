@@ -1,38 +1,26 @@
 {
-  "version": 1,
+  "version": 2,
   "services": [
-    {
-      "id": "taal-birth",
-      "agency": "Taal Municipal Local Civil Registrar",
-      "verified": false,
-      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/",
-      "title": {
-        "en": "Local birth-record copy",
-        "fil": "Lokal na kopya ng tala ng kapanganakan"
-      },
-      "summary": {
-        "en": "For your own existing birth record registered in Taal. A local copy is different from a PSA-issued certificate.",
-        "fil": "Para sa sarili mong umiiral na tala ng kapanganakan na nakarehistro sa Taal. Iba ang lokal na kopya sa sertipiko mula sa PSA."
-      },
-      "location": {
-        "en": "Taal, Batangas. Confirm the current office address and service counter with the municipal civil registrar before travelling.",
-        "fil": "Taal, Batangas. Kumpirmahin muna sa municipal civil registrar ang kasalukuyang address at tanggapan bago bumiyahe."
-      },
-      "notice": {
-        "en": "Current procedure not yet confirmed. The available charter is older. Contact the municipal civil registrar for requirements, office directions and copy issuance steps. No document checklist is published yet.",
-        "fil": "Hindi pa kumpirmado ang kasalukuyang proseso. Luma ang makukuhang charter. Makipag-ugnayan sa municipal civil registrar para sa mga kailangan, direksyon at hakbang. Wala pang inilalathalang checklist ng dokumento."
-      },
-      "steps": [],
-      "requirements": [],
-      "sources": [
-        "taal"
-      ]
-    },
     {
       "id": "pnp",
       "agency": "Philippine National Police",
+      "category": "clearance",
+      "icon": "police",
       "verified": true,
       "url": "https://pnpclearance.ph/",
+      "keywords": [
+        "police",
+        "pnp",
+        "npcs",
+        "clearance",
+        "first job",
+        "trabaho",
+        "employment",
+        "batangas",
+        "taal",
+        "san pablo",
+        "ra 11261"
+      ],
       "title": {
         "en": "National Police Clearance",
         "fil": "National Police Clearance"
@@ -42,64 +30,116 @@
         "fil": "Karaniwang unang aplikasyon na may personal na pagpunta para sa nasa hustong gulang na kumukuha ng sariling clearance."
       },
       "location": {
-        "en": "Choose a participating police station and available schedule in the official portal.",
-        "fil": "Pumili ng kalahok na police station at iskedyul sa opisyal na portal."
+        "en": "Choose a participating police station and schedule in the NPCS portal (such as Batangas City, Lipa, Taal, or San Pablo stations).",
+        "fil": "Pumili ng kalahok na police station at iskedyul sa NPCS portal (tulad ng istasyon sa Batangas City, Lipa, Taal, o San Pablo)."
+      },
+      "fee": {
+        "en": "~₱150 + e-payment fee; free once for First-Time Jobseekers (RA 11261)",
+        "fil": "~₱150 + bayad sa e-payment; libre nang isang beses sa First-Time Jobseeker (RA 11261)"
+      },
+      "processingTime": {
+        "en": "Same day (~30–60 mins at station) if no HIT",
+        "fil": "Parehong araw (~30–60 minuto sa istasyon) kung walang HIT"
+      },
+      "validity": {
+        "en": "6 months from issuance",
+        "fil": "6 na buwan mula sa paglabas"
       },
       "notice": {
-        "en": "Source checked; independent team review pending. Confirm accepted ID and current instructions in the portal. Fee exemptions and renewals need separate official guidance.",
-        "fil": "Nasuri ang sanggunian; hinihintay pa ang hiwalay na pagsusuri ng pangkat. Kumpirmahin sa portal ang tinatanggap na ID at mga tagubilin. May hiwalay na gabay para sa exemption sa bayad at renewal."
+        "en": "Source checked. Confirm accepted ID and current station slots in the portal. Renewals and fee exemptions follow separate portal options.",
+        "fil": "Nasuri ang sanggunian. Kumpirmahin sa portal ang tinatanggap na ID at iskedyul ng istasyon. May hiwalay na opsyon para sa renewal at exemption sa bayad."
       },
+      "acceptedIds": [
+        {
+          "en": "PhilSys / National ID (or ePhilID)",
+          "fil": "PhilSys / National ID (o ePhilID)"
+        },
+        {
+          "en": "Philippine Passport",
+          "fil": "Pasaporte ng Pilipinas"
+        },
+        {
+          "en": "LTO Driver's License",
+          "fil": "Lisensya sa Pagmamaneho (LTO)"
+        },
+        {
+          "en": "UMID, PRC ID, or Postal ID",
+          "fil": "UMID, PRC ID, o Postal ID"
+        },
+        {
+          "en": "Voter's ID / Voter's Certification with photo, Senior Citizen, or PWD ID",
+          "fil": "Voter's ID / Voter's Certification na may larawan, Senior Citizen, o PWD ID"
+        }
+      ],
+      "tips": [
+        {
+          "en": "First-Time Jobseekers (RA 11261) can avail of a free clearance once—prepare a Barangay Certificate & Oath of Undertaking before booking.",
+          "fil": "May isang beses na libreng clearance ang First-Time Jobseekers (RA 11261)—ihanda ang Barangay Certificate at Oath of Undertaking bago mag-book."
+        },
+        {
+          "en": "Save an offline screenshot of both your payment confirmation and NPC appointment reference number in case signal is weak inside the station.",
+          "fil": "Mag-save ng offline screenshot ng kumpirmasyon ng bayad at reference number ng NPC appointment kung sakaling mahina ang signal sa istasyon."
+        },
+        {
+          "en": "Arrive 15–30 minutes early in neat, collared or smart-casual attire for photo capture.",
+          "fil": "Dumating nang 15–30 minutong mas maaga at magsuot ng maayos na damit para sa pagkuha ng larawan."
+        }
+      ],
       "steps": [
         {
+          "id": "pnp-step-1",
           "title": {
             "en": "Create an account",
             "fil": "Gumawa ng account"
           },
           "detail": {
-            "en": "Register on the NPCS portal and complete your profile.",
-            "fil": "Magrehistro sa NPCS portal at kumpletuhin ang iyong profile."
+            "en": "Register on the NPCS portal with an active email and complete your personal profile.",
+            "fil": "Magrehistro sa NPCS portal gamit ang aktibong email at kumpletuhin ang iyong profile."
           },
           "place": {
-            "en": "Official portal",
-            "fil": "Opisyal na portal"
+            "en": "Official NPCS portal",
+            "fil": "Opisyal na NPCS portal"
           }
         },
         {
+          "id": "pnp-step-2",
           "title": {
             "en": "Choose your appointment",
             "fil": "Pumili ng appointment"
           },
           "detail": {
-            "en": "Start a clearance application; select your purpose, station and date. Keep the reference number.",
-            "fil": "Simulan ang aplikasyon; piliin ang layunin, istasyon at petsa. Itabi ang reference number."
+            "en": "Start a clearance application; select your purpose, participating police station, and date. Keep the reference number.",
+            "fil": "Simulan ang aplikasyon; piliin ang layunin, istasyon ng pulisya, at petsa. Itabi ang reference number."
           },
           "place": {
-            "en": "Official portal",
-            "fil": "Opisyal na portal"
+            "en": "Official NPCS portal",
+            "fil": "Opisyal na NPCS portal"
           }
         },
         {
+          "id": "pnp-step-3",
           "title": {
             "en": "Follow payment instructions",
             "fil": "Sundin ang tagubilin sa pagbabayad"
           },
           "detail": {
-            "en": "Use the portal payment options and keep the payment confirmation.",
-            "fil": "Gamitin ang mga opsyon sa portal at itabi ang kumpirmasyon ng bayad."
+            "en": "Pay via the portal's accredited e-payment options (or select the RA 11261 First-Time Jobseeker option if eligible) and keep the confirmation.",
+            "fil": "Magbayad gamit ang mga opsyon sa portal (o piliin ang First-Time Jobseeker kung kwalipikado) at itabi ang kumpirmasyon."
           },
           "place": {
-            "en": "Official portal",
-            "fil": "Opisyal na portal"
+            "en": "Official NPCS portal",
+            "fil": "Opisyal na NPCS portal"
           }
         },
         {
+          "id": "pnp-step-4",
           "title": {
             "en": "Attend and complete processing",
             "fil": "Pumunta at kumpletuhin ang proseso"
           },
           "detail": {
-            "en": "Bring your ID, payment confirmation and reference number. Complete photo, fingerprints and signature capture; follow release instructions.",
-            "fil": "Dalhin ang ID, kumpirmasyon ng bayad at reference number. Magpakuha ng larawan, fingerprint at lagda; sundin ang tagubilin sa pagkuha."
+            "en": "Bring your original valid ID, payment confirmation, and reference number. Complete photo, fingerprints, and signature capture; follow release instructions.",
+            "fil": "Dalhin ang orihinal na ID, kumpirmasyon ng bayad, at reference number. Magpakuha ng larawan, fingerprint, at lagda; sundin ang tagubilin sa pagkuha."
           },
           "place": {
             "en": "Your selected police station",
@@ -111,8 +151,8 @@
         {
           "id": "pnp-id-v1",
           "text": {
-            "en": "One valid government-issued ID accepted by PNP",
-            "fil": "Isang balidong government-issued ID na tinatanggap ng PNP"
+            "en": "One original valid government-issued ID accepted by PNP",
+            "fil": "Isang orihinal at balidong government-issued ID na tinatanggap ng PNP"
           }
         },
         {
@@ -128,6 +168,13 @@
             "en": "NPC appointment reference number",
             "fil": "Reference number ng NPC appointment"
           }
+        },
+        {
+          "id": "pnp-ballpen-v1",
+          "text": {
+            "en": "Black pen and printed/screenshot copy of appointment details",
+            "fil": "Itim na bolpen at naka-print o screenshot na detalye ng appointment"
+          }
         }
       ],
       "sources": [
@@ -137,8 +184,22 @@
     {
       "id": "nbi",
       "agency": "National Bureau of Investigation",
+      "category": "clearance",
+      "icon": "badge",
       "verified": true,
       "url": "https://clearance.nbi.gov.ph/",
+      "keywords": [
+        "nbi",
+        "clearance",
+        "first job",
+        "trabaho",
+        "employment",
+        "abroad",
+        "hit",
+        "ra 11261",
+        "batangas",
+        "lipa"
+      ],
       "title": {
         "en": "NBI Clearance",
         "fil": "NBI Clearance"
@@ -148,64 +209,116 @@
         "fil": "Karaniwang unang aplikasyon na may personal na pagpunta para sa nasa hustong gulang na kumukuha ng sariling clearance."
       },
       "location": {
-        "en": "Choose a branch and schedule in the official NBI application portal.",
-        "fil": "Pumili ng sangay at iskedyul sa opisyal na NBI application portal."
+        "en": "Choose an NBI branch and schedule in the official portal (e.g., Batangas City, Lipa, or Calamba branches).",
+        "fil": "Pumili ng sangay ng NBI at iskedyul sa opisyal na portal (hal., Batangas City, Lipa, o Calamba)."
+      },
+      "fee": {
+        "en": "~₱130 + e-payment fee; free once via First-Time Jobseeker tab (RA 11261)",
+        "fil": "~₱130 + bayad sa e-payment; libre nang isang beses sa First-Time Jobseeker tab (RA 11261)"
+      },
+      "processingTime": {
+        "en": "Same day if no HIT; ~5–10 working days if WITH HIT verification",
+        "fil": "Parehong araw kung walang HIT; ~5–10 araw ng trabaho kung may HIT"
+      },
+      "validity": {
+        "en": "1 year from issuance",
+        "fil": "1 taon mula sa paglabas"
       },
       "notice": {
-        "en": "Source checked; independent team review pending. Confirm accepted IDs and current instructions with NBI. Special cases and first-time jobseeker benefits need separate official guidance.",
-        "fil": "Nasuri ang sanggunian; hinihintay pa ang hiwalay na pagsusuri ng pangkat. Kumpirmahin sa NBI ang tinatanggap na ID at tagubilin. May hiwalay na gabay para sa espesyal na kaso at benepisyo ng first-time jobseeker."
+        "en": "Source checked. Confirm accepted IDs and current instructions with NBI. Renewals and First-Time Jobseeker claims use dedicated portal flows.",
+        "fil": "Nasuri ang sanggunian. Kumpirmahin sa NBI ang tinatanggap na ID at tagubilin. May hiwalay na daloy para sa renewal at First-Time Jobseeker."
       },
+      "acceptedIds": [
+        {
+          "en": "PhilSys / National ID (or ePhilID)",
+          "fil": "PhilSys / National ID (o ePhilID)"
+        },
+        {
+          "en": "Philippine Passport",
+          "fil": "Pasaporte ng Pilipinas"
+        },
+        {
+          "en": "LTO Driver's License, UMID, PRC ID, or Postal ID",
+          "fil": "Lisensya sa Pagmamaneho (LTO), UMID, PRC ID, o Postal ID"
+        },
+        {
+          "en": "PSA Birth Certificate (commonly accepted as one of two supporting IDs)",
+          "fil": "PSA Birth Certificate (madalas tinatanggap bilang isa sa dalawang ID)"
+        },
+        {
+          "en": "School ID with current registration form (for students)",
+          "fil": "School ID na may kasalukuyang registration form (para sa mga mag-aaral)"
+        }
+      ],
+      "tips": [
+        {
+          "en": "Getting a \"HIT\" simply means your name matches another record in the database—it is not a criminal record. Expect a return date after quality verification.",
+          "fil": "Ang \"HIT\" ay nangangahulugang may kapangalan ka lamang sa sistema—hindi ito nangangahulugang may kaso ka. Babalik ka lamang sa nakatakdang petsa."
+        },
+        {
+          "en": "First-Time Jobseekers must apply through the dedicated FIRST TIME JOBSEEKERS option in the NBI portal and bring their Barangay Certificate + Oath.",
+          "fil": "Dapat gamitin ng First-Time Jobseekers ang nakalaang FIRST TIME JOBSEEKERS na opsyon sa NBI portal at dalhin ang Barangay Certificate + Oath."
+        },
+        {
+          "en": "Double-check the spelling of your full name, middle name, and birthdate before paying—errors cannot be edited after payment.",
+          "fil": "Suriing mabuti ang baybay ng buong pangalan at petsa ng kapanganakan bago magbayad—hindi na ito mababago pagkatapos magbayad."
+        }
+      ],
       "steps": [
         {
+          "id": "nbi-step-1",
           "title": {
             "en": "Register and complete your profile",
             "fil": "Magrehistro at kumpletuhin ang profile"
           },
           "detail": {
-            "en": "Use the official portal. Review your personal details against your identification.",
-            "fil": "Gamitin ang opisyal na portal. Ihambing ang personal na detalye sa iyong ID."
+            "en": "Create an account on the official NBI portal. Verify your personal details match your valid IDs and birth certificate.",
+            "fil": "Gumawa ng account sa opisyal na NBI portal. Tiyaking tugma ang detalye sa iyong mga ID at birth certificate."
           },
           "place": {
-            "en": "Official portal",
-            "fil": "Opisyal na portal"
+            "en": "Official NBI portal",
+            "fil": "Opisyal na NBI portal"
           }
         },
         {
+          "id": "nbi-step-2",
           "title": {
             "en": "Apply and select a branch",
             "fil": "Mag-apply at pumili ng sangay"
           },
           "detail": {
-            "en": "Choose the ID you will bring, branch and available appointment. Retain your reference number.",
-            "fil": "Piliin ang dadalhing ID, sangay at available na appointment. Itabi ang reference number."
+            "en": "Choose the valid IDs you will bring, select your NBI branch and appointment slot, and save your reference number.",
+            "fil": "Piliin ang mga dadalhing ID, sangay ng NBI at iskedyul ng appointment, at itabi ang reference number."
           },
           "place": {
-            "en": "Official portal",
-            "fil": "Opisyal na portal"
+            "en": "Official NBI portal",
+            "fil": "Opisyal na NBI portal"
           }
         },
         {
+          "id": "nbi-step-3",
           "title": {
             "en": "Complete portal payment",
             "fil": "Bayaran ayon sa portal"
           },
           "detail": {
-            "en": "Follow the displayed payment instructions; retain proof and check payment status.",
-            "fil": "Sundin ang ipinapakitang tagubilin; itabi ang katibayan at tingnan ang status ng bayad."
+            "en": "Pay through the displayed payment channels (or submit First-Time Jobseeker details), save proof, and check payment status.",
+            "fil": "Magbayad gamit ang ipinapakitang paraan, itabi ang katibayan, at tingnan kung PAID na ang status."
           },
           "place": {
-            "en": "Official portal",
-            "fil": "Opisyal na portal"
+            "en": "Official NBI portal",
+            "fil": "Opisyal na NBI portal"
           }
         },
         {
+          "id": "nbi-step-4",
           "title": {
             "en": "Visit the selected branch",
             "fil": "Pumunta sa napiling sangay"
           },
           "detail": {
-            "en": "Present your reference, payment proof and IDs. Complete biometrics and data review. Follow the officer’s release or follow-up instructions.",
-            "fil": "Ipakita ang reference, katibayan ng bayad at mga ID. Kumpletuhin ang biometrics at pagsusuri ng datos. Sundin ang tagubilin sa pagkuha o pagbabalik."
+            "en": "Present your reference number, payment proof, and two valid IDs. Complete biometrics and data review, then follow releasing or HIT return instructions.",
+            "fil": "Ipakita ang reference number, katibayan ng bayad, at dalawang ID. Kumpletuhin ang biometrics at sundin ang tagubilin sa pagkuha o pagbabalik."
           },
           "place": {
             "en": "Your selected NBI branch",
@@ -234,11 +347,920 @@
             "en": "Proof of payment / receipt",
             "fil": "Katibayan ng bayad o resibo"
           }
+        },
+        {
+          "id": "nbi-ftjs-v1",
+          "text": {
+            "en": "Barangay First-Time Jobseeker Certificate & Oath (only if availing RA 11261 free fee)",
+            "fil": "Barangay First-Time Jobseeker Certificate at Oath (kung kukuha ng libreng bayad sa RA 11261)"
+          }
         }
       ],
       "sources": [
         "nbi-guide",
         "nbi-charter"
+      ]
+    },
+    {
+      "id": "psa-birth",
+      "agency": "Philippine Statistics Authority",
+      "category": "civil",
+      "icon": "birth",
+      "verified": true,
+      "url": "https://psa.gov.ph/civilregistration/requesting-civil-registry-document/birth-certificate",
+      "keywords": [
+        "psa",
+        "birth",
+        "certificate",
+        "secpa",
+        "kapanganakan",
+        "live birth",
+        "civil registry",
+        "school",
+        "passport",
+        "batangas"
+      ],
+      "title": {
+        "en": "PSA Birth Certificate",
+        "fil": "PSA Birth Certificate"
+      },
+      "summary": {
+        "en": "Official security-paper (SECPA) birth certificate copy requested for school, passport, SSS, or employment.",
+        "fil": "Opisyal na kopya ng birth certificate sa security paper (SECPA) para sa paaralan, pasaporte, SSS, o trabaho."
+      },
+      "location": {
+        "en": "PSA Civil Registry System (CRS) Outlet (e.g., Fiesta World Mall, Lipa City by online appointment) or official online delivery.",
+        "fil": "PSA CRS Outlet (hal., Fiesta World Mall, Lipa City sa pamamagitan ng online appointment) o opisyal na online delivery."
+      },
+      "fee": {
+        "en": "~₱155 per copy at CRS outlet; ~₱365 per copy for online delivery",
+        "fil": "~₱155 bawat kopya sa CRS outlet; ~₱365 bawat kopya sa online delivery"
+      },
+      "processingTime": {
+        "en": "Same day at CRS outlet with appointment; ~3–8 working days via courier",
+        "fil": "Parehong araw sa CRS outlet kung may appointment; ~3–8 araw ng trabaho sa delivery"
+      },
+      "validity": {
+        "en": "No expiration (Permanent Validity Act, RA 11909) while intact and readable",
+        "fil": "Walang expiration (RA 11909) hangga't malinaw at hindi sira"
+      },
+      "notice": {
+        "en": "Distinct from a Local Civil Registry (LCR) copy. Confirm whether the requesting office requires PSA SECPA paper.",
+        "fil": "Iba ito sa kopya mula sa Local Civil Registry (LCR). Tiyakin kung PSA SECPA ang hinihingi ng tanggapan."
+      },
+      "acceptedIds": [
+        {
+          "en": "PhilSys / National ID (or ePhilID)",
+          "fil": "PhilSys / National ID (o ePhilID)"
+        },
+        {
+          "en": "Philippine Passport, Driver's License, UMID, PRC ID, or Postal ID",
+          "fil": "Pasaporte ng Pilipinas, Driver's License, UMID, PRC ID, o Postal ID"
+        },
+        {
+          "en": "School ID with current registration/enrollment proof (for students requesting own record)",
+          "fil": "School ID na may patunay ng kasalukuyang pagpapatala (para sa estudyante)"
+        }
+      ],
+      "tips": [
+        {
+          "en": "Under RA 11909, PSA Birth Certificates no longer expire—you do not need a newly dated copy unless an older copy is torn, blurred, or specifically needs updating.",
+          "fil": "Sa ilalim ng RA 11909, hindi na nag-e-expire ang PSA Birth Certificate—hindi kailangang kumuha ng bago kung malinaw at buo pa ang luma."
+        },
+        {
+          "en": "For CRS outlet walk-in, book a slot at appointment.psa.gov.ph first; outlets generally require an appointment.",
+          "fil": "Para sa pagpunta sa CRS outlet, mag-book muna ng iskedyul sa appointment.psa.gov.ph."
+        },
+        {
+          "en": "If your birth was recently registered or corrected at your municipality, confirm it has been endorsed to PSA before ordering.",
+          "fil": "Kung bagong rehistro o may pagwawasto sa munisipyo, tiyakin munang naipasa na ito sa PSA bago umorder."
+        }
+      ],
+      "steps": [
+        {
+          "id": "psa-step-1",
+          "title": {
+            "en": "Choose outlet pickup or online delivery",
+            "fil": "Pumili ng CRS outlet o online delivery"
+          },
+          "detail": {
+            "en": "Decide whether to visit a PSA CRS outlet (lower fee, same-day release) or order online for door-to-door courier delivery.",
+            "fil": "Magpasya kung pupunta sa PSA CRS outlet (mas mura, parehong araw) o oorder online para sa delivery."
+          },
+          "place": {
+            "en": "PSA website / CRS portal",
+            "fil": "Website ng PSA / CRS portal"
+          }
+        },
+        {
+          "id": "psa-step-2",
+          "title": {
+            "en": "Book appointment or submit request",
+            "fil": "Mag-book ng appointment o magsumite ng request"
+          },
+          "detail": {
+            "en": "Enter full birth details (name at birth, date/place of birth, parents' names) and save your appointment slip or reference number.",
+            "fil": "Ilagay ang kumpletong detalye ng kapanganakan at itabi ang appointment slip o reference number."
+          },
+          "place": {
+            "en": "Official PSA booking / order site",
+            "fil": "Opisyal na PSA booking / order site"
+          }
+        },
+        {
+          "id": "psa-step-3",
+          "title": {
+            "en": "Pay the processing fee",
+            "fil": "Bayaran ang kaukulang bayad"
+          },
+          "detail": {
+            "en": "Pay at the CRS outlet cashier on your appointment date or via accredited online/over-the-counter channels for delivery.",
+            "fil": "Magbayad sa cashier ng CRS outlet sa araw ng appointment o sa accredited na bayaran kung online delivery."
+          },
+          "place": {
+            "en": "PSA CRS cashier or accredited payment channel",
+            "fil": "Cashier ng PSA CRS o accredited payment channel"
+          }
+        },
+        {
+          "id": "psa-step-4",
+          "title": {
+            "en": "Claim or receive your SECPA copy",
+            "fil": "Kunin o tanggapin ang kopyang SECPA"
+          },
+          "detail": {
+            "en": "Present your valid ID and receipt/reference at the releasing window (or to the courier upon delivery) and inspect all printed details.",
+            "fil": "Ipakita ang iyong valid ID at resibo sa releasing window (o sa courier) at suriin ang nakaimprentang detalye."
+          },
+          "place": {
+            "en": "PSA CRS Outlet or delivery address",
+            "fil": "PSA CRS Outlet o address ng paghahatid"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "psa-id-v1",
+          "text": {
+            "en": "One valid government-issued ID (or Student ID with enrollment proof)",
+            "fil": "Isang balidong government-issued ID (o Student ID na may patunay ng pagpapatala)"
+          }
+        },
+        {
+          "id": "psa-details-v1",
+          "text": {
+            "en": "Complete birth details (exact name, date/place of birth, parents' full names)",
+            "fil": "Kumpletong detalye ng kapanganakan (buong pangalan, petsa/lugar, pangalan ng mga magulang)"
+          }
+        },
+        {
+          "id": "psa-appt-v1",
+          "text": {
+            "en": "Confirmed CRS appointment slip or online order reference number",
+            "fil": "Kumpirmadong CRS appointment slip o reference number ng online order"
+          }
+        },
+        {
+          "id": "psa-payment-v1",
+          "text": {
+            "en": "Exact cash for CRS cashier or online payment receipt",
+            "fil": "Eksaktong bayad para sa cashier o resibo ng online payment"
+          }
+        }
+      ],
+      "sources": [
+        "psa-crs"
+      ]
+    },
+    {
+      "id": "taal-birth",
+      "agency": "Taal Municipal Local Civil Registrar",
+      "category": "civil",
+      "icon": "birth",
+      "verified": false,
+      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/",
+      "keywords": [
+        "taal",
+        "local",
+        "birth",
+        "civil registrar",
+        "lcr",
+        "kapanganakan",
+        "batangas",
+        "municipal"
+      ],
+      "title": {
+        "en": "Local Birth-Record Copy (Taal LCR)",
+        "fil": "Lokal na Kopya ng Tala ng Kapanganakan (Taal LCR)"
+      },
+      "summary": {
+        "en": "For your own existing birth record registered in Taal. A local certified copy is different from a PSA SECPA certificate.",
+        "fil": "Para sa sarili mong umiiral na tala ng kapanganakan na nakarehistro sa Taal. Iba ang lokal na kopya sa sertipikong SECPA mula sa PSA."
+      },
+      "location": {
+        "en": "Taal, Batangas. Confirm the current Municipal Local Civil Registrar office counter and hours before travelling.",
+        "fil": "Taal, Batangas. Kumpirmahin muna sa Municipal Local Civil Registrar ang kasalukuyang tanggapan at oras bago bumiyahe."
+      },
+      "fee": {
+        "en": "Confirm current municipal copy fee directly with Taal LCR",
+        "fil": "Kumpirmahin sa Taal LCR ang kasalukuyang bayad sa lokal na kopya"
+      },
+      "processingTime": {
+        "en": "Confirm current releasing schedule with Taal LCR",
+        "fil": "Kumpirmahin sa Taal LCR ang kasalukuyang tagal ng paglabas"
+      },
+      "validity": {
+        "en": "Local certified true copy (distinct from PSA SECPA)",
+        "fil": "Lokal na certified true copy (iba sa PSA SECPA)"
+      },
+      "notice": {
+        "en": "Current procedure not yet confirmed. The available online charter is older (2019). Contact the Taal Municipal Local Civil Registrar for updated requirements, fees, and office directions before visiting.",
+        "fil": "Hindi pa kumpirmado ang kasalukuyang proseso. Luma (2019) ang makukuhang charter online. Makipag-ugnayan muna sa Taal Municipal Local Civil Registrar para sa updated na kailangan, bayad, at direksyon."
+      },
+      "acceptedIds": [],
+      "tips": [
+        {
+          "en": "Most schools, employers, and DFA Passport require a PSA Birth Certificate (SECPA), not a Local Civil Registry copy—check which one you need first.",
+          "fil": "Karaniwang PSA Birth Certificate (SECPA) ang hinihingi ng paaralan, trabaho, at pasaporte—tiyakin muna kung lokal na kopya talaga ang kailangan."
+        },
+        {
+          "en": "Local LCR copies are usually needed when your PSA copy is unreadable, missing/unendorsed, or undergoing record correction.",
+          "fil": "Karaniwang kinukuha ang lokal na kopya kung malabo ang PSA copy, wala pa sa PSA, o may proseso ng pagwawasto ng tala."
+        }
+      ],
+      "steps": [],
+      "requirements": [],
+      "sources": [
+        "taal"
+      ]
+    },
+    {
+      "id": "passport",
+      "agency": "Department of Foreign Affairs (DFA)",
+      "category": "id",
+      "icon": "passport",
+      "verified": true,
+      "url": "https://consular.dfa.gov.ph/services/passport/requirements/passport-adult/adult-new",
+      "keywords": [
+        "passport",
+        "dfa",
+        "travel",
+        "abroad",
+        "valid id",
+        "primary id",
+        "batangas",
+        "lipa"
+      ],
+      "title": {
+        "en": "Philippine Passport (New Adult)",
+        "fil": "Pasaporte ng Pilipinas (Bagong Aplikante)"
+      },
+      "summary": {
+        "en": "First-time Philippine passport application for an adult (18+) with an existing PSA Birth Certificate.",
+        "fil": "Unang pagkuha ng pasaporte ng Pilipinas para sa nasa hustong gulang (18+) na may PSA Birth Certificate."
+      },
+      "location": {
+        "en": "Book a DFA Consular Office on passport.gov.ph (e.g., 2F Robinsons Place Lipa or SM City San Pablo).",
+        "fil": "Pumili ng DFA Consular Office sa passport.gov.ph (hal., 2F Robinsons Place Lipa o SM City San Pablo)."
+      },
+      "fee": {
+        "en": "₱950 Regular / ₱1,200 Expedited (+ optional courier fee)",
+        "fil": "₱950 Regular / ₱1,200 Expedited (+ opsyonal na bayad sa courier)"
+      },
+      "processingTime": {
+        "en": "~10–12 working days (Regular) or ~5–7 working days (Expedited)",
+        "fil": "~10–12 araw ng trabaho (Regular) o ~5–7 araw (Expedited)"
+      },
+      "validity": {
+        "en": "10 years (for adults 18+)",
+        "fil": "10 taon (para sa edad 18 pataas)"
+      },
+      "notice": {
+        "en": "Source checked. Confirm accepted IDs and specific consular office instructions on the DFA portal before booking.",
+        "fil": "Nasuri ang sanggunian. Kumpirmahin sa DFA portal ang tinatanggap na ID at tagubilin ng consular office bago mag-book."
+      },
+      "acceptedIds": [
+        {
+          "en": "PhilSys / National ID (or ePhilID)",
+          "fil": "PhilSys / National ID (o ePhilID)"
+        },
+        {
+          "en": "UMID, LTO Driver's License, or PRC ID",
+          "fil": "UMID, LTO Driver's License, o PRC ID"
+        },
+        {
+          "en": "Digitized Postal ID (issued 2016 onwards)",
+          "fil": "Digitized Postal ID (inilabas mula 2016)"
+        },
+        {
+          "en": "Old Voter's ID or COMELEC Voter's Certificate issued from Intramuros",
+          "fil": "Voter's ID o COMELEC Voter's Certificate mula sa Intramuros"
+        },
+        {
+          "en": "School ID with current Certificate of Registration (for college students)",
+          "fil": "School ID na may kasalukuyang Certificate of Registration (para sa mga estudyante)"
+        }
+      ],
+      "tips": [
+        {
+          "en": "Bring both the ORIGINAL and clear photocopies of your PSA Birth Certificate and valid ID—DFA keeps the photocopies.",
+          "fil": "Dalhin ang ORIHINAL at malinaw na photocopy ng PSA Birth Certificate at valid ID—kinukuha ng DFA ang mga photocopy."
+        },
+        {
+          "en": "Wear a collared shirt and avoid earrings, facial piercings, or colored contact lenses for the biometric photo.",
+          "fil": "Magsuot ng damit na may kuwelyo at huwag magsuot ng hikaw o colored contact lens para sa larawan."
+        },
+        {
+          "en": "Carefully check every letter of your name and birthplace on the encoder's monitor before confirming.",
+          "fil": "Suriing mabuti ang bawat letra ng pangalan at lugar ng kapanganakan sa monitor bago kumpirmahin."
+        }
+      ],
+      "steps": [
+        {
+          "id": "pass-step-1",
+          "title": {
+            "en": "Book a DFA appointment",
+            "fil": "Mag-book ng appointment sa DFA"
+          },
+          "detail": {
+            "en": "Visit passport.gov.ph, select Individual Appointment, pick your Consular Office and slot, and enter your details accurately.",
+            "fil": "Pumunta sa passport.gov.ph, piliin ang Individual Appointment, ang Consular Office at petsa, at ilagay ang tamang detalye."
+          },
+          "place": {
+            "en": "Official DFA portal (passport.gov.ph)",
+            "fil": "Opisyal na DFA portal (passport.gov.ph)"
+          }
+        },
+        {
+          "id": "pass-step-2",
+          "title": {
+            "en": "Pay within the deadline",
+            "fil": "Magbayad bago ang deadline"
+          },
+          "detail": {
+            "en": "Pay the processing fee using the generated payment reference at accredited partners or e-wallets before the reservation expires.",
+            "fil": "Bayaran ang processing fee gamit ang reference number sa accredited payment centers o e-wallet bago mag-expire."
+          },
+          "place": {
+            "en": "Accredited DFA payment channel",
+            "fil": "Accredited DFA payment channel"
+          }
+        },
+        {
+          "id": "pass-step-3",
+          "title": {
+            "en": "Print confirmed packet",
+            "fil": "I-print ang kumpirmadong papeles"
+          },
+          "detail": {
+            "en": "Download and print the confirmed application form and e-receipt sent to your email, plus photocopies of your documents.",
+            "fil": "I-download at i-print ang application form at e-receipt mula sa email, kasama ang mga photocopy ng dokumento."
+          },
+          "place": {
+            "en": "Before your appointment",
+            "fil": "Bago ang iyong appointment"
+          }
+        },
+        {
+          "id": "pass-step-4",
+          "title": {
+            "en": "Attend biometrics & claim",
+            "fil": "Pumunta sa biometrics at pagkuha"
+          },
+          "detail": {
+            "en": "Arrive 30 minutes early for verification, encoding, and photo/fingerprints. Claim on the release date or wait for courier delivery.",
+            "fil": "Dumating nang 30 minutong mas maaga para sa beripikasyon, encoding, at biometrics. Kunin sa takdang petsa o hintayin ang delivery."
+          },
+          "place": {
+            "en": "Your selected DFA Consular Office",
+            "fil": "Napiling DFA Consular Office"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "pass-appt-v1",
+          "text": {
+            "en": "Printed confirmed DFA appointment & application form",
+            "fil": "Naka-print na kumpirmadong DFA appointment at application form"
+          }
+        },
+        {
+          "id": "pass-psa-v1",
+          "text": {
+            "en": "Original PSA Birth Certificate + 1 photocopy",
+            "fil": "Orihinal na PSA Birth Certificate + 1 photocopy"
+          }
+        },
+        {
+          "id": "pass-id-v1",
+          "text": {
+            "en": "Original valid government-issued ID + 1 photocopy (front & back)",
+            "fil": "Orihinal na balidong government ID + 1 photocopy (harap at likod)"
+          }
+        },
+        {
+          "id": "pass-receipt-v1",
+          "text": {
+            "en": "Printed e-receipt / proof of payment",
+            "fil": "Naka-print na e-receipt / katibayan ng bayad"
+          }
+        },
+        {
+          "id": "pass-pen-v1",
+          "text": {
+            "en": "Black ballpoint pen",
+            "fil": "Itim na bolpen"
+          }
+        }
+      ],
+      "sources": [
+        "dfa-passport"
+      ]
+    },
+    {
+      "id": "philsys",
+      "agency": "Philippine Statistics Authority (PhilSys)",
+      "category": "id",
+      "icon": "card",
+      "verified": true,
+      "url": "https://philsys.gov.ph/registration-process/",
+      "keywords": [
+        "national id",
+        "philsys",
+        "ephilid",
+        "digital id",
+        "valid id",
+        "free id",
+        "psa",
+        "student id"
+      ],
+      "title": {
+        "en": "National ID (PhilSys)",
+        "fil": "National ID (PhilSys)"
+      },
+      "summary": {
+        "en": "Free foundational Philippine Identification System registration for first-time applicants.",
+        "fil": "Libreng pagpaparehistro para sa National ID (PhilSys) ng Pilipinas para sa mga unang beses na aplikante."
+      },
+      "location": {
+        "en": "Nearest PhilSys Fixed Registration Center (often in malls, city/municipal halls, or PSA outlets).",
+        "fil": "Pinakamalapit na PhilSys Registration Center (karaniwang nasa mall, munisipyo, o tanggapan ng PSA)."
+      },
+      "fee": {
+        "en": "Free (initial registration, ePhilID, and Digital National ID)",
+        "fil": "Libre (unang pagpaparehistro, ePhilID, at Digital National ID)"
+      },
+      "processingTime": {
+        "en": "~15–30 mins on-site; Digital ID available once verified",
+        "fil": "~15–30 minuto sa site; makukuha ang Digital ID kapag beripikado na"
+      },
+      "validity": {
+        "en": "Lifetime (periodic biometric updates per PhilSys rules)",
+        "fil": "Panghabambuhay (may pana-panahong pag-update ng biometrics)"
+      },
+      "notice": {
+        "en": "Source checked. Keep your Transaction Slip safe—you need the Transaction Reference Number (TRN) to access your Digital National ID.",
+        "fil": "Nasuri ang sanggunian. Ingatan ang iyong Transaction Slip—kailangan ang TRN upang makuha ang Digital National ID."
+      },
+      "acceptedIds": [
+        {
+          "en": "Primary: Passport, UMID, Driver's License, or PRC ID (any 1)",
+          "fil": "Pangunahin: Pasaporte, UMID, Driver's License, o PRC ID (alinman sa 1)"
+        },
+        {
+          "en": "Secondary (if no primary ID): PSA Birth Certificate + Student ID, Barangay Clearance, Postal ID, or Voter's ID",
+          "fil": "Sekondarya (kung walang primary ID): PSA Birth Certificate + Student ID, Barangay Clearance, Postal ID, o Voter's ID"
+        }
+      ],
+      "tips": [
+        {
+          "en": "Best first primary ID for students: it is completely free and accepted for PNP, NBI, DFA Passport, SSS, and bank accounts.",
+          "fil": "Pinakamainam na unang primary ID para sa mga estudyante: libre ito at tinatanggap sa PNP, NBI, DFA Passport, SSS, at mga bangko."
+        },
+        {
+          "en": "Once verified, you can generate your official Digital National ID at national-id.gov.ph using your TRN even before the physical card arrives.",
+          "fil": "Kapag beripikado na, maaari mong kunin ang Digital National ID sa national-id.gov.ph gamit ang iyong TRN habang hinihintay ang pisikal na card."
+        }
+      ],
+      "steps": [
+        {
+          "id": "philsys-step-1",
+          "title": {
+            "en": "Find a PhilSys Registration Center",
+            "fil": "Maghanap ng PhilSys Registration Center"
+          },
+          "detail": {
+            "en": "Check the official PhilSys website or your LGU/PSA page for active registration centers near you.",
+            "fil": "Tingnan sa opisyal na website ng PhilSys o pahina ng PSA/LGU ang mga bukas na registration center."
+          },
+          "place": {
+            "en": "philsys.gov.ph / local PSA",
+            "fil": "philsys.gov.ph / lokal na PSA"
+          }
+        },
+        {
+          "id": "philsys-step-2",
+          "title": {
+            "en": "Present supporting documents",
+            "fil": "Ipakita ang mga dokumento"
+          },
+          "detail": {
+            "en": "Submit one primary ID, or your PSA Birth Certificate paired with a valid secondary ID such as your School ID.",
+            "fil": "Ipakita ang isang primary ID, o ang PSA Birth Certificate na may kasamang secondary ID tulad ng School ID."
+          },
+          "place": {
+            "en": "PhilSys Registration Center",
+            "fil": "PhilSys Registration Center"
+          }
+        },
+        {
+          "id": "philsys-step-3",
+          "title": {
+            "en": "Complete demographic & biometric capture",
+            "fil": "Kumpletuhin ang datos at biometrics"
+          },
+          "detail": {
+            "en": "Review your encoded details carefully, complete iris/fingerprint/photo capture, and receive your Transaction Slip (TRN).",
+            "fil": "Suriin ang iyong detalye, magpakuha ng iris/fingerprint/larawan, at kunin ang Transaction Slip (TRN)."
+          },
+          "place": {
+            "en": "PhilSys Registration Center",
+            "fil": "PhilSys Registration Center"
+          }
+        },
+        {
+          "id": "philsys-step-4",
+          "title": {
+            "en": "Access Digital National ID / claim card",
+            "fil": "Kunin ang Digital National ID o card"
+          },
+          "detail": {
+            "en": "Use your TRN at national-id.gov.ph to view your Digital National ID or request an ePhilID while waiting for card delivery.",
+            "fil": "Gamitin ang TRN sa national-id.gov.ph upang makita ang Digital National ID o kumuha ng ePhilID habang hinihintay ang card."
+          },
+          "place": {
+            "en": "national-id.gov.ph / PSA",
+            "fil": "national-id.gov.ph / PSA"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "philsys-doc-v1",
+          "text": {
+            "en": "Original supporting document (Primary ID or PSA Birth Certificate + Student/Secondary ID)",
+            "fil": "Orihinal na dokumento (Primary ID o PSA Birth Certificate + Student/Secondary ID)"
+          }
+        },
+        {
+          "id": "philsys-contact-v1",
+          "text": {
+            "en": "Active mobile number and email address for notifications",
+            "fil": "Aktibong numero ng telepono at email para sa mga abiso"
+          }
+        },
+        {
+          "id": "philsys-slip-v1",
+          "text": {
+            "en": "Folder or sleeve to keep your Transaction Slip (TRN) safe after capture",
+            "fil": "Lalagyan o folder upang hindi mawala ang Transaction Slip (TRN)"
+          }
+        }
+      ],
+      "sources": [
+        "philsys-guide"
+      ]
+    },
+    {
+      "id": "sss",
+      "agency": "Social Security System",
+      "category": "benefits",
+      "icon": "savings",
+      "verified": true,
+      "url": "https://www.sss.gov.ph/sss-number-application/",
+      "keywords": [
+        "sss",
+        "social security",
+        "e1",
+        "first job",
+        "pre-employment",
+        "trabaho",
+        "benefits",
+        "number"
+      ],
+      "title": {
+        "en": "SSS Number (First-Time Registration)",
+        "fil": "SSS Number (Unang Pagpaparehistro)"
+      },
+      "summary": {
+        "en": "Online SS Number registration for first-time jobseekers and new members.",
+        "fil": "Online na pagkuha ng SS Number para sa mga naghahanap ng unang trabaho at bagong miyembro."
+      },
+      "location": {
+        "en": "Apply online at member.sss.gov.ph; optional branch visit if submitting documents in person.",
+        "fil": "Mag-apply online sa member.sss.gov.ph; pumunta lamang sa sangay ng SSS kung kailangang magpasa nang personal."
+      },
+      "fee": {
+        "en": "Free registration (contributions begin once employed or paying voluntarily)",
+        "fil": "Libreng pagpaparehistro (magsisimula ang hulog kapag may trabaho o boluntaryo)"
+      },
+      "processingTime": {
+        "en": "Instant temporary SS Number via email; permanent tagging after document check",
+        "fil": "Agarang temporary SS Number sa email; magiging permanent pagkatapos ng beripikasyon"
+      },
+      "validity": {
+        "en": "Lifetime (only one SS Number per person)",
+        "fil": "Panghabambuhay (isang SS Number lamang bawat tao)"
+      },
+      "notice": {
+        "en": "Source checked. Never register a second SS Number—your single number stays with you for life.",
+        "fil": "Nasuri ang sanggunian. Huwag kailanman kumuha ng pangalawang SS Number—iisa lamang ito habambuhay."
+      },
+      "acceptedIds": [
+        {
+          "en": "PSA Birth Certificate (primary proof of identity for SSS)",
+          "fil": "PSA Birth Certificate (pangunahing patunay sa SSS)"
+        },
+        {
+          "en": "Plus 1 valid ID if submitting at a branch: PhilSys / National ID, Passport, Driver's License, Postal ID, or UMID",
+          "fil": "Dagdag na 1 valid ID kung pupunta sa sangay: PhilSys / National ID, Pasaporte, Driver's License, Postal ID, o UMID"
+        }
+      ],
+      "tips": [
+        {
+          "en": "Most employers already accept your printed SS Number Slip and E-1 Form (with Temporary status) for pre-employment onboarding.",
+          "fil": "Tinatanggap na ng karamihan sa mga employer ang naka-print na SS Number Slip at E-1 Form (kahit Temporary pa) para sa pagpasok sa trabaho."
+        },
+        {
+          "en": "Upload or submit your PSA Birth Certificate early to convert your status from Temporary to Permanent so you can access future benefits and loans.",
+          "fil": "Magpasa nang maaga ng PSA Birth Certificate upang maging Permanent ang iyong status para sa mga benepisyo at loan."
+        }
+      ],
+      "steps": [
+        {
+          "id": "sss-step-1",
+          "title": {
+            "en": "Apply online via SSS portal",
+            "fil": "Mag-apply online sa SSS portal"
+          },
+          "detail": {
+            "en": "Open the Online SS Number Application at member.sss.gov.ph, enter your name, birthdate, and active email, and verify the link sent to you.",
+            "fil": "Buksan ang Online SS Number Application sa member.sss.gov.ph, ilagay ang detalye at email, at kumpirmahin ang link na ipapadala."
+          },
+          "place": {
+            "en": "member.sss.gov.ph",
+            "fil": "member.sss.gov.ph"
+          }
+        },
+        {
+          "id": "sss-step-2",
+          "title": {
+            "en": "Download SS Number Slip & E-1 Form",
+            "fil": "I-download ang SS Number Slip at E-1 Form"
+          },
+          "detail": {
+            "en": "Complete the remaining form fields and download/save PDF copies of your SS Number Slip and Personal Record (E-1 Form).",
+            "fil": "Kumpletuhin ang natitirang detalye at i-download ang PDF ng SS Number Slip at E-1 Form."
+          },
+          "place": {
+            "en": "member.sss.gov.ph",
+            "fil": "member.sss.gov.ph"
+          }
+        },
+        {
+          "id": "sss-step-3",
+          "title": {
+            "en": "Create your My.SSS account",
+            "fil": "Gumawa ng My.SSS account"
+          },
+          "detail": {
+            "en": "Register on My.SSS using your new SS Number and check your email for the activation link.",
+            "fil": "Magrehistro sa My.SSS gamit ang bagong SS Number at buksan ang activation link sa iyong email."
+          },
+          "place": {
+            "en": "My.SSS portal",
+            "fil": "My.SSS portal"
+          }
+        },
+        {
+          "id": "sss-step-4",
+          "title": {
+            "en": "Submit birth record for Permanent status",
+            "fil": "Ipasa ang birth certificate para maging Permanent"
+          },
+          "detail": {
+            "en": "Upload a clear scan of your PSA Birth Certificate online (or present original + photocopy at an SSS branch) to tag your number as Permanent.",
+            "fil": "Mag-upload ng malinaw na kopya ng PSA Birth Certificate online (o dalhin sa sangay ng SSS) upang maging Permanent ang status."
+          },
+          "place": {
+            "en": "My.SSS portal or nearest SSS branch",
+            "fil": "My.SSS portal o pinakamalapit na sangay ng SSS"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "sss-email-v1",
+          "text": {
+            "en": "Active personal email address and mobile number",
+            "fil": "Aktibong personal na email address at numero ng telepono"
+          }
+        },
+        {
+          "id": "sss-psa-v1",
+          "text": {
+            "en": "PSA Birth Certificate (clear scan for upload / original + photocopy for branch)",
+            "fil": "PSA Birth Certificate (malinaw na scan para sa upload / orihinal + photocopy sa sangay)"
+          }
+        },
+        {
+          "id": "sss-id-v1",
+          "text": {
+            "en": "One valid government-issued ID (if visiting a branch)",
+            "fil": "Isang balidong government-issued ID (kung pupunta sa sangay)"
+          }
+        },
+        {
+          "id": "sss-slip-v1",
+          "text": {
+            "en": "Printed SS Number Slip and E-1 Form (for employer submission)",
+            "fil": "Naka-print na SS Number Slip at E-1 Form (para sa employer)"
+          }
+        }
+      ],
+      "sources": [
+        "sss-guide"
+      ]
+    },
+    {
+      "id": "philhealth",
+      "agency": "Philippine Health Insurance Corporation",
+      "category": "benefits",
+      "icon": "health",
+      "verified": true,
+      "url": "https://www.philhealth.gov.ph/members/",
+      "keywords": [
+        "philhealth",
+        "pmrf",
+        "mdr",
+        "pin",
+        "health",
+        "first job",
+        "pre-employment",
+        "trabaho",
+        "benefits"
+      ],
+      "title": {
+        "en": "PhilHealth Member Registration",
+        "fil": "Pagpaparehistro sa PhilHealth"
+      },
+      "summary": {
+        "en": "Get your 12-digit PhilHealth Identification Number (PIN) and Member Data Record (MDR) for employment or coverage.",
+        "fil": "Pagkuha ng 12-digit PhilHealth Identification Number (PIN) at Member Data Record (MDR) para sa trabaho o benepisyo."
+      },
+      "location": {
+        "en": "Nearest PhilHealth Local Health Insurance Office (LHIO), such as Batangas City or Lipa LHIO.",
+        "fil": "Pinakamalapit na PhilHealth Local Health Insurance Office (LHIO), tulad ng Batangas City o Lipa LHIO."
+      },
+      "fee": {
+        "en": "Free registration (monthly premium applies once employed or self-paying)",
+        "fil": "Libreng pagpaparehistro (may buwanang hulog kapag may trabaho o nagbabayad)"
+      },
+      "processingTime": {
+        "en": "Usually same-day issuance of PIN and printed MDR at LHIO",
+        "fil": "Karaniwang parehong araw ang paglabas ng PIN at MDR sa LHIO"
+      },
+      "validity": {
+        "en": "Lifetime 12-digit PhilHealth Identification Number (PIN)",
+        "fil": "Panghabambuhay na 12-digit PhilHealth Identification Number (PIN)"
+      },
+      "notice": {
+        "en": "Source checked. Confirm current LHIO walk-in rules and First-Time Jobseeker assistance at philhealth.gov.ph.",
+        "fil": "Nasuri ang sanggunian. Kumpirmahin sa philhealth.gov.ph ang kasalukuyang patakaran ng LHIO at tulong para sa First-Time Jobseeker."
+      },
+      "acceptedIds": [
+        {
+          "en": "PhilSys / National ID (or ePhilID)",
+          "fil": "PhilSys / National ID (o ePhilID)"
+        },
+        {
+          "en": "Philippine Passport, Driver's License, UMID, PRC ID, or Postal ID",
+          "fil": "Pasaporte ng Pilipinas, Driver's License, UMID, PRC ID, o Postal ID"
+        },
+        {
+          "en": "PSA Birth Certificate (accepted supporting document for new applicants)",
+          "fil": "PSA Birth Certificate (tinatanggap na dokumento para sa bagong aplikante)"
+        },
+        {
+          "en": "School ID with current registration (for students)",
+          "fil": "School ID na may kasalukuyang pagpapatala (para sa mga estudyante)"
+        }
+      ],
+      "tips": [
+        {
+          "en": "Download and fill out 2 copies of the PMRF (PhilHealth Member Registration Form) before going so you can head straight to the submission counter.",
+          "fil": "I-download at sagutan ang 2 kopya ng PMRF bago pumunta upang makadiretso sa counter ng pagpapasa."
+        },
+        {
+          "en": "Take a clear photo and keep photocopies of your MDR—employers usually ask for a copy on day one.",
+          "fil": "Kunan ng malinaw na larawan at mag-photocopy ng iyong MDR—karaniwang hinihingi ito ng employer sa unang araw."
+        }
+      ],
+      "steps": [
+        {
+          "id": "ph-step-1",
+          "title": {
+            "en": "Accomplish the PMRF form",
+            "fil": "Sagutan ang PMRF form"
+          },
+          "detail": {
+            "en": "Download and fill out two copies of the PhilHealth Member Registration Form (PMRF) accurately using black ink.",
+            "fil": "I-download at sagutan nang tama ang dalawang kopya ng PhilHealth Member Registration Form (PMRF) gamit ang itim na tinta."
+          },
+          "place": {
+            "en": "philhealth.gov.ph (Downloads)",
+            "fil": "philhealth.gov.ph (Downloads)"
+          }
+        },
+        {
+          "id": "ph-step-2",
+          "title": {
+            "en": "Prepare valid ID & birth record",
+            "fil": "Ihanda ang valid ID at birth certificate"
+          },
+          "detail": {
+            "en": "Bring your original valid ID and PSA Birth Certificate (plus photocopies) for identity verification.",
+            "fil": "Dalhin ang orihinal na valid ID at PSA Birth Certificate (kasama ang mga photocopy) para sa beripikasyon."
+          },
+          "place": {
+            "en": "Before visiting LHIO",
+            "fil": "Bago pumunta sa LHIO"
+          }
+        },
+        {
+          "id": "ph-step-3",
+          "title": {
+            "en": "Submit at a PhilHealth LHIO",
+            "fil": "Ipasa sa PhilHealth LHIO"
+          },
+          "detail": {
+            "en": "Submit your PMRF and supporting documents at the nearest PhilHealth Local Health Insurance Office (or via your employer HR if hired).",
+            "fil": "Ipasa ang PMRF at mga dokumento sa pinakamalapit na PhilHealth LHIO (o sa HR ng employer kung natanggap na sa trabaho)."
+          },
+          "place": {
+            "en": "Nearest PhilHealth LHIO",
+            "fil": "Pinakamalapit na PhilHealth LHIO"
+          }
+        },
+        {
+          "id": "ph-step-4",
+          "title": {
+            "en": "Receive your PIN and MDR",
+            "fil": "Tanggapin ang iyong PIN at MDR"
+          },
+          "detail": {
+            "en": "Verify your name and birthdate on the printed Member Data Record (MDR) showing your permanent 12-digit PIN.",
+            "fil": "Suriin ang pangalan at petsa ng kapanganakan sa naka-print na Member Data Record (MDR) na may 12-digit PIN."
+          },
+          "place": {
+            "en": "PhilHealth LHIO releasing counter",
+            "fil": "Releasing counter ng PhilHealth LHIO"
+          }
+        }
+      ],
+      "requirements": [
+        {
+          "id": "ph-pmrf-v1",
+          "text": {
+            "en": "Two (2) accomplished copies of PhilHealth Member Registration Form (PMRF)",
+            "fil": "Dalawang (2) sinagutang kopya ng PhilHealth Member Registration Form (PMRF)"
+          }
+        },
+        {
+          "id": "ph-id-v1",
+          "text": {
+            "en": "Original valid government-issued ID + photocopy (or PSA Birth Certificate)",
+            "fil": "Orihinal na valid government ID + photocopy (o PSA Birth Certificate)"
+          }
+        },
+        {
+          "id": "ph-photo-v1",
+          "text": {
+            "en": "1x1 ID photo (check if required by your local LHIO)",
+            "fil": "1x1 ID photo (tiyakin kung hinihingi ng lokal na LHIO)"
+          }
+        },
+        {
+          "id": "ph-ftjs-v1",
+          "text": {
+            "en": "Barangay First-Time Jobseeker Certificate (if applying as RA 11261 jobseeker)",
+            "fil": "Barangay First-Time Jobseeker Certificate (kung mag-aapply bilang RA 11261 jobseeker)"
+          }
+        }
+      ],
+      "sources": [
+        "philhealth-guide"
       ]
     }
   ],
@@ -261,8 +1283,15 @@
       "id": "nbi-charter",
       "title": "NBI Citizen’s Charter",
       "url": "https://nbi.gov.ph/citizens-charter/nbi-clearance-application/",
-      "section": "Identification requirements; fees conflict with newer guide and are omitted",
+      "section": "Identification requirements and processing rules",
       "checked": "2026-11-04"
+    },
+    {
+      "id": "psa-crs",
+      "title": "PSA: Requesting a Birth Certificate",
+      "url": "https://psa.gov.ph/civilregistration/requesting-civil-registry-document/birth-certificate",
+      "section": "SECPA issuance via CRS outlets and online channels",
+      "checked": "2026-11-28"
     },
     {
       "id": "taal",
@@ -270,6 +1299,34 @@
       "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/",
       "section": "Links a charter under a 2019 upload path; current copy-issuance details unconfirmed",
       "checked": "2026-11-04"
+    },
+    {
+      "id": "dfa-passport",
+      "title": "DFA: New Adult Passport Requirements",
+      "url": "https://consular.dfa.gov.ph/services/passport/requirements/passport-adult/adult-new",
+      "section": "Core documentary requirements and valid IDs for new adult applicants",
+      "checked": "2026-11-28"
+    },
+    {
+      "id": "philsys-guide",
+      "title": "PSA PhilSys Registration Process",
+      "url": "https://philsys.gov.ph/registration-process/",
+      "section": "Registration steps, supporting documents, and TRN tracking",
+      "checked": "2026-11-28"
+    },
+    {
+      "id": "sss-guide",
+      "title": "SSS Number Application Guide",
+      "url": "https://www.sss.gov.ph/sss-number-application/",
+      "section": "Online SS Number registration and supporting documents",
+      "checked": "2026-11-28"
+    },
+    {
+      "id": "philhealth-guide",
+      "title": "PhilHealth Members & Registration",
+      "url": "https://www.philhealth.gov.ph/members/",
+      "section": "PMRF registration and Member Data Record issuance",
+      "checked": "2026-11-28"
     }
   ],
   "questions": [
@@ -279,22 +1336,136 @@
         "en": "What do you need help with?",
         "fil": "Saan mo kailangan ng tulong?"
       },
+      "hint": {
+        "en": "Pick your goal—we’ll match the right agency and guide.",
+        "fil": "Piliin ang iyong pakay—itutugma namin ang tamang ahensya at gabay."
+      },
       "choices": [
-        {
-          "id": "birth",
-          "text": {
-            "en": "A birth-record copy",
-            "fil": "Kopya ng tala ng kapanganakan"
-          },
-          "next": "birth-type"
-        },
         {
           "id": "clearance",
           "text": {
             "en": "A clearance",
             "fil": "Clearance"
           },
+          "detail": {
+            "en": "PNP or NBI clearance for jobs, school, or IDs",
+            "fil": "PNP o NBI clearance para sa trabaho, paaralan, o ID"
+          },
           "next": "clearance-type"
+        },
+        {
+          "id": "birth",
+          "text": {
+            "en": "A birth-record copy",
+            "fil": "Kopya ng tala ng kapanganakan"
+          },
+          "detail": {
+            "en": "PSA Birth Certificate or local civil-registrar copy",
+            "fil": "PSA Birth Certificate o kopya sa lokal na civil registrar"
+          },
+          "next": "birth-type"
+        },
+        {
+          "id": "id",
+          "text": {
+            "en": "A government ID",
+            "fil": "Government ID"
+          },
+          "detail": {
+            "en": "Philippine Passport or free National ID (PhilSys)",
+            "fil": "Pasaporte ng Pilipinas o libreng National ID (PhilSys)"
+          },
+          "next": "id-type"
+        },
+        {
+          "id": "benefits",
+          "text": {
+            "en": "First-job benefit numbers",
+            "fil": "Mga numero para sa unang trabaho"
+          },
+          "detail": {
+            "en": "SSS Number or PhilHealth PIN / MDR",
+            "fil": "SSS Number o PhilHealth PIN / MDR"
+          },
+          "next": "benefits-type"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure where to start",
+            "fil": "Hindi sigurado kung saan magsisimula"
+          },
+          "detail": {
+            "en": "See common starting documents for students",
+            "fil": "Tingnan ang karaniwang unang dokumento para sa estudyante"
+          },
+          "next": "general-referral"
+        }
+      ]
+    },
+    {
+      "id": "clearance-type",
+      "text": {
+        "en": "Which clearance does the requesting institution specify?",
+        "fil": "Anong clearance ang tinukoy ng humihinging institusyon?"
+      },
+      "choices": [
+        {
+          "id": "pnp",
+          "text": {
+            "en": "National Police Clearance (PNP)",
+            "fil": "National Police Clearance (PNP)"
+          },
+          "detail": {
+            "en": "6-month validity · 1 valid ID required",
+            "fil": "6 na buwang bisa · 1 valid ID ang kailangan"
+          },
+          "next": "pnp-scope"
+        },
+        {
+          "id": "nbi",
+          "text": {
+            "en": "NBI Clearance",
+            "fil": "NBI Clearance"
+          },
+          "detail": {
+            "en": "1-year validity · 2 valid IDs required",
+            "fil": "1 taong bisa · 2 valid ID ang kailangan"
+          },
+          "next": "nbi-scope"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not specified / compare both",
+            "fil": "Hindi tinukoy / ikumpara ang dalawa"
+          },
+          "next": "clearance-referral"
+        }
+      ]
+    },
+    {
+      "id": "pnp-scope",
+      "text": {
+        "en": "Are you an adult applying for your own clearance for the first time under the standard process?",
+        "fil": "Nasa hustong gulang ka ba at unang beses na kumukuha ng sariling clearance sa karaniwang proseso?"
+      },
+      "choices": [
+        {
+          "id": "yes",
+          "text": {
+            "en": "Yes — standard first-time application",
+            "fil": "Oo — karaniwang unang aplikasyon"
+          },
+          "next": "service:pnp"
+        },
+        {
+          "id": "no",
+          "text": {
+            "en": "Renewal, representative, or special case",
+            "fil": "Renewal, kinatawan, o espesyal na kaso"
+          },
+          "next": "pnp-referral"
         },
         {
           "id": "unsure",
@@ -302,7 +1473,40 @@
             "en": "Not sure",
             "fil": "Hindi sigurado"
           },
-          "next": "general-referral"
+          "next": "pnp-referral"
+        }
+      ]
+    },
+    {
+      "id": "nbi-scope",
+      "text": {
+        "en": "Are you an adult applying for your own clearance for the first time under the standard process?",
+        "fil": "Nasa hustong gulang ka ba at unang beses na kumukuha ng sariling clearance sa karaniwang proseso?"
+      },
+      "choices": [
+        {
+          "id": "yes",
+          "text": {
+            "en": "Yes — standard first-time application",
+            "fil": "Oo — karaniwang unang aplikasyon"
+          },
+          "next": "service:nbi"
+        },
+        {
+          "id": "no",
+          "text": {
+            "en": "Renewal, representative, or special case",
+            "fil": "Renewal, kinatawan, o espesyal na kaso"
+          },
+          "next": "nbi-referral"
+        },
+        {
+          "id": "unsure",
+          "text": {
+            "en": "Not sure",
+            "fil": "Hindi sigurado"
+          },
+          "next": "nbi-referral"
         }
       ]
     },
@@ -314,28 +1518,36 @@
       },
       "choices": [
         {
+          "id": "psa",
+          "text": {
+            "en": "PSA-issued certificate (SECPA)",
+            "fil": "Sertipiko mula sa PSA (SECPA)"
+          },
+          "detail": {
+            "en": "Standard requirement for schools, passport, SSS, and jobs",
+            "fil": "Karaniwang kailangan para sa paaralan, pasaporte, SSS, at trabaho"
+          },
+          "next": "service:psa-birth"
+        },
+        {
           "id": "local",
           "text": {
-            "en": "Local civil-registry copy",
-            "fil": "Kopya mula sa lokal na civil registry"
+            "en": "Local civil-registry copy (municipal LCR)",
+            "fil": "Kopya mula sa lokal na civil registry (munisipyo)"
+          },
+          "detail": {
+            "en": "Used when PSA copy is missing, blurred, or being corrected",
+            "fil": "Ginagamit kung kulang, malabo, o may pagwawasto sa PSA"
           },
           "next": "birth-location"
         },
         {
-          "id": "psa",
-          "text": {
-            "en": "PSA-issued certificate",
-            "fil": "Sertipiko mula sa PSA"
-          },
-          "next": "psa-referral"
-        },
-        {
           "id": "unsure",
           "text": {
-            "en": "Not sure",
-            "fil": "Hindi sigurado"
+            "en": "Not sure which one I need",
+            "fil": "Hindi sigurado kung alin ang kailangan"
           },
-          "next": "psa-referral"
+          "next": "birth-compare-referral"
         }
       ]
     },
@@ -406,101 +1618,84 @@
       ]
     },
     {
-      "id": "clearance-type",
+      "id": "id-type",
       "text": {
-        "en": "Which clearance does the requesting institution specify?",
-        "fil": "Anong clearance ang tinukoy ng humihinging institusyon?"
+        "en": "Which government ID do you want to apply for?",
+        "fil": "Anong government ID ang nais mong kunin?"
       },
       "choices": [
         {
-          "id": "pnp",
+          "id": "philsys",
           "text": {
-            "en": "National Police Clearance (PNP)",
-            "fil": "National Police Clearance (PNP)"
+            "en": "National ID (PhilSys)",
+            "fil": "National ID (PhilSys)"
           },
-          "next": "pnp-scope"
+          "detail": {
+            "en": "Free · Best first primary ID for students",
+            "fil": "Libre · Pinakamainam na unang primary ID ng estudyante"
+          },
+          "next": "service:philsys"
         },
         {
-          "id": "nbi",
+          "id": "passport",
           "text": {
-            "en": "NBI Clearance",
-            "fil": "NBI Clearance"
+            "en": "Philippine Passport (DFA)",
+            "fil": "Pasaporte ng Pilipinas (DFA)"
           },
-          "next": "nbi-scope"
+          "detail": {
+            "en": "₱950+ · Valid for 10 years & international travel",
+            "fil": "₱950+ · 10 taong bisa at para sa pagbiyahe sa labas ng bansa"
+          },
+          "next": "service:passport"
         },
         {
           "id": "unsure",
           "text": {
-            "en": "Not specified / not sure",
-            "fil": "Hindi tinukoy / hindi sigurado"
+            "en": "Not sure which ID to get first",
+            "fil": "Hindi sigurado kung alin ang uunahin"
           },
-          "next": "clearance-referral"
+          "next": "id-compare-referral"
         }
       ]
     },
     {
-      "id": "pnp-scope",
+      "id": "benefits-type",
       "text": {
-        "en": "Are you an adult applying for your own clearance for the first time under the standard process?",
-        "fil": "Nasa hustong gulang ka ba at unang beses na kumukuha ng sariling clearance sa karaniwang proseso?"
+        "en": "Which pre-employment / benefit registration do you need?",
+        "fil": "Anong pagpaparehistro para sa trabaho o benepisyo ang kailangan mo?"
       },
       "choices": [
         {
-          "id": "yes",
+          "id": "sss",
           "text": {
-            "en": "Yes — standard first-time application",
-            "fil": "Oo — karaniwang unang aplikasyon"
+            "en": "SSS Number",
+            "fil": "SSS Number"
           },
-          "next": "service:pnp"
+          "detail": {
+            "en": "Online SS Number & E-1 Form for employment",
+            "fil": "Online na SS Number at E-1 Form para sa trabaho"
+          },
+          "next": "service:sss"
         },
         {
-          "id": "no",
+          "id": "philhealth",
           "text": {
-            "en": "Renewal, representative, fee exemption or special case",
-            "fil": "Renewal, kinatawan, exemption sa bayad o espesyal na kaso"
+            "en": "PhilHealth Member (PIN & MDR)",
+            "fil": "Miyembro ng PhilHealth (PIN at MDR)"
           },
-          "next": "pnp-referral"
+          "detail": {
+            "en": "12-digit PIN & Member Data Record via PMRF",
+            "fil": "12-digit PIN at Member Data Record gamit ang PMRF"
+          },
+          "next": "service:philhealth"
         },
         {
           "id": "unsure",
           "text": {
-            "en": "Not sure",
-            "fil": "Hindi sigurado"
+            "en": "Need both / compare",
+            "fil": "Kailangan pareho / ikumpara"
           },
-          "next": "pnp-referral"
-        }
-      ]
-    },
-    {
-      "id": "nbi-scope",
-      "text": {
-        "en": "Are you an adult applying for your own clearance for the first time under the standard process?",
-        "fil": "Nasa hustong gulang ka ba at unang beses na kumukuha ng sariling clearance sa karaniwang proseso?"
-      },
-      "choices": [
-        {
-          "id": "yes",
-          "text": {
-            "en": "Yes — standard first-time application",
-            "fil": "Oo — karaniwang unang aplikasyon"
-          },
-          "next": "service:nbi"
-        },
-        {
-          "id": "no",
-          "text": {
-            "en": "Renewal, representative, fee exemption or special case",
-            "fil": "Renewal, kinatawan, exemption sa bayad o espesyal na kaso"
-          },
-          "next": "nbi-referral"
-        },
-        {
-          "id": "unsure",
-          "text": {
-            "en": "Not sure",
-            "fil": "Hindi sigurado"
-          },
-          "next": "nbi-referral"
+          "next": "benefits-compare-referral"
         }
       ]
     }
@@ -509,50 +1704,476 @@
     {
       "id": "general-referral",
       "reason": {
-        "en": "Ask the institution requesting your document to identify the exact service. LakbayG covers only three sample journeys.",
-        "fil": "Tanungin ang humihinging institusyon kung anong eksaktong serbisyo ang kailangan. Tatlong halimbawang proseso lamang ang saklaw ng LakbayG."
+        "en": "Ask the school or employer requesting your document for their exact checklist. Most students start with a free National ID, a PSA Birth Certificate, and NBI or PNP clearance.",
+        "fil": "Itanong sa paaralan o employer ang eksaktong listahan ng kailangan. Karaniwang inuuna ng mga estudyante ang libreng National ID, PSA Birth Certificate, at NBI o PNP clearance."
       },
+      "compare": {
+        "en": "Starter stack: 1) PSA Birth Certificate (needed by DFA, SSS, PhilHealth) → 2) National ID (free valid ID) → 3) NBI or PNP Clearance (when applying for work).",
+        "fil": "Karaniwang pagkakasunod-sunod: 1) PSA Birth Certificate (kailangan sa DFA, SSS, PhilHealth) → 2) National ID (libreng valid ID) → 3) NBI o PNP Clearance (kapag mag-aapply ng trabaho)."
+      },
+      "suggestedServices": [
+        "philsys",
+        "psa-birth",
+        "nbi"
+      ],
       "url": "https://arta.gov.ph/"
-    },
-    {
-      "id": "psa-referral",
-      "reason": {
-        "en": "A PSA-issued certificate is outside this local-copy journey. Confirm the required document with the requesting institution and consult PSA.",
-        "fil": "Hindi saklaw ng lokal na kopya ang sertipiko mula sa PSA. Kumpirmahin ang hinihinging dokumento at kumonsulta sa PSA."
-      },
-      "url": "https://psa.gov.ph/"
-    },
-    {
-      "id": "taal-referral",
-      "reason": {
-        "en": "This pilot covers only your own existing record registered in Taal. Ask the relevant civil registrar about your case before visiting.",
-        "fil": "Sarili mong umiiral na talang nakarehistro sa Taal lamang ang saklaw. Magtanong muna sa kaukulang civil registrar tungkol sa iyong kaso."
-      },
-      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/"
     },
     {
       "id": "clearance-referral",
       "reason": {
-        "en": "PNP and NBI clearances are different services. Ask the requesting institution which one it accepts; employment alone does not determine the answer.",
-        "fil": "Magkaibang serbisyo ang PNP at NBI clearance. Itanong kung alin ang tinatanggap; hindi sapat ang layuning trabaho upang pumili."
+        "en": "PNP and NBI clearances are issued by different agencies. Confirm with your employer or school which one they accept before paying.",
+        "fil": "Magkaibang ahensya ang naglalabas ng PNP at NBI clearance. Kumpirmahin sa employer o paaralan kung alin ang tinatanggap bago magbayad."
       },
+      "compare": {
+        "en": "PNP Clearance: ~₱150, needs 1 valid ID, 6-month validity, processed at local police stations.\nNBI Clearance: ~₱130, needs 2 valid IDs, 1-year validity, commonly requested by corporate employers and abroad.",
+        "fil": "PNP Clearance: ~₱150, 1 valid ID, 6 na buwang bisa, sa lokal na police station.\nNBI Clearance: ~₱130, 2 valid ID, 1 taong bisa, madalas hingin ng malalaking kumpanya at para sa abroad."
+      },
+      "suggestedServices": [
+        "pnp",
+        "nbi"
+      ],
       "url": "https://pnpclearance.ph/"
     },
     {
       "id": "pnp-referral",
       "reason": {
-        "en": "Consult PNP for renewal, first-time jobseeker benefits or special cases. This pilot only covers standard first-time appearance applications.",
-        "fil": "Kumonsulta sa PNP para sa renewal, benepisyo ng first-time jobseeker o espesyal na kaso. Karaniwang unang aplikasyon na may pagpunta lamang ang saklaw."
+        "en": "Consult PNP for renewal, authorized representative, or special cases. You can still review the standard guide below for general steps.",
+        "fil": "Kumonsulta sa PNP para sa renewal, kinatawan, o espesyal na kaso. Maaari mo pa ring tingnan ang gabay sa ibaba para sa karaniwang hakbang."
       },
+      "suggestedServices": [
+        "pnp"
+      ],
       "url": "https://pnpclearance.ph/"
     },
     {
       "id": "nbi-referral",
       "reason": {
-        "en": "Consult NBI for renewal, first-time jobseeker benefits or special cases. This pilot only covers standard first-time appearance applications.",
-        "fil": "Kumonsulta sa NBI para sa renewal, benepisyo ng first-time jobseeker o espesyal na kaso. Karaniwang unang aplikasyon na may pagpunta lamang ang saklaw."
+        "en": "Consult NBI for renewal, authorized representative, or special cases. You can still review the standard guide below for general steps.",
+        "fil": "Kumonsulta sa NBI para sa renewal, kinatawan, o espesyal na kaso. Maaari mo pa ring tingnan ang gabay sa ibaba para sa karaniwang hakbang."
       },
+      "suggestedServices": [
+        "nbi"
+      ],
       "url": "https://nbi.gov.ph/how-to-apply-nbi-clearance/"
+    },
+    {
+      "id": "birth-compare-referral",
+      "reason": {
+        "en": "Almost all schools, passport applications, SSS, and employers require a PSA-issued Birth Certificate (SECPA), not a municipal Local Civil Registry copy.",
+        "fil": "Halos lahat ng paaralan, pasaporte, SSS, at trabaho ay PSA Birth Certificate (SECPA) ang hinihingi—hindi ang lokal na kopya mula sa munisipyo."
+      },
+      "compare": {
+        "en": "PSA Birth Certificate: Printed on yellow/blue SECPA security paper; accepted nationwide.\nLocal Civil Registry (LCR) copy: Certified copy from your birth municipality; mainly used if your PSA record is missing, blurred, or under correction.",
+        "fil": "PSA Birth Certificate: Nakaimprenta sa SECPA security paper; tinatanggap saanman.\nLokal na LCR copy: Mula sa munisipyo kung saan ipinanganak; kailangan lamang kung kulang, malabo, o may pagwawasto sa PSA."
+      },
+      "suggestedServices": [
+        "psa-birth",
+        "taal-birth"
+      ],
+      "url": "https://psa.gov.ph/civilregistration/requesting-civil-registry-document/birth-certificate"
+    },
+    {
+      "id": "taal-referral",
+      "reason": {
+        "en": "The local-copy note covers only your own existing record registered in Taal. Ask the relevant municipal civil registrar—or request a PSA Birth Certificate if that is what you actually need.",
+        "fil": "Sarili mong umiiral na talang nakarehistro sa Taal lamang ang saklaw. Magtanong sa kaukulang civil registrar—o kumuha ng PSA Birth Certificate kung iyon ang talagang hinihingi."
+      },
+      "suggestedServices": [
+        "psa-birth",
+        "taal-birth"
+      ],
+      "url": "https://news.taal.gov.ph/government/municipal-departments/municipal-local-civil-registrar/"
+    },
+    {
+      "id": "id-compare-referral",
+      "reason": {
+        "en": "If you do not have any primary government ID yet, start with the free National ID (PhilSys) before applying for a Philippine Passport.",
+        "fil": "Kung wala ka pang primary government ID, unahin ang libreng National ID (PhilSys) bago mag-apply ng Pasaporte."
+      },
+      "compare": {
+        "en": "National ID (PhilSys): Free, accepts PSA Birth Certificate + Student ID.\nPhilippine Passport (DFA): ₱950+, 10-year validity, ideal once you have a PSA Birth Certificate and valid ID.",
+        "fil": "National ID (PhilSys): Libre, tinatanggap ang PSA Birth Certificate + Student ID.\nPasaporte (DFA): ₱950+, 10 taong bisa, mainam kung may PSA Birth Certificate at valid ID na."
+      },
+      "suggestedServices": [
+        "philsys",
+        "passport"
+      ],
+      "url": "https://philsys.gov.ph/registration-process/"
+    },
+    {
+      "id": "benefits-compare-referral",
+      "reason": {
+        "en": "Most Filipino employers ask for both an SSS Number and a PhilHealth PIN/MDR during pre-employment onboarding. Start with SSS online (instant) and prepare your PMRF for PhilHealth.",
+        "fil": "Karaniwang hinihingi ng mga employer ang parehong SSS Number at PhilHealth PIN/MDR bago pumasok sa trabaho. Unahin ang SSS online at ihanda ang PMRF para sa PhilHealth."
+      },
+      "compare": {
+        "en": "SSS Number: Applied 100% online at member.sss.gov.ph; gives instant SS Number Slip + E-1 Form.\nPhilHealth: Fill out PMRF (2 copies) and submit at nearest PhilHealth LHIO for your 12-digit PIN and MDR.",
+        "fil": "SSS Number: Online sa member.sss.gov.ph; agarang SS Number Slip at E-1 Form.\nPhilHealth: Sagutan ang PMRF (2 kopya) at ipasa sa PhilHealth LHIO para sa 12-digit PIN at MDR."
+      },
+      "suggestedServices": [
+        "sss",
+        "philhealth"
+      ],
+      "url": "https://www.sss.gov.ph/sss-number-application/"
+    }
+  ],
+  "offices": [
+    {
+      "id": "pnp-batangas-city",
+      "serviceId": "pnp",
+      "name": "Batangas City Police Station",
+      "city": "Batangas City",
+      "address": "Hilltop / Diversion Road, Brgy. Kumintang Ibaba, Batangas City",
+      "lat": 13.79721,
+      "lng": 121.0698,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NPCS slot)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NPCS slot)"
+      },
+      "note": {
+        "en": "Select this station in pnpclearance.ph before visiting; bring your valid ID and payment confirmation.",
+        "fil": "Piliin ang istasyong ito sa pnpclearance.ph bago pumunta; dalhin ang valid ID at katibayan ng bayad."
+      }
+    },
+    {
+      "id": "pnp-taal",
+      "serviceId": "pnp",
+      "name": "Taal Municipal Police Station",
+      "city": "Taal",
+      "address": "Poblacion, Taal, Batangas",
+      "lat": 13.87956,
+      "lng": 120.92357,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NPCS slot)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NPCS slot)"
+      },
+      "note": {
+        "en": "Confirm station availability on the NPCS portal before booking.",
+        "fil": "Kumpirmahin sa NPCS portal kung bukas ang slot ng istasyon bago mag-book."
+      }
+    },
+    {
+      "id": "pnp-lipa",
+      "serviceId": "pnp",
+      "name": "Lipa City Police Station",
+      "city": "Lipa City",
+      "address": "J.P. Laurel Hwy, Brgy. Marawoy, Lipa City, Batangas",
+      "lat": 13.95741,
+      "lng": 121.16462,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NPCS slot)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NPCS slot)"
+      },
+      "note": {
+        "en": "Near Lipa City Hall compound; bring printed or screenshot NPC reference number.",
+        "fil": "Malapit sa Lipa City Hall compound; dalhin ang naka-print o screenshot na NPC reference number."
+      }
+    },
+    {
+      "id": "pnp-san-pablo",
+      "serviceId": "pnp",
+      "name": "San Pablo City Police Station",
+      "city": "San Pablo",
+      "address": "Trece Martirez St., Brgy. IV-C, San Pablo City, Laguna",
+      "lat": 14.07447,
+      "lng": 121.32454,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NPCS slot)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NPCS slot)"
+      },
+      "note": {
+        "en": "Located near San Pablo City Hall; confirm NPCS appointment slot online.",
+        "fil": "Malapit sa San Pablo City Hall; tiyakin muna ang NPCS appointment slot online."
+      }
+    },
+    {
+      "id": "nbi-batangas",
+      "serviceId": "nbi",
+      "name": "NBI Batangas District Office",
+      "city": "Batangas City",
+      "address": "Hilltop Road (near Provincial Capitol), Batangas City",
+      "lat": 13.76439,
+      "lng": 121.06288,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NBI appointment)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NBI appointment)"
+      },
+      "note": {
+        "en": "Bring two original valid IDs, payment receipt, and NBI reference number.",
+        "fil": "Magdala ng dalawang orihinal na valid ID, resibo ng bayad, at NBI reference number."
+      }
+    },
+    {
+      "id": "nbi-lipa",
+      "serviceId": "nbi",
+      "name": "NBI Lipa Satellite Office",
+      "city": "Lipa City",
+      "address": "Lipa City Hall Compound, Brgy. Marawoy, Lipa City, Batangas",
+      "lat": 13.9570,
+      "lng": 121.1642,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NBI appointment)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NBI appointment)"
+      },
+      "note": {
+        "en": "Located at the rear of Lipa City Hall; confirm branch slot on clearance.nbi.gov.ph.",
+        "fil": "Nasa likurang bahagi ng Lipa City Hall; kumpirmahin ang slot sa clearance.nbi.gov.ph."
+      }
+    },
+    {
+      "id": "nbi-san-pablo",
+      "serviceId": "nbi",
+      "name": "NBI San Pablo Satellite Office",
+      "city": "San Pablo",
+      "address": "4F San Pablo City Shopping Mall, A. Regidor St., San Pablo City, Laguna",
+      "lat": 14.0695,
+      "lng": 121.3253,
+      "hours": {
+        "en": "Mon–Fri 9:00 AM–5:00 PM (by NBI appointment)",
+        "fil": "Lun–Biy 9:00 AM–5:00 PM (ayon sa NBI appointment)"
+      },
+      "note": {
+        "en": "Check mall entry hours if you have an early morning slot.",
+        "fil": "Tingnan ang oras ng pagbubukas ng mall kung maaga ang iyong appointment."
+      }
+    },
+    {
+      "id": "nbi-calamba",
+      "serviceId": "nbi",
+      "name": "NBI Laguna Clearance Center (Calamba)",
+      "city": "Calamba",
+      "address": "Brgy. Real / SM City Calamba area, Calamba City, Laguna",
+      "lat": 14.20418,
+      "lng": 121.15459,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (by NBI appointment)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (ayon sa NBI appointment)"
+      },
+      "note": {
+        "en": "Verify exact Calamba satellite counter in your NBI appointment confirmation.",
+        "fil": "Tiyakin ang eksaktong counter sa Calamba sa iyong NBI appointment confirmation."
+      }
+    },
+    {
+      "id": "psa-lipa-crs",
+      "serviceId": "psa-birth",
+      "name": "PSA CRS Outlet – Batangas (Lipa)",
+      "city": "Lipa City",
+      "address": "G/F Bldg. C, Fiesta World Mall, Brgy. Marawoy, Lipa City, Batangas",
+      "lat": 13.96306,
+      "lng": 121.16913,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (appointment required)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (kailangan ng appointment)"
+      },
+      "note": {
+        "en": "Main regional PSA CRS releasing outlet for Batangas; book at appointment.psa.gov.ph first.",
+        "fil": "Pangunahing PSA CRS outlet para sa Batangas; mag-book muna sa appointment.psa.gov.ph."
+      }
+    },
+    {
+      "id": "psa-san-pablo",
+      "serviceId": "psa-birth",
+      "name": "PSA Laguna Provincial Statistical Office",
+      "city": "San Pablo",
+      "address": "Maharlika Hwy, Brgy. Bagong Bayan, San Pablo City, Laguna",
+      "lat": 14.0652,
+      "lng": 121.3185,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Confirm CRS appointment availability or order online for door-to-door delivery.",
+        "fil": "Kumpirmahin ang CRS appointment o umorder online para sa door-to-door delivery."
+      }
+    },
+    {
+      "id": "lcr-taal",
+      "serviceId": "taal-birth",
+      "name": "Taal Municipal Local Civil Registrar",
+      "city": "Taal",
+      "address": "Casa Real / Taal Municipal Hall, Calle J.W. Diokno, Poblacion 7, Taal, Batangas",
+      "lat": 13.88006,
+      "lng": 120.92278,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (confirm counter first)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (kumpirmahin muna sa tanggapan)"
+      },
+      "note": {
+        "en": "Verification pending: confirm current copy-issuance counter and requirements directly with Taal LCR.",
+        "fil": "Kailangan ng kumpirmasyon: itanong muna sa Taal LCR ang kasalukuyang counter at mga kailangan."
+      }
+    },
+    {
+      "id": "dfa-lipa",
+      "serviceId": "passport",
+      "name": "DFA Consular Office – Batangas (Lipa)",
+      "city": "Lipa City",
+      "address": "2F Robinsons Place Lipa, J.P. Laurel Hwy, Brgy. Mataas na Lupa, Lipa City",
+      "lat": 13.94385,
+      "lng": 121.1504,
+      "hours": {
+        "en": "Mon–Fri 9:00 AM–5:00 PM (confirmed appointment only)",
+        "fil": "Lun–Biy 9:00 AM–5:00 PM (may kumpirmadong appointment lamang)"
+      },
+      "note": {
+        "en": "Arrive 30 minutes before your slot with printed application form, e-receipt, and photocopies.",
+        "fil": "Dumating nang 30 minutong mas maaga dala ang naka-print na form, e-receipt, at photocopy."
+      }
+    },
+    {
+      "id": "dfa-san-pablo",
+      "serviceId": "passport",
+      "name": "DFA Consular Office – San Pablo",
+      "city": "San Pablo",
+      "address": "SM City San Pablo, Maharlika Hwy, San Pablo City, Laguna",
+      "lat": 14.0728,
+      "lng": 121.3008,
+      "hours": {
+        "en": "Mon–Fri 9:00 AM–5:00 PM (confirmed appointment only)",
+        "fil": "Lun–Biy 9:00 AM–5:00 PM (may kumpirmadong appointment lamang)"
+      },
+      "note": {
+        "en": "Select this office on passport.gov.ph; follow dress code and bring original + photocopies.",
+        "fil": "Piliin ang tanggapang ito sa passport.gov.ph; sundin ang dress code at magdala ng orihinal + photocopy."
+      }
+    },
+    {
+      "id": "philsys-batangas",
+      "serviceId": "philsys",
+      "name": "PhilSys Fixed Registration Center – Batangas City",
+      "city": "Batangas City",
+      "address": "G/F Citimart Caedo Plaza, Brgy. Calicanto, Batangas City",
+      "lat": 13.7653,
+      "lng": 121.05602,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Bring your primary ID or PSA Birth Certificate + Student ID; keep your Transaction Slip (TRN).",
+        "fil": "Dalhin ang primary ID o PSA Birth Certificate + Student ID; ingatan ang Transaction Slip (TRN)."
+      }
+    },
+    {
+      "id": "philsys-lipa",
+      "serviceId": "philsys",
+      "name": "PhilSys Fixed Registration Center – Lipa",
+      "city": "Lipa City",
+      "address": "G/F Bldg. C, Fiesta World Mall, Brgy. Marawoy, Lipa City, Batangas",
+      "lat": 13.96315,
+      "lng": 121.1693,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Co-located with the PSA CRS complex at Fiesta World Mall.",
+        "fil": "Katabi ng PSA CRS complex sa Fiesta World Mall."
+      }
+    },
+    {
+      "id": "philsys-calamba",
+      "serviceId": "philsys",
+      "name": "PhilSys Center – Calamba City Hall",
+      "city": "Calamba",
+      "address": "G/F New City Hall Complex, Brgy. Real, Calamba City, Laguna",
+      "lat": 14.19403,
+      "lng": 121.15982,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Check local PSA Laguna notices for active walk-in hours or mall pop-up booths.",
+        "fil": "Tingnan ang abiso ng PSA Laguna para sa oras ng walk-in o booth sa mall."
+      }
+    },
+    {
+      "id": "sss-batangas",
+      "serviceId": "sss",
+      "name": "SSS Batangas Branch",
+      "city": "Batangas City",
+      "address": "SSS Building, National Hwy, Brgy. Kumintang Ibaba, Batangas City",
+      "lat": 13.77564,
+      "lng": 121.06626,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM (check number coding)",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM (tingnan ang number coding)"
+      },
+      "note": {
+        "en": "Apply for your SS Number online first; visit only if submitting birth records in person.",
+        "fil": "Mag-apply muna online ng SS Number; pumunta lamang kung magpapasa ng birth certificate nang personal."
+      }
+    },
+    {
+      "id": "sss-lipa",
+      "serviceId": "sss",
+      "name": "SSS Lipa Branch",
+      "city": "Lipa City",
+      "address": "AMR Business Center, J.P. Laurel Hwy, Brgy. Sabang, Lipa City, Batangas",
+      "lat": 13.9498,
+      "lng": 121.1585,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Bring your printed E-1 Form, PSA Birth Certificate, and one valid ID when visiting.",
+        "fil": "Magdala ng naka-print na E-1 Form, PSA Birth Certificate, at isang valid ID kung pupunta."
+      }
+    },
+    {
+      "id": "ph-batangas-lhio",
+      "serviceId": "philhealth",
+      "name": "PhilHealth LHIO – Batangas City",
+      "city": "Batangas City",
+      "address": "Millorey Bldg., Brgy. Pallocan West (near SM City Batangas), Batangas City",
+      "lat": 13.75569,
+      "lng": 121.06896,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Bring 2 filled copies of PMRF plus valid ID / PSA Birth Certificate to get your PIN & MDR.",
+        "fil": "Magdala ng 2 sinagutang PMRF at valid ID / PSA Birth Certificate para sa PIN at MDR."
+      }
+    },
+    {
+      "id": "ph-batangas-pro",
+      "serviceId": "philhealth",
+      "name": "PhilHealth Regional Office IV-A",
+      "city": "Batangas City",
+      "address": "Xentro Mall Batangas, Diversion Road, Brgy. Alangilan, Batangas City",
+      "lat": 13.78865,
+      "lng": 121.06106,
+      "hours": {
+        "en": "Mon–Fri 8:00 AM–5:00 PM",
+        "fil": "Lun–Biy 8:00 AM–5:00 PM"
+      },
+      "note": {
+        "en": "Located along Diversion Road; confirm if front-line member registration is open or routed to Pallocan LHIO.",
+        "fil": "Nasa Diversion Road; tiyakin kung bukas ang member registration counter o sa Pallocan LHIO."
+      }
+    },
+    {
+      "id": "ph-lipa",
+      "serviceId": "philhealth",
+      "name": "PhilHealth Express / LHIO – Lipa",
+      "city": "Lipa City",
+      "address": "Level 2, Robinsons Place Lipa, J.P. Laurel Hwy, Lipa City, Batangas",
+      "lat": 13.94395,
+      "lng": 121.1506,
+      "hours": {
+        "en": "Mon–Fri 9:00 AM–5:00 PM (mall hours may apply)",
+        "fil": "Lun–Biy 9:00 AM–5:00 PM (batay sa oras ng mall)"
+      },
+      "note": {
+        "en": "Convenient mall counter inside Robinsons Place Lipa; bring accomplished PMRF copies.",
+        "fil": "Nasa loob ng Robinsons Place Lipa; magdala ng sinagutang kopya ng PMRF."
+      }
     }
   ]
 }

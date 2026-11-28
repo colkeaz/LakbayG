@@ -22,13 +22,10 @@ class AppLocalizationsFil extends AppLocalizations {
   String get tagline => 'Alamin ang pupuntahan. Dumating nang handa.';
 
   @override
-  String get intro => 'Gabay sa susunod mong dokumento mula sa pamahalaan.';
-
-  @override
   String get findService => 'Hanapin ang tamang serbisyo';
 
   @override
-  String get explore => 'Tingnan ang mga proseso';
+  String get explore => 'Tingnan ang mga gabay';
 
   @override
   String get studentNotice =>
@@ -39,15 +36,6 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get pending => 'Kailangan ng opisyal na kumpirmasyon';
-
-  @override
-  String get roadmap => 'Gabay sa proseso';
-
-  @override
-  String get requirements => 'Mga ihahanda';
-
-  @override
-  String get prepare => 'Ihanda ang aking checklist';
 
   @override
   String get sources => 'Mga opisyal na sanggunian';
@@ -68,9 +56,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get next => 'Magpatuloy';
 
   @override
-  String get back => 'Bumalik';
-
-  @override
   String get restart => 'Magsimulang muli';
 
   @override
@@ -86,9 +71,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get referral => 'Kumpirmahin sa tamang sanggunian';
 
   @override
-  String get viewRoadmap => 'Tingnan ang gabay';
-
-  @override
   String get missingOnly => 'Ipakita lamang ang kulang';
 
   @override
@@ -96,7 +78,7 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get resetConfirm =>
-      'Alisin ang lahat ng markang handa para sa serbisyong ito?';
+      'Alisin ang lahat ng markang handa at tapos na hakbang para sa serbisyong ito?';
 
   @override
   String get cancel => 'Kanselahin';
@@ -109,17 +91,20 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get complete =>
-      'Handa ang lahat ng item. Hindi nito ginagarantiya ang pagiging kwalipikado o pag-apruba.';
+      'Handa na ang lahat ng item. Kumpirmahin pa rin ang huling patakaran sa ahensya bago pumunta.';
 
   @override
   String get empty =>
-      'Dito nagsisimula ang paghahanda. Magbukas ng proseso upang gawin ang checklist.';
+      'Dito nagsisimula ang paghahanda. Magbukas ng gabay upang masubaybayan ang mga hakbang, detalye, at dalahin.';
 
   @override
   String get language => 'Wika';
 
   @override
   String get chooseLanguage => 'Piliin ang iyong wika';
+
+  @override
+  String get bilingualPrompt => 'Choose your language / Piliin ang iyong wika';
 
   @override
   String get languageHelp => 'Mababago mo ito anumang oras sa Mga Setting.';
@@ -143,11 +128,7 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get aboutBody =>
-      'Tinutulungan ka ng LakbayG na pumili ng serbisyo, tingnan ang opisyal na gabay at mag-save ng checklist. Nananatili sa device na ito ang checklist at wika. Walang kinokolektang account o personal na dokumento.';
-
-  @override
-  String get reviewNotice =>
-      'Kailangan pa ng hiwalay na pagsusuri ng pangkat sa nilalaman at salin sa Filipino. Hindi pa handa para sa release ang proseso sa Taal.';
+      'Tinutulungan ka ng LakbayG na mahanap ang tamang serbisyo ng pamahalaan, sundan ang mga hakbang, i-save ang detalye ng appointment, at maghanda ng checklist nang offline. Nananatili sa device na ito ang lahat—walang account o personal na upload.';
 
   @override
   String get retry => 'Subukang muli';
@@ -157,33 +138,16 @@ class AppLocalizationsFil extends AppLocalizations {
       'Hindi ma-load ng LakbayG ang lokal na nilalaman o datos. Subukang muli nang hindi binubura ang app data.';
 
   @override
-  String get step => 'Hakbang';
-
-  @override
-  String get offline => 'Magagamit ang gabay nang offline';
-
-  @override
   String get linksNeedInternet =>
       'Kailangan ng internet para sa opisyal na website.';
 
   @override
-  String get greeting => 'Maligayang pagdating sa LakbayG';
-
-  @override
-  String get quickActions => 'Mga mabilis na aksyon';
-
-  @override
-  String get myGuides => 'Mga gabay ko';
-
-  @override
-  String get searchHint => 'Hanapin ang serbisyo o ahensya';
-
-  @override
-  String get notSure => 'Hindi alam ang serbisyo? Sagutin ang ilang tanong.';
+  String get searchHint =>
+      'Maghanap ng serbisyo, ahensya, o salita (hal., trabaho)';
 
   @override
   String get noResults =>
-      'Walang natumbang serbisyo. Subukan ang ibang salita.';
+      'Walang tumugmang serbisyo. Subukan ang ibang salita.';
 
   @override
   String get steps => 'Hakbang-hakbang';
@@ -193,15 +157,6 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get goTo => 'Pupuntahan';
-
-  @override
-  String get progress => 'Iyong progreso';
-
-  @override
-  String get itemsReady => 'item na handa';
-
-  @override
-  String get guidesStarted => 'gabay na sinimulan';
 
   @override
   String get openGuide => 'Buksan ang gabay';
@@ -215,6 +170,10 @@ class AppLocalizationsFil extends AppLocalizations {
   String get documentQuestion => 'Anong dokumento ang kailangan mo?';
 
   @override
+  String get pipWelcome =>
+      'Hindi sigurado kung anong dokumento ang kailangan mo? Ako si Pip. Hanapin natin.';
+
+  @override
   String get resumeGuide => 'Ipagpatuloy ang paghahanda';
 
   @override
@@ -222,4 +181,209 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get readyGroup => 'Handa na';
+
+  @override
+  String get catAll => 'Lahat';
+
+  @override
+  String get catClearance => 'Clearance';
+
+  @override
+  String get catCivil => 'Civil Registry';
+
+  @override
+  String get catId => 'Government ID';
+
+  @override
+  String get catBenefits => 'Pang-trabaho';
+
+  @override
+  String get estimatedFee => 'Bayarin';
+
+  @override
+  String get processingTime => 'Proseso';
+
+  @override
+  String get validity => 'Bisa';
+
+  @override
+  String stepsDone(Object done, Object total) {
+    return '$done / $total hakbang tapos';
+  }
+
+  @override
+  String get tapToMarkDone =>
+      'Pindutin ang bilang ng hakbang upang markahang tapos';
+
+  @override
+  String get goToChecklist => 'Ihanda ang mga dalahin';
+
+  @override
+  String get acceptedIds => 'Mga tinatanggap na ID';
+
+  @override
+  String get goodToKnow => 'Mahalagang paalala at tip';
+
+  @override
+  String get myItems => 'Mga dinagdag mo';
+
+  @override
+  String get addItem => 'Magdagdag ng item';
+
+  @override
+  String get addItemHint => 'hal., Itim na bolpen, photocopy ng ID';
+
+  @override
+  String get emptyItemError => 'Maglagay ng pangalan ng item.';
+
+  @override
+  String get add => 'Idagdag';
+
+  @override
+  String get delete => 'Tanggalin';
+
+  @override
+  String get myApplication => 'Detalye ng aplikasyon ko';
+
+  @override
+  String get trackerEmptyHint =>
+      'I-save nang offline sa teleponong ito ang sangay, iskedyul, o reference number.';
+
+  @override
+  String get editDetails => 'I-edit';
+
+  @override
+  String get addDetails => 'Magdagdag ng detalye';
+
+  @override
+  String get branchLabel => 'Sangay o istasyon';
+
+  @override
+  String get branchHint => 'hal., NBI Batangas City / Taal PNP';
+
+  @override
+  String get appointmentDate => 'Petsa ng appointment';
+
+  @override
+  String get pickDate => 'Pumili ng petsa';
+
+  @override
+  String get clearDate => 'Alisin ang petsa';
+
+  @override
+  String get referenceNumber => 'Reference / Transaction #';
+
+  @override
+  String get notesLabel => 'Sariling tala';
+
+  @override
+  String get save => 'I-save';
+
+  @override
+  String get clearDetails => 'Burahin';
+
+  @override
+  String get copied => 'Nakopya sa clipboard';
+
+  @override
+  String get saved => 'Na-save nang offline sa device';
+
+  @override
+  String get quickComparison => 'Mabilis na paghahambing';
+
+  @override
+  String get relatedGuides => 'Mga kaugnay na gabay';
+
+  @override
+  String get readyBadge => 'Handa na';
+
+  @override
+  String get guidesStarted => 'gabay na sinimulan';
+
+  @override
+  String get stepsLabel => 'hakbang';
+
+  @override
+  String get itemsLabel => 'item';
+
+  @override
+  String get offlineNote =>
+      'Gumagana nang offline · Naka-save lamang sa device na ito · Malayang gabay ng mag-aaral; kumpirmahin lagi sa ahensya ang huling tagubilin.';
+
+  @override
+  String get mapTab => 'Mapa';
+
+  @override
+  String get navChecklists => 'Checklist';
+
+  @override
+  String get navSettings => 'Setting';
+
+  @override
+  String get officeMapTitle => 'Mga Tanggapan';
+
+  @override
+  String get mapView => 'Mapa';
+
+  @override
+  String get listView => 'Listahan';
+
+  @override
+  String get allServices => 'Lahat ng serbisyo';
+
+  @override
+  String get allAreas => 'Lahat ng lugar';
+
+  @override
+  String get officeHours => 'Karaniwang oras';
+
+  @override
+  String get getDirections => 'Kumuha ng direksyon';
+
+  @override
+  String get useAsBranch => 'Gawing sangay ko';
+
+  @override
+  String get branchSaved => 'Na-save bilang iyong sangay sa tracker.';
+
+  @override
+  String get viewOnMap => 'Tingnan sa mapa';
+
+  @override
+  String viewOfficesOnMap(Object count) {
+    return 'Tingnan sa mapa ($count)';
+  }
+
+  @override
+  String distanceKm(Object km) {
+    return '$km km ang layo';
+  }
+
+  @override
+  String get locateMe => 'Hanapin ako';
+
+  @override
+  String get fitPins => 'Ipakita lahat ng pin';
+
+  @override
+  String get locationOff =>
+      'Naka-off ang GPS. Ipinapakita ang mapa ng Batangas.';
+
+  @override
+  String get locationDenied =>
+      'Hindi pinayagan ang lokasyon. Maaari pa ring maghanap ng tanggapan.';
+
+  @override
+  String get locationUnavailable =>
+      'Hindi makuha ang kasalukuyang lokasyon ngayon.';
+
+  @override
+  String get mapOfflineHint =>
+      'Kailangan ng internet sa mapa · Gumagana offline ang listahan';
+
+  @override
+  String get noOffices => 'Walang tanggapang tugma sa napiling filter.';
+
+  @override
+  String get osmAttribution => '© OpenStreetMap';
 }
