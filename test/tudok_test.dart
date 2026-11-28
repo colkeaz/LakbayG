@@ -30,6 +30,14 @@ class FailingChecklist extends ChecklistRepository {
   }
 }
 
+class FailingAppointmentRepository extends AppointmentRepository {
+  FailingAppointmentRepository(super.store);
+  @override
+  Future<void> save(String service, AppointmentNote note) async {
+    throw StateError('disk unavailable');
+  }
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   sqfliteFfiInit();
@@ -67,6 +75,7 @@ void main() {
     controller = AppController(
       ChecklistRepository(store),
       SettingsRepository(store),
+      AppointmentRepository(store),
     );
     await controller.initialize();
   });
@@ -79,6 +88,36 @@ void main() {
     expect(c.services.length, 3);
     expect(c.service('taal-birth').verified, false);
     expect(c.service('taal-birth').requirements, isEmpty);
+    expect(c.service('taal-birth').steps, isEmpty);
+  });
+  test('Catalog includes beginner explainers, hints, notes, tips and neutral referral', () {
+    final c = fixture();
+    for (final s in c.services) {
+      expect(s.whatItIs.en, isNotEmpty);
+      expect(s.whatItIs.fil, isNotEmpty);
+      expect(s.usedFor, isNotEmpty);
+      expect(s.validityNote.en, isNotEmpty);
+      expect(s.validityNote.fil, isNotEmpty);
+      expect(s.tips.length, greaterThanOrEqualTo(3));
+    }
+    for (final id in ['pnp', 'nbi']) {
+      final s = c.service(id);
+      expect(s.requirements.every((r) => r.note != null), true);
+      expect(s.steps.any((st) => st.tip != null), true);
+    }
+    final birthChoices = c.question('birth-type').choices;
+    expect(birthChoices.firstWhere((ch) => ch.id == 'local').hint, isNotNull);
+    expect(birthChoices.firstWhere((ch) => ch.id == 'psa').hint, isNotNull);
+    final clearanceChoices = c.question('clearance-type').choices;
+    expect(clearanceChoices.firstWhere((ch) => ch.id == 'pnp').hint, isNotNull);
+    expect(clearanceChoices.firstWhere((ch) => ch.id == 'nbi').hint, isNotNull);
+
+    final clearanceRef = c.referrals.firstWhere(
+      (r) => r.id == 'clearance-referral',
+    );
+    expect(clearanceRef.url, 'https://arta.gov.ph/');
+    expect(clearanceRef.reason.en, contains('PNP'));
+    expect(clearanceRef.reason.en, contains('NBI'));
   });
   test('PNP and NBI stay distinct; uncertain purpose gets referral', () {
     for (final id in ['pnp', 'nbi']) {
@@ -141,6 +180,9 @@ void main() {
       (j) => j['services'][0]['title']['fil'] = '',
       (j) => j['services'][1]['requirements'][1]['id'] =
           j['services'][1]['requirements'][0]['id'],
+      (j) => j['questions'][1]['choices'][0]['hint']['fil'] = '',
+      (j) => j['services'][1]['requirements'][0]['note']['en'] = '   ',
+      (j) => j['services'][1]['steps'][0]['tip']['fil'] = '',
     ]) {
       final j = jsonDecode(
         File('assets/catalog.json').readAsStringSync(),
@@ -155,6 +197,7 @@ void main() {
     final restored = AppController(
       ChecklistRepository(store),
       SettingsRepository(store),
+      AppointmentRepository(store),
     );
     await restored.initialize();
     expect(restored.checked('pnp', 'pnp-id-v1'), true);
@@ -165,7 +208,52 @@ void main() {
     expect(restored.checked('nbi', 'nbi-ids-v1'), true);
     restored.dispose();
   });
-  test('SQLite data survives closing and reopening the database', () async {
+  test(
+    'Appointment notes validate, persist per service, and clear cleanly',
+    () async {
+      expect(await controller.saveAppointment('pnp', '   ', '9:00 AM'), false);
+      expect(
+        await controller.saveAppointment('pnp', 'BAD<REF>!', '9:00 AM'),
+        false,
+      );
+      expect(
+        await controller.saveAppointment('pnp', 'NPCS-2026-001', '<script>'),
+        false,
+      );
+      expect(controller.appointment('pnp'), isNull);
+
+      expect(
+        await controller.saveAppointment(
+          'pnp',
+          ' NPCS-2026-001 ',
+          ' Dec 5, 9:00 AM · Lipa ',
+        ),
+        true,
+      );
+      expect(controller.appointment('pnp')?.referenceNo, 'NPCS-2026-001');
+      expect(
+        controller.appointment('pnp')?.scheduleNote,
+        'Dec 5, 9:00 AM · Lipa',
+      );
+      expect(controller.appointment('nbi'), isNull);
+
+      final restored = AppController(
+        ChecklistRepository(store),
+        SettingsRepository(store),
+        AppointmentRepository(store),
+      );
+      await restored.initialize();
+      expect(restored.appointment('pnp')?.referenceNo, 'NPCS-2026-001');
+      expect(
+        restored.appointment('pnp')?.scheduleNote,
+        'Dec 5, 9:00 AM · Lipa',
+      );
+      expect(await restored.clearAppointment('pnp'), true);
+      expect(restored.appointment('pnp'), isNull);
+      restored.dispose();
+    },
+  );
+  test('SQLite data and appointments survive closing and reopening', () async {
     final folder = await Directory.systemTemp.createTemp('tudok-test-');
     final path = '${folder.path}/test.db';
     final disk = await LocalStore.open(
@@ -174,6 +262,13 @@ void main() {
     );
     await ChecklistRepository(disk).set('pnp', 'pnp-id-v1', true);
     await SettingsRepository(disk).setLanguage('fil');
+    await AppointmentRepository(disk).save(
+      'pnp',
+      const AppointmentNote(
+        referenceNo: 'NPCS-2026-777',
+        scheduleNote: 'Dec 8, 10:00 AM · Batangas',
+      ),
+    );
     await disk.database.close();
     final reopened = await LocalStore.open(
       factory: databaseFactoryFfi,
@@ -184,19 +279,75 @@ void main() {
       contains('pnp-id-v1'),
     );
     expect(await SettingsRepository(reopened).language(), 'fil');
+    final saved = (await AppointmentRepository(reopened).read())['pnp'];
+    expect(saved?.referenceNo, 'NPCS-2026-777');
+    expect(saved?.scheduleNote, 'Dec 8, 10:00 AM · Batangas');
     await reopened.database.close();
     await folder.delete(recursive: true);
   });
+  test('SQLite v1 database migrates cleanly to v2 without losing data', () async {
+    final folder = await Directory.systemTemp.createTemp('tudok-migrate-');
+    final path = '${folder.path}/legacy.db';
+    final v1 = await databaseFactoryFfi.openDatabase(
+      path,
+      options: OpenDatabaseOptions(
+        version: 1,
+        onCreate: (db, version) async {
+          await db.execute(
+            'CREATE TABLE checklist (service TEXT NOT NULL, requirement TEXT NOT NULL, PRIMARY KEY(service, requirement))',
+          );
+          await db.execute(
+            'CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)',
+          );
+          await db.insert('checklist', {
+            'service': 'nbi',
+            'requirement': 'nbi-ids-v1',
+          });
+          await db.insert('settings', {'key': 'language', 'value': 'fil'});
+        },
+      ),
+    );
+    await v1.close();
+
+    final upgraded = await LocalStore.open(
+      factory: databaseFactoryFfi,
+      location: path,
+    );
+    expect(
+      (await ChecklistRepository(upgraded).read())['nbi'],
+      contains('nbi-ids-v1'),
+    );
+    expect(await SettingsRepository(upgraded).language(), 'fil');
+    await AppointmentRepository(upgraded).save(
+      'nbi',
+      const AppointmentNote(
+        referenceNo: 'NBI-2026-888',
+        scheduleNote: 'Dec 10, PM slot',
+      ),
+    );
+    expect(
+      (await AppointmentRepository(upgraded).read())['nbi']?.referenceNo,
+      'NBI-2026-888',
+    );
+    await upgraded.database.close();
+    await folder.delete(recursive: true);
+  });
   test(
-    'Failed writes leave prepared state unchanged and allow retry',
+    'Failed writes leave prepared and appointment state unchanged',
     () async {
       final failed = AppController(
         FailingChecklist(store),
         SettingsRepository(store),
+        FailingAppointmentRepository(store),
       );
       await failed.initialize();
       expect(await failed.toggle('pnp', 'pnp-id-v1', true), false);
       expect(failed.checked('pnp', 'pnp-id-v1'), false);
+      expect(
+        await failed.saveAppointment('pnp', 'NPCS-2026-999', '9:00 AM'),
+        false,
+      );
+      expect(failed.appointment('pnp'), isNull);
       expect(failed.busy, false);
       failed.dispose();
     },
@@ -220,7 +371,35 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
   testWidgets(
-    'Questionnaire validation and language switch preserve selection',
+    'Home search filters by use-case keywords and shows 1-line subtitles',
+    (tester) async {
+      await tester.runAsync(() => controller.changeLanguage('en'));
+      await tester.pumpWidget(
+        TuDokApp(catalog: fixture(), controller: controller),
+      );
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Local private employment'), findsOneWidget);
+      final search = find.byKey(const ValueKey<String>('home-search-field'));
+      await tester.enterText(search, 'ojt');
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey<String>('service-pnp')), findsOneWidget);
+      expect(find.byKey(const ValueKey<String>('service-nbi')), findsNothing);
+      await tester.enterText(search, 'job');
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey<String>('service-pnp')), findsOneWidget);
+      expect(find.byKey(const ValueKey<String>('service-nbi')), findsOneWidget);
+      await tester.enterText(search, 'birth');
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(const ValueKey<String>('service-taal-birth')),
+        findsOneWidget,
+      );
+      expect(find.byKey(const ValueKey<String>('service-pnp')), findsNothing);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+  testWidgets(
+    'Questionnaire validation, choice hints, and language switch preserve selection',
     (tester) async {
       await tester.runAsync(() => controller.changeLanguage('en'));
       await tester.pumpWidget(
@@ -244,13 +423,61 @@ void main() {
         find.text('Anong clearance ang tinukoy ng humihinging institusyon?'),
         findsOneWidget,
       );
+      expect(
+        find.textContaining('nangangailangan ng 1 balidong ID'),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('nangangailangan ng 2 orihinal na balidong ID'),
+        findsOneWidget,
+      );
       await tester.pumpWidget(const SizedBox());
     },
   );
   testWidgets(
-    'Checklist save, missing filter, completion and confirmed reset',
+    'Guide AppBar uses concise title and pre-portal gate prompts when unchecked',
     (tester) async {
       tester.view.physicalSize = const Size(800, 2000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      await tester.runAsync(() => controller.changeLanguage('en'));
+      final service = fixture().service('pnp');
+      await tester.pumpWidget(
+        AppScope(
+          catalog: fixture(),
+          controller: controller,
+          child: ListenableBuilder(
+            listenable: controller,
+            builder: (context, _) => MaterialApp(
+              localizationsDelegates: const TuDokLocalizations().delegates,
+              supportedLocales: const TuDokLocalizations().locales,
+              home: ChecklistScreen(service: service),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Service Guide'), findsOneWidget);
+      expect(find.text('National Police Clearance'), findsOneWidget);
+      expect(find.text('What it is'), findsOneWidget);
+      expect(find.text('Validity & release'), findsOneWidget);
+      expect(find.text('Counter survival tips'), findsOneWidget);
+      await tester.ensureVisible(find.text('Open official website'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Open official website'));
+      await tester.pumpAndSettle();
+      expect(find.text('Not all items are checked yet'), findsOneWidget);
+      await tester.tap(find.text('Review checklist'));
+      await tester.pumpAndSettle();
+      expect(find.byType(Checkbox), findsNWidgets(3));
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+  testWidgets(
+    'Checklist save, missing filter, appointment pocket card validation and reset',
+    (tester) async {
+      tester.view.physicalSize = const Size(800, 2400);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
@@ -271,6 +498,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      expect(find.textContaining('PhilID / ePhilID'), findsOneWidget);
       await tester.tap(find.byType(Checkbox).first);
       await tester.runAsync(() async {
         while (controller.busy) {
@@ -282,6 +510,72 @@ void main() {
       await tester.tap(find.byType(Switch));
       await tester.pumpAndSettle();
       expect(find.byType(Checkbox), findsNWidgets(2));
+
+      // Appointment pocket card validation: empty and invalid characters rejected
+      final saveBtn = find.byKey(
+        const ValueKey<String>('appointment-save-button'),
+      );
+      await tester.ensureVisible(saveBtn);
+      await tester.tap(saveBtn);
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Enter your reference number before saving.'),
+        findsOneWidget,
+      );
+      await tester.enterText(
+        find.byKey(const ValueKey<String>('appointment-ref-field')),
+        'BAD<REF>!',
+      );
+      await tester.tap(saveBtn);
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Use only letters, numbers, spaces, hyphens, underscores, or slashes.',
+        ),
+        findsOneWidget,
+      );
+      await tester.enterText(
+        find.byKey(const ValueKey<String>('appointment-ref-field')),
+        'NPCS-2026-4455',
+      );
+      await tester.enterText(
+        find.byKey(const ValueKey<String>('appointment-schedule-field')),
+        'Dec 6, 9:00 AM · Lipa',
+      );
+      await tester.runAsync(() async {
+        await tester.tap(saveBtn);
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(find.text('NPCS-2026-4455'), findsOneWidget);
+      expect(find.text('Dec 6, 9:00 AM · Lipa'), findsOneWidget);
+      expect(controller.appointment('pnp')?.referenceNo, 'NPCS-2026-4455');
+
+      // Edit and clear saved appointment
+      await tester.tap(
+        find.byKey(const ValueKey<String>('appointment-edit-button')),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byKey(const ValueKey<String>('appointment-ref-field')),
+        'NPCS-2026-9900',
+      );
+      await tester.runAsync(() async {
+        await tester.tap(saveBtn);
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(find.text('NPCS-2026-9900'), findsOneWidget);
+      await tester.runAsync(() async {
+        await tester.tap(
+          find.byKey(const ValueKey<String>('appointment-clear-button')),
+        );
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(controller.appointment('pnp'), isNull);
+
+      await tester.ensureVisible(find.text('Reset checklist'));
       await tester.tap(find.text('Reset checklist'));
       await tester.pumpAndSettle();
       await tester.runAsync(() async {

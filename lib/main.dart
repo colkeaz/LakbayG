@@ -44,6 +44,7 @@ class _BootstrapState extends State<Bootstrap> {
     final controller = AppController(
       ChecklistRepository(store),
       SettingsRepository(store),
+      AppointmentRepository(store),
     );
     await controller.initialize();
     return (catalog, controller);
@@ -151,7 +152,7 @@ class TuDokApp extends StatelessWidget {
             color: Palette.surface,
             surfaceTintColor: Colors.transparent,
             margin: const EdgeInsets.symmetric(vertical: 7),
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
           ),
@@ -457,8 +458,17 @@ class _HomeViewState extends State<HomeView> {
     final services = context.catalog.services.where((s) {
       if (query.trim().isEmpty) return true;
       final q = query.trim().toLowerCase();
-      return context.tr(s.title).toLowerCase().contains(q) ||
-          s.agency.toLowerCase().contains(q);
+      final haystack = [
+        s.title.en,
+        s.title.fil,
+        s.agency,
+        s.summary.en,
+        s.summary.fil,
+        s.whatItIs.en,
+        s.whatItIs.fil,
+        for (final use in s.usedFor) ...[use.en, use.fil],
+      ].join(' ').toLowerCase();
+      return haystack.contains(q);
     }).toList();
 
     final active = context.catalog.services.where((s) {
@@ -501,6 +511,7 @@ class _HomeViewState extends State<HomeView> {
             ),
         ],
         TextField(
+          key: const ValueKey<String>('home-search-field'),
           onChanged: (value) => setState(() => query = value),
           decoration: InputDecoration(
             hintText: l.searchHint,
@@ -512,7 +523,7 @@ class _HomeViewState extends State<HomeView> {
           SoftTile(color: Palette.surface, child: Text(l.noResults)),
         for (final s in services) ServiceCard(service: s),
         OutlinedButton.icon(
-          onPressed: () => context.open(NavigatorScreen()),
+          onPressed: () => context.open(const NavigatorScreen()),
           icon: const Icon(Icons.alt_route),
           label: Text(l.findService),
         ),
@@ -532,6 +543,7 @@ class ServiceCard extends StatelessWidget {
     final count = s.requirements
         .where((r) => context.state.checked(s.id, r.id))
         .length;
+    final useSummary = s.usedFor.map(context.tr).join(' · ');
     return Column(
       children: [
         ListTile(
@@ -567,14 +579,49 @@ class ServiceCard extends StatelessWidget {
           ),
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 6),
-            child: Text(
-              [
-                s.agency,
-                if (!s.verified) context.l.pending,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  s.agency,
+                  style: const TextStyle(fontSize: 14, color: Palette.muted),
+                ),
+                if (!checklist && useSummary.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      useSummary,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 13.5,
+                        color: Palette.primary,
+                      ),
+                    ),
+                  ),
+                if (!s.verified)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      context.l.pending,
+                      style: const TextStyle(
+                        fontSize: 13.5,
+                        color: Palette.muted,
+                      ),
+                    ),
+                  ),
                 if (checklist)
-                  '$count / ${s.requirements.length} ${context.l.prepared}',
-              ].join('\n'),
-              style: const TextStyle(fontSize: 14, color: Palette.muted),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      '$count / ${s.requirements.length} ${context.l.prepared}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Palette.muted,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
           trailing: const Icon(Icons.chevron_right, color: Palette.muted),
@@ -729,6 +776,307 @@ Future<void> openOfficial(BuildContext context, String url) async {
   );
 }
 
+enum _RefError { required, invalid }
+
+class AppointmentPocketCard extends StatefulWidget {
+  final String serviceId;
+  const AppointmentPocketCard({super.key, required this.serviceId});
+  @override
+  State<AppointmentPocketCard> createState() => _AppointmentPocketCardState();
+}
+
+class _AppointmentPocketCardState extends State<AppointmentPocketCard> {
+  final TextEditingController refCtrl = TextEditingController();
+  final TextEditingController scheduleCtrl = TextEditingController();
+  bool editing = false;
+  _RefError? refError;
+  bool scheduleError = false;
+
+  @override
+  void dispose() {
+    refCtrl.dispose();
+    scheduleCtrl.dispose();
+    super.dispose();
+  }
+
+  void _startEdit(AppointmentNote? current) {
+    refCtrl.text = current?.referenceNo ?? '';
+    scheduleCtrl.text = current?.scheduleNote ?? '';
+    setState(() {
+      editing = true;
+      refError = null;
+      scheduleError = false;
+    });
+  }
+
+  Future<void> _submit() async {
+    final ref = refCtrl.text.trim();
+    final schedule = scheduleCtrl.text.trim();
+    final _RefError? nextRefError = ref.isEmpty
+        ? _RefError.required
+        : !AppointmentNote.isValidReference(ref)
+        ? _RefError.invalid
+        : null;
+    final nextScheduleError = !AppointmentNote.isValidSchedule(schedule);
+    if (nextRefError != null || nextScheduleError) {
+      setState(() {
+        refError = nextRefError;
+        scheduleError = nextScheduleError;
+      });
+      return;
+    }
+    final ok = await context.state.saveAppointment(
+      widget.serviceId,
+      ref,
+      schedule,
+    );
+    if (!mounted) {
+      return;
+    }
+    if (ok) {
+      setState(() {
+        editing = false;
+        refError = null;
+        scheduleError = false;
+      });
+    } else {
+      context.saveResult(false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l;
+    final state = context.state;
+    final saved = state.appointment(widget.serviceId);
+    final showForm = saved == null || editing;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Section(l.appointmentCardTitle),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: Palette.surface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Palette.line),
+          ),
+          child: showForm
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      l.appointmentCardSubtitle,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Palette.muted,
+                        height: 1.35,
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    TextField(
+                      key: const ValueKey<String>('appointment-ref-field'),
+                      controller: refCtrl,
+                      onChanged: (_) {
+                        if (refError != null) {
+                          setState(() => refError = null);
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: l.appointmentRefLabel,
+                        hintText: l.appointmentRefHint,
+                        errorText: refError == null
+                            ? null
+                            : refError == _RefError.required
+                            ? l.appointmentRefRequired
+                            : l.appointmentRefInvalid,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      key: const ValueKey<String>('appointment-schedule-field'),
+                      controller: scheduleCtrl,
+                      onChanged: (_) {
+                        if (scheduleError) {
+                          setState(() => scheduleError = false);
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: l.appointmentScheduleLabel,
+                        hintText: l.appointmentScheduleHint,
+                        errorText: scheduleError
+                            ? l.appointmentScheduleInvalid
+                            : null,
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 8,
+                      children: [
+                        FilledButton.icon(
+                          key: const ValueKey<String>(
+                            'appointment-save-button',
+                          ),
+                          onPressed: state.busy ? null : _submit,
+                          icon: const Icon(Icons.save_outlined),
+                          label: Text(l.appointmentSave),
+                        ),
+                        if (saved != null)
+                          TextButton(
+                            onPressed: state.busy
+                                ? null
+                                : () => setState(() {
+                                    editing = false;
+                                    refError = null;
+                                    scheduleError = false;
+                                  }),
+                            child: Text(l.cancel),
+                          ),
+                      ],
+                    ),
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.offline_pin_outlined,
+                          size: 18,
+                          color: Palette.primary,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            l.appointmentSaved,
+                            style: const TextStyle(
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w600,
+                              color: Palette.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      l.appointmentRefLabel,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Palette.muted,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SelectableText(
+                            saved.referenceNo,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800,
+                              color: Palette.ink,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          tooltip: l.copyLink,
+                          onPressed: () async {
+                            await Clipboard.setData(
+                              ClipboardData(text: saved.referenceNo),
+                            );
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(l.appointmentCopied)),
+                              );
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.copy_outlined,
+                            color: Palette.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (saved.scheduleNote.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.event_note_outlined,
+                            size: 18,
+                            color: Palette.muted,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              saved.scheduleNote,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Palette.ink,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                    const SizedBox(height: 14),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 8,
+                      children: [
+                        OutlinedButton.icon(
+                          key: const ValueKey<String>(
+                            'appointment-edit-button',
+                          ),
+                          onPressed: state.busy
+                              ? null
+                              : () => _startEdit(saved),
+                          icon: const Icon(Icons.edit_outlined, size: 18),
+                          label: Text(l.appointmentEdit),
+                        ),
+                        TextButton.icon(
+                          key: const ValueKey<String>(
+                            'appointment-clear-button',
+                          ),
+                          onPressed: state.busy
+                              ? null
+                              : () async {
+                                  final ok = await state.clearAppointment(
+                                    widget.serviceId,
+                                  );
+                                  if (context.mounted) {
+                                    if (ok) {
+                                      refCtrl.clear();
+                                      scheduleCtrl.clear();
+                                      setState(() {
+                                        editing = false;
+                                        refError = null;
+                                        scheduleError = false;
+                                      });
+                                    } else {
+                                      context.saveResult(false);
+                                    }
+                                  }
+                                },
+                          icon: const Icon(Icons.delete_outline, size: 18),
+                          label: Text(l.appointmentClear),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+        ),
+      ],
+    );
+  }
+}
+
 /// One screen for the whole journey: where to go, the steps, and what to
 /// bring. Previously the steps lived on a separate roadmap screen that was
 /// lost as soon as the user opened their checklist.
@@ -748,6 +1096,77 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   late bool packing = widget.packing;
   bool missing = false;
 
+  Widget _tipsTile(BuildContext context, Service s) => SoftTile(
+    color: Palette.surface,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final (i, tip) in s.tips.indexed) ...[
+          if (i > 0) const SizedBox(height: 10),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                s.verified ? Icons.lightbulb_outline : Icons.help_outline,
+                size: 19,
+                color: Palette.primary,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  context.tr(tip),
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Palette.ink,
+                    height: 1.4,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ],
+    ),
+  );
+
+  Future<void> _handleOpenOfficial(
+    BuildContext context,
+    Service s,
+    int count,
+    int total,
+  ) async {
+    if (s.verified && count < total) {
+      final proceed = await showDialog<bool>(
+        context: context,
+        builder: (c) => AlertDialog(
+          title: Text(c.l.readinessGateTitle),
+          content: Text(c.l.readinessGateBody(total - count)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(c, false),
+              child: Text(c.l.reviewChecklist),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(c, true),
+              child: Text(c.l.continueAnyway),
+            ),
+          ],
+        ),
+      );
+      if (!context.mounted) {
+        return;
+      }
+      if (proceed == false) {
+        setState(() => packing = true);
+        return;
+      }
+      if (proceed != true) {
+        return;
+      }
+    }
+    await openOfficial(context, s.url);
+  }
+
   @override
   Widget build(BuildContext context) {
     final s = widget.service;
@@ -758,11 +1177,21 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.tr(s.title)),
+        title: Text(l.serviceGuide),
         actions: const [LanguageMenu()],
       ),
       body: PageBody(
         children: [
+          Text(
+            context.tr(s.title),
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+              color: Palette.ink,
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(height: 4),
           Text(s.agency, style: Theme.of(context).textTheme.titleMedium),
           Align(
             alignment: Alignment.centerLeft,
@@ -785,6 +1214,60 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
             onSelectionChanged: (v) => setState(() => packing = v.single),
           ),
           if (!packing) ...[
+            Section(l.whatItIs),
+            SoftTile(
+              color: Palette.surface,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.tr(s.whatItIs),
+                    style: const TextStyle(
+                      fontSize: 15.5,
+                      color: Palette.ink,
+                      height: 1.45,
+                    ),
+                  ),
+                  if (s.usedFor.isNotEmpty) ...[
+                    const SizedBox(height: 14),
+                    Text(
+                      l.usedFor,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Palette.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final use in s.usedFor)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Palette.blueSoft,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              context.tr(use),
+                              style: const TextStyle(
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.w600,
+                                color: Palette.ink,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
             Section(l.scope),
             Text(
               context.tr(s.summary),
@@ -883,9 +1366,56 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                           ),
                         ],
                       ),
+                      if (step.tip != null) ...[
+                        const SizedBox(height: 12),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Palette.blueSoft,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.lightbulb_outline,
+                                size: 18,
+                                color: Palette.primary,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  '${l.tipLabel}: ${context.tr(step.tip!)}',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Palette.ink,
+                                    height: 1.35,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
+            ],
+            Section(l.validityAndRelease),
+            SoftTile(
+              color: Palette.surface,
+              child: Text(
+                context.tr(s.validityNote),
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Palette.ink,
+                  height: 1.4,
+                ),
+              ),
+            ),
+            if (s.tips.isNotEmpty) ...[
+              Section(s.verified ? l.counterTips : l.questionsToAsk),
+              _tipsTile(context, s),
             ],
           ] else if (total > 0) ...[
             SoftTile(
@@ -938,6 +1468,19 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                     context.tr(r.text),
                     style: const TextStyle(fontSize: 16, color: Palette.ink),
                   ),
+                  subtitle: r.note == null
+                      ? null
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 6),
+                          child: Text(
+                            context.tr(r.note!),
+                            style: const TextStyle(
+                              fontSize: 13.5,
+                              color: Palette.muted,
+                              height: 1.35,
+                            ),
+                          ),
+                        ),
                   value: state.checked(s.id, r.id),
                   onChanged: state.busy
                       ? null
@@ -991,12 +1534,16 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                 label: Text(l.reset),
               ),
             ),
+            if (s.verified) AppointmentPocketCard(serviceId: s.id),
+          ] else if (s.tips.isNotEmpty) ...[
+            Section(l.questionsToAsk),
+            _tipsTile(context, s),
           ],
-          const SizedBox(height: 10),
+          const SizedBox(height: 14),
           SizedBox(
             height: 52,
             child: FilledButton.icon(
-              onPressed: () => openOfficial(context, s.url),
+              onPressed: () => _handleOpenOfficial(context, s, count, total),
               icon: const Icon(Icons.open_in_new),
               label: Text(l.openOfficial),
             ),
@@ -1130,21 +1677,42 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              e.answers[e.current] == c.id
-                                  ? Icons.radio_button_checked
-                                  : Icons.radio_button_off,
-                              color: Palette.primary,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 1),
+                              child: Icon(
+                                e.answers[e.current] == c.id
+                                    ? Icons.radio_button_checked
+                                    : Icons.radio_button_off,
+                                color: Palette.primary,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
-                              child: Text(
-                                context.tr(c.text),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Palette.ink,
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    context.tr(c.text),
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Palette.ink,
+                                    ),
+                                  ),
+                                  if (c.hint != null) ...[
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      context.tr(c.hint!),
+                                      style: const TextStyle(
+                                        fontSize: 13.5,
+                                        color: Palette.muted,
+                                        height: 1.35,
+                                      ),
+                                    ),
+                                  ],
+                                ],
                               ),
                             ),
                           ],

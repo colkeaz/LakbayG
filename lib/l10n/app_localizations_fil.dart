@@ -176,7 +176,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get myGuides => 'Mga gabay ko';
 
   @override
-  String get searchHint => 'Hanapin ang serbisyo o ahensya';
+  String get searchHint =>
+      'Hanapin ang serbisyo, ahensya, o gamit (hal. trabaho, OJT, birth)';
 
   @override
   String get notSure => 'Hindi alam ang serbisyo? Sagutin ang ilang tanong.';
@@ -222,4 +223,85 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get readyGroup => 'Handa na';
+
+  @override
+  String get serviceGuide => 'Gabay sa Serbisyo';
+
+  @override
+  String get whatItIs => 'Ano ito';
+
+  @override
+  String get usedFor => 'Karaniwang gamit';
+
+  @override
+  String get validityAndRelease => 'Bisa at pagkuha';
+
+  @override
+  String get counterTips => 'Mga tip sa pagpunta';
+
+  @override
+  String get questionsToAsk => 'Mga itatanong sa tanggapan';
+
+  @override
+  String get tipLabel => 'Tip';
+
+  @override
+  String get appointmentCardTitle => 'Aking Appointment Pocket Card';
+
+  @override
+  String get appointmentCardSubtitle =>
+      'I-save nang offline ang iyong reference number at iskedyul para sa counter.';
+
+  @override
+  String get appointmentRefLabel => 'Reference number';
+
+  @override
+  String get appointmentRefHint => 'hal. NPCS-2026-00123';
+
+  @override
+  String get appointmentScheduleLabel => 'Iskedyul at sangay (opsyonal)';
+
+  @override
+  String get appointmentScheduleHint => 'hal. Dis 5, 9:00 AM · Lipa Station';
+
+  @override
+  String get appointmentSave => 'I-save ang detalye';
+
+  @override
+  String get appointmentEdit => 'I-edit';
+
+  @override
+  String get appointmentClear => 'Burahin';
+
+  @override
+  String get appointmentSaved => 'Naka-save nang offline sa device na ito';
+
+  @override
+  String get appointmentRefRequired =>
+      'Ilagay muna ang iyong reference number bago mag-save.';
+
+  @override
+  String get appointmentRefInvalid =>
+      'Gumamit lamang ng mga titik, numero, espasyo, gitling, underscore, o slash.';
+
+  @override
+  String get appointmentScheduleInvalid =>
+      'Alisin ang mga hindi sinusuportahang simbolo sa iyong tala ng iskedyul.';
+
+  @override
+  String get appointmentCopied => 'Nakopya ang reference number.';
+
+  @override
+  String get readinessGateTitle => 'May mga item pang hindi naka-check';
+
+  @override
+  String readinessGateBody(int count) {
+    return 'May $count pang item sa iyong checklist na hindi pa naka-check. Suriin muna ang mga dalahin, o magpatuloy sa opisyal na website?';
+  }
+
+  @override
+  String get reviewChecklist => 'Suriin ang checklist';
+
+  @override
+  String get continueAnyway => 'Magpatuloy sa website';
 }

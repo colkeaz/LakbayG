@@ -175,7 +175,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myGuides => 'My guides';
 
   @override
-  String get searchHint => 'Search a service or agency';
+  String get searchHint =>
+      'Search service, agency, or use (e.g. job, OJT, birth)';
 
   @override
   String get notSure => 'Not sure which service? Answer a few questions.';
@@ -220,4 +221,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get readyGroup => 'Prepared';
+
+  @override
+  String get serviceGuide => 'Service Guide';
+
+  @override
+  String get whatItIs => 'What it is';
+
+  @override
+  String get usedFor => 'Commonly used for';
+
+  @override
+  String get validityAndRelease => 'Validity & release';
+
+  @override
+  String get counterTips => 'Counter survival tips';
+
+  @override
+  String get questionsToAsk => 'Questions to ask the office';
+
+  @override
+  String get tipLabel => 'Tip';
+
+  @override
+  String get appointmentCardTitle => 'My Appointment Pocket Card';
+
+  @override
+  String get appointmentCardSubtitle =>
+      'Save your reference number and schedule offline for counter check-in.';
+
+  @override
+  String get appointmentRefLabel => 'Reference number';
+
+  @override
+  String get appointmentRefHint => 'e.g. NPCS-2026-00123';
+
+  @override
+  String get appointmentScheduleLabel => 'Schedule & branch note (optional)';
+
+  @override
+  String get appointmentScheduleHint => 'e.g. Dec 5, 9:00 AM · Lipa Station';
+
+  @override
+  String get appointmentSave => 'Save details';
+
+  @override
+  String get appointmentEdit => 'Edit';
+
+  @override
+  String get appointmentClear => 'Clear';
+
+  @override
+  String get appointmentSaved => 'Saved offline on this device';
+
+  @override
+  String get appointmentRefRequired =>
+      'Enter your reference number before saving.';
+
+  @override
+  String get appointmentRefInvalid =>
+      'Use only letters, numbers, spaces, hyphens, underscores, or slashes.';
+
+  @override
+  String get appointmentScheduleInvalid =>
+      'Remove unsupported symbols from your schedule note.';
+
+  @override
+  String get appointmentCopied => 'Reference number copied.';
+
+  @override
+  String get readinessGateTitle => 'Not all items are checked yet';
+
+  @override
+  String readinessGateBody(int count) {
+    return 'You still have $count unchecked item(s) on your checklist. Review what to bring first, or continue to the official website?';
+  }
+
+  @override
+  String get reviewChecklist => 'Review checklist';
+
+  @override
+  String get continueAnyway => 'Continue to website';
 }

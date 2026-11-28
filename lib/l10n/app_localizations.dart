@@ -413,7 +413,7 @@ abstract class AppLocalizations {
   /// No description provided for @searchHint.
   ///
   /// In en, this message translates to:
-  /// **'Search a service or agency'**
+  /// **'Search service, agency, or use (e.g. job, OJT, birth)'**
   String get searchHint;
 
   /// No description provided for @notSure.
@@ -499,6 +499,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prepared'**
   String get readyGroup;
+
+  /// No description provided for @serviceGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Guide'**
+  String get serviceGuide;
+
+  /// No description provided for @whatItIs.
+  ///
+  /// In en, this message translates to:
+  /// **'What it is'**
+  String get whatItIs;
+
+  /// No description provided for @usedFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Commonly used for'**
+  String get usedFor;
+
+  /// No description provided for @validityAndRelease.
+  ///
+  /// In en, this message translates to:
+  /// **'Validity & release'**
+  String get validityAndRelease;
+
+  /// No description provided for @counterTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Counter survival tips'**
+  String get counterTips;
+
+  /// No description provided for @questionsToAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions to ask the office'**
+  String get questionsToAsk;
+
+  /// No description provided for @tipLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip'**
+  String get tipLabel;
+
+  /// No description provided for @appointmentCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Appointment Pocket Card'**
+  String get appointmentCardTitle;
+
+  /// No description provided for @appointmentCardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your reference number and schedule offline for counter check-in.'**
+  String get appointmentCardSubtitle;
+
+  /// No description provided for @appointmentRefLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference number'**
+  String get appointmentRefLabel;
+
+  /// No description provided for @appointmentRefHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. NPCS-2026-00123'**
+  String get appointmentRefHint;
+
+  /// No description provided for @appointmentScheduleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule & branch note (optional)'**
+  String get appointmentScheduleLabel;
+
+  /// No description provided for @appointmentScheduleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Dec 5, 9:00 AM · Lipa Station'**
+  String get appointmentScheduleHint;
+
+  /// No description provided for @appointmentSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save details'**
+  String get appointmentSave;
+
+  /// No description provided for @appointmentEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get appointmentEdit;
+
+  /// No description provided for @appointmentClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get appointmentClear;
+
+  /// No description provided for @appointmentSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved offline on this device'**
+  String get appointmentSaved;
+
+  /// No description provided for @appointmentRefRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your reference number before saving.'**
+  String get appointmentRefRequired;
+
+  /// No description provided for @appointmentRefInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Use only letters, numbers, spaces, hyphens, underscores, or slashes.'**
+  String get appointmentRefInvalid;
+
+  /// No description provided for @appointmentScheduleInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove unsupported symbols from your schedule note.'**
+  String get appointmentScheduleInvalid;
+
+  /// No description provided for @appointmentCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference number copied.'**
+  String get appointmentCopied;
+
+  /// No description provided for @readinessGateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not all items are checked yet'**
+  String get readinessGateTitle;
+
+  /// Confirmation message shown when opening an official website while checklist items remain unchecked.
+  ///
+  /// In en, this message translates to:
+  /// **'You still have {count} unchecked item(s) on your checklist. Review what to bring first, or continue to the official website?'**
+  String readinessGateBody(int count);
+
+  /// No description provided for @reviewChecklist.
+  ///
+  /// In en, this message translates to:
+  /// **'Review checklist'**
+  String get reviewChecklist;
+
+  /// No description provided for @continueAnyway.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to website'**
+  String get continueAnyway;
 }
 
 class _AppLocalizationsDelegate

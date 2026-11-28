@@ -2,6 +2,33 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
+class AppointmentNote {
+  static final RegExp validReferencePattern = RegExp(r'^[A-Za-z0-9\-/_ ]+$');
+  static final RegExp validSchedulePattern = RegExp(
+    r"^[A-Za-z0-9\s,.:;/\-()@#&'·+]+$",
+  );
+
+  final String referenceNo;
+  final String scheduleNote;
+  const AppointmentNote({
+    required this.referenceNo,
+    required this.scheduleNote,
+  });
+
+  static bool isValidReference(String value) {
+    final trimmed = value.trim();
+    return trimmed.isNotEmpty &&
+        trimmed.length <= 60 &&
+        validReferencePattern.hasMatch(trimmed);
+  }
+
+  static bool isValidSchedule(String value) {
+    final trimmed = value.trim();
+    return trimmed.isEmpty ||
+        (trimmed.length <= 140 && validSchedulePattern.hasMatch(trimmed));
+  }
+}
+
 class LocalStore {
   final Database database;
   LocalStore(this.database);
@@ -13,7 +40,7 @@ class LocalStore {
     final db = await f.openDatabase(
       location ?? p.join(await f.getDatabasesPath(), 'tudok.db'),
       options: OpenDatabaseOptions(
-        version: 1,
+        version: 2,
         onCreate: (db, version) async {
           await db.execute(
             'CREATE TABLE checklist (service TEXT NOT NULL, requirement TEXT NOT NULL, PRIMARY KEY(service, requirement))',
@@ -21,6 +48,16 @@ class LocalStore {
           await db.execute(
             'CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)',
           );
+          await db.execute(
+            'CREATE TABLE appointments (service TEXT PRIMARY KEY, reference_no TEXT NOT NULL, schedule_note TEXT NOT NULL)',
+          );
+        },
+        onUpgrade: (db, oldVersion, newVersion) async {
+          if (oldVersion < 2) {
+            await db.execute(
+              'CREATE TABLE IF NOT EXISTS appointments (service TEXT PRIMARY KEY, reference_no TEXT NOT NULL, schedule_note TEXT NOT NULL)',
+            );
+          }
         },
       ),
     );
@@ -85,15 +122,54 @@ class SettingsRepository {
   }
 }
 
+class AppointmentRepository {
+  final LocalStore store;
+  AppointmentRepository(this.store);
+  Future<Map<String, AppointmentNote>> read() async {
+    final result = <String, AppointmentNote>{};
+    for (final row in await store.database.query('appointments')) {
+      result[row['service'] as String] = AppointmentNote(
+        referenceNo: row['reference_no'] as String,
+        scheduleNote: row['schedule_note'] as String,
+      );
+    }
+    return result;
+  }
+
+  Future<void> save(String service, AppointmentNote note) async {
+    await store.database.insert('appointments', {
+      'service': service,
+      'reference_no': note.referenceNo,
+      'schedule_note': note.scheduleNote,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<void> clear(String service) async {
+    await store.database.delete(
+      'appointments',
+      where: 'service = ?',
+      whereArgs: [service],
+    );
+  }
+}
+
 class AppController extends ChangeNotifier {
   final ChecklistRepository checklists;
   final SettingsRepository settings;
+  final AppointmentRepository appointments;
   Map<String, Set<String>> prepared = {};
+  Map<String, AppointmentNote> savedAppointments = {};
   String language = 'en';
   bool firstLaunch = true, busy = false;
-  AppController(this.checklists, this.settings);
+  AppController(
+    this.checklists,
+    this.settings, [
+    AppointmentRepository? appointments,
+  ]) : appointments = appointments ?? AppointmentRepository(checklists.store);
+
   Future<void> initialize() async {
     prepared = await checklists.read();
+    savedAppointments = await appointments.read();
     final stored = await settings.language();
     firstLaunch = stored == null;
     language = stored == 'fil' ? 'fil' : 'en';
@@ -101,11 +177,15 @@ class AppController extends ChangeNotifier {
 
   bool checked(String service, String requirement) =>
       prepared[service]?.contains(requirement) ?? false;
+
+  AppointmentNote? appointment(String service) => savedAppointments[service];
+
   Future<bool> changeLanguage(String value) async => _save(() async {
     await settings.setLanguage(value);
     language = value;
     firstLaunch = false;
   });
+
   Future<bool> toggle(String service, String requirement, bool value) async =>
       _save(() async {
         await checklists.set(service, requirement, value);
@@ -116,10 +196,38 @@ class AppController extends ChangeNotifier {
           items.remove(requirement);
         }
       });
+
   Future<bool> reset(String service) async => _save(() async {
     await checklists.reset(service);
     prepared.remove(service);
   });
+
+  Future<bool> saveAppointment(
+    String service,
+    String referenceNo,
+    String scheduleNote,
+  ) async {
+    final cleanedRef = referenceNo.trim();
+    final cleanedSchedule = scheduleNote.trim();
+    if (!AppointmentNote.isValidReference(cleanedRef) ||
+        !AppointmentNote.isValidSchedule(cleanedSchedule)) {
+      return false;
+    }
+    final note = AppointmentNote(
+      referenceNo: cleanedRef,
+      scheduleNote: cleanedSchedule,
+    );
+    return _save(() async {
+      await appointments.save(service, note);
+      savedAppointments[service] = note;
+    });
+  }
+
+  Future<bool> clearAppointment(String service) async => _save(() async {
+    await appointments.clear(service);
+    savedAppointments.remove(service);
+  });
+
   Future<bool> _save(Future<void> Function() operation) async {
     if (busy) {
       return false;

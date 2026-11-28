@@ -14,6 +14,42 @@
         "en": "For your own existing birth record registered in Taal. A local copy is different from a PSA-issued certificate.",
         "fil": "Para sa sarili mong umiiral na tala ng kapanganakan na nakarehistro sa Taal. Iba ang lokal na kopya sa sertipiko mula sa PSA."
       },
+      "whatItIs": {
+        "en": "A certified copy of your birth entry directly from the municipal civil registry book (often called LCR Form 1A). Unlike a PSA Birth Certificate printed on national security paper (SECPA), this local copy comes straight from the municipality where your birth was registered.",
+        "fil": "Isang sertipikadong kopya ng tala ng iyong kapanganakan mula mismo sa aklat ng munisipyo (madalas tawaging LCR Form 1A). Iba ito sa PSA Birth Certificate na naka-print sa security paper (SECPA), dahil direkta itong ibinibigay ng munisipyong pinagrehistruhan ng iyong kapanganakan."
+      },
+      "usedFor": [
+        {
+          "en": "School enrollment",
+          "fil": "Pag-enroll sa paaralan"
+        },
+        {
+          "en": "Late birth registration",
+          "fil": "Late registration ng kapanganakan"
+        },
+        {
+          "en": "Supporting copy when PSA print is blurred",
+          "fil": "Pantulong na kopya kung malabo ang kopya mula sa PSA"
+        }
+      ],
+      "validityNote": {
+        "en": "Local civil-registry copies are issued only by the municipality where the birth was recorded. Confirm with the requesting office whether LCR Form 1A is accepted or if a PSA SECPA certificate is required.",
+        "fil": "Sa munisipyong pinagrehistruhan lamang makukuha ang lokal na kopya. Kumpirmahin muna sa humihinging opisina kung tinatanggap ang LCR Form 1A o kung PSA SECPA certificate ang kailangan."
+      },
+      "tips": [
+        {
+          "en": "Ask the Taal registrar what valid IDs are required today, and whether an authorization letter is needed if a relative claims it.",
+          "fil": "Itanong sa Taal civil registrar kung anong balidong ID ang kailangan ngayon, at kung kailangan ng authorization letter kapag kamag-anak ang kukuha."
+        },
+        {
+          "en": "Ask for the exact current issuance fee, office window hours, and whether Form 1A is released same-day or next-day.",
+          "fil": "Itanong ang kasalukuyang bayarin, oras ng tanggapan, at kung makukuha ba agad ang Form 1A sa parehong araw o kinabukasan."
+        },
+        {
+          "en": "Ask whether your record is already endorsed to PSA in case your school or employer also asks for a PSA SECPA copy later.",
+          "fil": "Itanong kung na-endorso na sa PSA ang iyong tala sakaling hingin ng paaralan o employer ang PSA SECPA copy."
+        }
+      ],
       "location": {
         "en": "Taal, Batangas. Confirm the current office address and service counter with the municipal civil registrar before travelling.",
         "fil": "Taal, Batangas. Kumpirmahin muna sa municipal civil registrar ang kasalukuyang address at tanggapan bago bumiyahe."
@@ -41,6 +77,42 @@
         "en": "Standard first-time, in-person application for an adult requesting their own clearance.",
         "fil": "Karaniwang unang aplikasyon na may personal na pagpunta para sa nasa hustong gulang na kumukuha ng sariling clearance."
       },
+      "whatItIs": {
+        "en": "An official certificate from the Philippine National Police confirming you have no pending warrant or derogatory police record nationwide. It requires only 1 valid government-issued ID and is widely used for local private jobs and general ID requirements.",
+        "fil": "Opisyal na sertipiko mula sa Philippine National Police na nagpapatunay na wala kang nakabinbing warrant o negatibong talaan ng pulisya sa buong bansa. Isang balidong government-issued ID lamang ang kailangan at madalas gamitin sa lokal na pribadong trabaho at pagkuha ng ID."
+      },
+      "usedFor": [
+        {
+          "en": "Local private employment",
+          "fil": "Lokal na pribadong trabaho"
+        },
+        {
+          "en": "OJT & internships",
+          "fil": "OJT at internship"
+        },
+        {
+          "en": "General ID applications",
+          "fil": "Pagkuha ng balidong ID"
+        }
+      ],
+      "validityNote": {
+        "en": "Typically valid for 6 months from issuance. If no matching name appears, release is usually same-day; if a namesake \"HIT\" occurs, verification takes extra working days (this is a routine check and does not mean you have a record).",
+        "fil": "Karaniwang may bisa nang 6 na buwan mula sa petsa ng pag-isyu. Kadalasang nakukuha sa parehong araw kung walang kapangalan; kung may \"HIT\" o kapangalan sa talaan, nangangailangan ito ng karagdagang araw ng beripikasyon (normal itong pagsusuri at hindi agad nangangahulugang may kaso ka)."
+      },
+      "tips": [
+        {
+          "en": "Wear neat, decent attire (a collared shirt or presentable top; avoid sando or slippers) because your photo is captured at the station.",
+          "fil": "Magsuot ng maayos na damit (may kwelyo o disenteng pang-itaas; iwasan ang sando o tsinelas) dahil kukunan ka ng opisyal na larawan sa istasyon."
+        },
+        {
+          "en": "Save offline screenshots of your reference number and payment confirmation before leaving home—mobile signal inside stations can be weak.",
+          "fil": "Mag-save ng offline screenshot ng iyong reference number at kumpirmasyon ng bayad bago umalis ng bahay—madalas mahina ang signal sa loob ng istasyon."
+        },
+        {
+          "en": "Arrive 15–30 minutes ahead of your booked schedule and bring an original, undamaged physical ID.",
+          "fil": "Dumating nang 15–30 minuto bago ang iyong iskedyul at dalhin ang orihinal at maayos na pisikal na ID."
+        }
+      ],
       "location": {
         "en": "Choose a participating police station and available schedule in the official portal.",
         "fil": "Pumili ng kalahok na police station at iskedyul sa opisyal na portal."
@@ -62,6 +134,10 @@
           "place": {
             "en": "Official portal",
             "fil": "Opisyal na portal"
+          },
+          "tip": {
+            "en": "Match your full name, middle name, suffix, and birthdate to your PSA Birth Certificate letter-for-letter to avoid verification delays.",
+            "fil": "Itugma nang eksakto sa iyong PSA Birth Certificate ang buong pangalan, gitnang pangalan, suffix, at kaarawan upang maiwasan ang aberya."
           }
         },
         {
@@ -76,6 +152,10 @@
           "place": {
             "en": "Official portal",
             "fil": "Opisyal na portal"
+          },
+          "tip": {
+            "en": "Pick a station you can reach easily on time and save your reference number in your Appointment Pocket Card below.",
+            "fil": "Pumili ng istasyong madaling puntahan sa oras at i-save ang reference number sa iyong Appointment Pocket Card sa ibaba."
           }
         },
         {
@@ -90,6 +170,10 @@
           "place": {
             "en": "Official portal",
             "fil": "Opisyal na portal"
+          },
+          "tip": {
+            "en": "Pay promptly before your reference number expires and take an offline screenshot of your receipt right away.",
+            "fil": "Magbayad agad bago mag-expire ang reference number at mag-save ng offline screenshot ng resibo."
           }
         },
         {
@@ -104,6 +188,10 @@
           "place": {
             "en": "Your selected police station",
             "fil": "Napiling police station"
+          },
+          "tip": {
+            "en": "Dress neatly for your photo capture and double-check the spelling on your printed clearance before leaving the counter.",
+            "fil": "Magsuot ng maayos na damit para sa larawan at suriin ang baybay ng iyong pangalan sa naka-print na clearance bago umalis."
           }
         }
       ],
@@ -113,6 +201,10 @@
           "text": {
             "en": "One valid government-issued ID accepted by PNP",
             "fil": "Isang balidong government-issued ID na tinatanggap ng PNP"
+          },
+          "note": {
+            "en": "Examples: PhilID / ePhilID, Passport, Driver's License, UMID, Postal ID, Voter's ID, or valid Student ID with current registration form. Bring the original, unexpired physical ID (not a company ID or photocopy only).",
+            "fil": "Mga halimbawa: PhilID / ePhilID, Pasaporte, Driver's License, UMID, Postal ID, Voter's ID, o balidong Student ID na may kasalukuyang registration form. Dalhin ang orihinal at hindi pa expired na pisikal na ID (hindi company ID o photocopy lamang)."
           }
         },
         {
@@ -120,6 +212,10 @@
           "text": {
             "en": "Proof of payment / payment confirmation",
             "fil": "Katibayan o kumpirmasyon ng bayad"
+          },
+          "note": {
+            "en": "Save an offline screenshot or printed receipt of your e-wallet, bank, or payment center confirmation.",
+            "fil": "Mag-save ng offline screenshot o naka-print na resibo ng iyong bayad sa e-wallet, bangko, o payment center."
           }
         },
         {
@@ -127,6 +223,10 @@
           "text": {
             "en": "NPC appointment reference number",
             "fil": "Reference number ng NPC appointment"
+          },
+          "note": {
+            "en": "Shown in your NPCS dashboard after booking. Keep a screenshot or save it in your Appointment Pocket Card below.",
+            "fil": "Makikita sa iyong NPCS dashboard matapos magpa-schedule. Mag-screenshot o i-save ito sa iyong Appointment Pocket Card sa ibaba."
           }
         }
       ],
@@ -147,6 +247,42 @@
         "en": "Standard first-time, in-person application for an adult requesting their own clearance.",
         "fil": "Karaniwang unang aplikasyon na may personal na pagpunta para sa nasa hustong gulang na kumukuha ng sariling clearance."
       },
+      "whatItIs": {
+        "en": "A national background clearance from the National Bureau of Investigation checking nationwide criminal and court records. It requires 2 original valid government-issued IDs and is strictly required for government jobs, visas/abroad, and many corporate employers.",
+        "fil": "Pambansang clearance mula sa National Bureau of Investigation na nagsusuri ng talaang kriminal at korte sa buong bansa. Nangangailangan ito ng 2 orihinal na balidong ID at mahigpit na hinihingi sa trabaho sa gobyerno, visa o pag-aabroad, at maraming kumpanya."
+      },
+      "usedFor": [
+        {
+          "en": "Government employment",
+          "fil": "Trabaho sa gobyerno"
+        },
+        {
+          "en": "Visas & travel abroad",
+          "fil": "Visa at pag-aabroad"
+        },
+        {
+          "en": "Corporate jobs & board exams",
+          "fil": "Pribadong kumpanya at board exam"
+        }
+      ],
+      "validityNote": {
+        "en": "Typically valid for 1 year from issuance. If your name triggers a \"HIT\" (someone with a similar name exists in records), the branch will schedule a return release date after manual verification—this is common and does not automatically mean you have a case.",
+        "fil": "Karaniwang may bisa nang 1 taon mula sa pag-isyu. Kapag nagka-\"HIT\" (may kapangalan ka sa talaan), bibigyan ka ng petsa ng pagbalik habang sinusuri nang mano-mano ang tala—karaniwan ito at hindi agad nangangahulugang may kaso ka."
+      },
+      "tips": [
+        {
+          "en": "Wear neat attire (collared shirt or decent top; avoid sleeveless tops, shorts, or slippers) for biometrics and photo capture.",
+          "fil": "Magsuot ng maayos na damit (may kwelyo o disenteng pang-itaas; iwasan ang sleeveless, shorts, o tsinelas) para sa biometrics at pagkuha ng larawan."
+        },
+        {
+          "en": "Screenshot your NBI reference number, QR code, and payment receipt before visiting so you can show them offline.",
+          "fil": "Mag-screenshot ng iyong NBI reference number, QR code, at resibo ng bayad bago pumunta upang maipakita ito kahit walang internet."
+        },
+        {
+          "en": "Verify every letter of your name and birthdate on the biometric review screen before the officer prints your clearance.",
+          "fil": "Suriin ang bawat titik ng iyong pangalan at kaarawan sa screen ng biometrics bago i-print ang iyong clearance."
+        }
+      ],
       "location": {
         "en": "Choose a branch and schedule in the official NBI application portal.",
         "fil": "Pumili ng sangay at iskedyul sa opisyal na NBI application portal."
@@ -168,6 +304,10 @@
           "place": {
             "en": "Official portal",
             "fil": "Opisyal na portal"
+          },
+          "tip": {
+            "en": "Enter your name exactly as printed on your PSA Birth Certificate and valid IDs (including middle name and Jr./III suffixes).",
+            "fil": "Ilagay ang iyong pangalan nang eksakto sa iyong PSA Birth Certificate at mga ID (kasama ang gitnang pangalan at Jr./III)."
           }
         },
         {
@@ -182,6 +322,10 @@
           "place": {
             "en": "Official portal",
             "fil": "Opisyal na portal"
+          },
+          "tip": {
+            "en": "Note whether your slot is AM or PM and save your reference number in your Appointment Pocket Card below.",
+            "fil": "Tandaan kung AM o PM ang iyong iskedyul at i-save ang reference number sa iyong Appointment Pocket Card sa ibaba."
           }
         },
         {
@@ -196,6 +340,10 @@
           "place": {
             "en": "Official portal",
             "fil": "Opisyal na portal"
+          },
+          "tip": {
+            "en": "Complete payment before the reference expires and confirm that your portal transaction changes to Paid before travelling.",
+            "fil": "Bayaran bago mag-expire ang reference at tiyaking nakalagay na Paid sa portal bago pumunta sa sangay."
           }
         },
         {
@@ -210,6 +358,10 @@
           "place": {
             "en": "Your selected NBI branch",
             "fil": "Napiling sangay ng NBI"
+          },
+          "tip": {
+            "en": "Bring both original physical IDs—digital photos of IDs are not accepted at the verification counter.",
+            "fil": "Dalhin ang parehong orihinal na pisikal na ID—hindi tinatanggap ang larawan lamang ng ID sa cellphone."
           }
         }
       ],
@@ -219,6 +371,10 @@
           "text": {
             "en": "Two original, valid government-issued IDs accepted by NBI",
             "fil": "Dalawang orihinal at balidong government-issued ID na tinatanggap ng NBI"
+          },
+          "note": {
+            "en": "Examples: PhilID / ePhilID, Passport, Driver's License, UMID, Postal ID, Voter's ID, or valid Student ID with current registration form. Both must be original, physical, and unexpired (no company IDs or photocopies only).",
+            "fil": "Mga halimbawa: PhilID / ePhilID, Pasaporte, Driver's License, UMID, Postal ID, Voter's ID, o balidong Student ID na may kasalukuyang registration form. Parehong dapat orihinal, pisikal, at hindi pa expired (bawal ang company ID o photocopy lamang)."
           }
         },
         {
@@ -226,6 +382,10 @@
           "text": {
             "en": "Application reference number or QR code",
             "fil": "Reference number o QR code ng aplikasyon"
+          },
+          "note": {
+            "en": "Screenshot your NBI reference number or QR code from the portal, or save it offline in your Appointment Pocket Card below.",
+            "fil": "Mag-screenshot ng iyong NBI reference number o QR code mula sa portal, o i-save ito nang offline sa Appointment Pocket Card sa ibaba."
           }
         },
         {
@@ -233,6 +393,10 @@
           "text": {
             "en": "Proof of payment / receipt",
             "fil": "Katibayan ng bayad o resibo"
+          },
+          "note": {
+            "en": "Keep an offline screenshot or printed receipt showing your paid NBI transaction.",
+            "fil": "Magtabi ng offline screenshot o naka-print na resibo na nagpapakitang bayad na ang iyong aplikasyon sa NBI."
           }
         }
       ],
@@ -319,6 +483,10 @@
             "en": "Local civil-registry copy",
             "fil": "Kopya mula sa lokal na civil registry"
           },
+          "hint": {
+            "en": "Issued by the city or municipality where you were born (Form 1A). Often requested for school enrollment, late registration, or when a PSA copy is blurred.",
+            "fil": "Ibinibigay ng lungsod o munisipyong pinanganakan mo (Form 1A). Madalas hingin sa pag-enroll, late registration, o kapag malabo ang kopya mula sa PSA."
+          },
           "next": "birth-location"
         },
         {
@@ -326,6 +494,10 @@
           "text": {
             "en": "PSA-issued certificate",
             "fil": "Sertipiko mula sa PSA"
+          },
+          "hint": {
+            "en": "Printed on official security paper by the Philippine Statistics Authority (PSA). Standard requirement for passports, jobs, and board exams.",
+            "fil": "Naka-print sa opisyal na security paper ng Philippine Statistics Authority (PSA). Karaniwang hinihingi para sa pasaporte, trabaho, at board exam."
           },
           "next": "psa-referral"
         },
@@ -418,6 +590,10 @@
             "en": "National Police Clearance (PNP)",
             "fil": "National Police Clearance (PNP)"
           },
+          "hint": {
+            "en": "Checks nationwide police records, requires 1 valid ID, and is commonly accepted for local private-sector jobs and general IDs.",
+            "fil": "Sinusuri ang talaan ng pulisya sa buong bansa, nangangailangan ng 1 balidong ID, at karaniwang tinatanggap sa lokal na pribadong trabaho at pagkuha ng ID."
+          },
           "next": "pnp-scope"
         },
         {
@@ -425,6 +601,10 @@
           "text": {
             "en": "NBI Clearance",
             "fil": "NBI Clearance"
+          },
+          "hint": {
+            "en": "Checks nationwide criminal and court records, requires 2 original valid IDs, and is strictly required for government jobs, visas/abroad, and many corporate employers.",
+            "fil": "Sinusuri ang talaang kriminal at korte sa buong bansa, nangangailangan ng 2 orihinal na balidong ID, at mahigpit na hinihingi sa trabaho sa gobyerno, visa o pag-aabroad, at maraming kumpanya."
           },
           "next": "nbi-scope"
         },
@@ -533,10 +713,10 @@
     {
       "id": "clearance-referral",
       "reason": {
-        "en": "PNP and NBI clearances are different services. Ask the requesting institution which one it accepts; employment alone does not determine the answer.",
-        "fil": "Magkaibang serbisyo ang PNP at NBI clearance. Itanong kung alin ang tinatanggap; hindi sapat ang layuning trabaho upang pumili."
+        "en": "PNP and NBI clearances are different services:\n• PNP Clearance: checks nationwide police records, needs 1 valid ID, common for local private jobs and OJT.\n• NBI Clearance: checks nationwide criminal and court records, needs 2 original valid IDs, required for government jobs, visas/abroad, and many corporations.\nAsk the requesting institution which one it accepts before applying.",
+        "fil": "Magkaibang serbisyo ang PNP at NBI clearance:\n• PNP Clearance: sinusuri ang talaan ng pulisya sa buong bansa, kailangan ng 1 balidong ID, karaniwan sa lokal na pribadong trabaho at OJT.\n• NBI Clearance: sinusuri ang talaang kriminal at korte sa buong bansa, kailangan ng 2 orihinal na balidong ID, kailangan sa trabaho sa gobyerno, visa o pag-aabroad, at maraming kumpanya.\nItanong muna sa humihinging institusyon kung alin ang tinatanggap bago mag-apply."
       },
-      "url": "https://pnpclearance.ph/"
+      "url": "https://arta.gov.ph/"
     },
     {
       "id": "pnp-referral",

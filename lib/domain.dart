@@ -31,21 +31,28 @@ class Source {
 class Requirement {
   final String id;
   final LocalText text;
-  Requirement(Json j) : id = j['id'], text = LocalText.parse(j['text']);
+  final LocalText? note;
+  Requirement(Json j)
+    : id = j['id'],
+      text = LocalText.parse(j['text']),
+      note = j['note'] == null ? null : LocalText.parse(j['note']);
 }
 
 class ProcessStep {
   final LocalText title, detail, place;
+  final LocalText? tip;
   ProcessStep(Json j)
     : title = LocalText.parse(j['title']),
       detail = LocalText.parse(j['detail']),
-      place = LocalText.parse(j['place']);
+      place = LocalText.parse(j['place']),
+      tip = j['tip'] == null ? null : LocalText.parse(j['tip']);
 }
 
 class Service {
   final String id, agency, url;
   final bool verified;
-  final LocalText title, summary, location, notice;
+  final LocalText title, summary, location, notice, whatItIs, validityNote;
+  final List<LocalText> usedFor, tips;
   final List<ProcessStep> steps;
   final List<Requirement> requirements;
   final List<String> sources;
@@ -58,6 +65,16 @@ class Service {
       summary = LocalText.parse(j['summary']),
       location = LocalText.parse(j['location']),
       notice = LocalText.parse(j['notice']),
+      whatItIs = j['whatItIs'] == null
+          ? LocalText.parse(j['summary'])
+          : LocalText.parse(j['whatItIs']),
+      usedFor = ((j['usedFor'] as List?) ?? const [])
+          .map(LocalText.parse)
+          .toList(),
+      validityNote = j['validityNote'] == null
+          ? LocalText.parse(j['notice'])
+          : LocalText.parse(j['validityNote']),
+      tips = ((j['tips'] as List?) ?? const []).map(LocalText.parse).toList(),
       steps = (j['steps'] as List).map((e) => ProcessStep(e)).toList(),
       requirements = (j['requirements'] as List)
           .map((e) => Requirement(e))
@@ -68,10 +85,12 @@ class Service {
 class Choice {
   final String id, next;
   final LocalText text;
+  final LocalText? hint;
   Choice(Json j)
     : id = j['id'],
       next = j['next'],
-      text = LocalText.parse(j['text']);
+      text = LocalText.parse(j['text']),
+      hint = j['hint'] == null ? null : LocalText.parse(j['hint']);
 }
 
 class Question {
