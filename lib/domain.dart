@@ -35,62 +35,109 @@ class Requirement {
 }
 
 class ProcessStep {
+  final String id;
   final LocalText title, detail, place;
   ProcessStep(Json j)
-    : title = LocalText.parse(j['title']),
+    : id = j['id'],
+      title = LocalText.parse(j['title']),
       detail = LocalText.parse(j['detail']),
       place = LocalText.parse(j['place']);
 }
 
 class Service {
-  final String id, agency, url;
+  static const categories = {'clearance', 'civil', 'id', 'benefits'};
+
+  final String id, agency, url, category, icon;
   final bool verified;
-  final LocalText title, summary, location, notice;
+  final List<String> keywords;
+  final LocalText title,
+      summary,
+      location,
+      notice,
+      fee,
+      processingTime,
+      validity;
   final List<ProcessStep> steps;
   final List<Requirement> requirements;
+  final List<LocalText> acceptedIds, tips;
   final List<String> sources;
+
   Service(Json j)
     : id = j['id'],
       agency = j['agency'],
       url = j['url'],
+      category = j['category'],
+      icon = j['icon'],
       verified = j['verified'],
+      keywords = List<String>.from(j['keywords'] ?? const <String>[]),
       title = LocalText.parse(j['title']),
       summary = LocalText.parse(j['summary']),
       location = LocalText.parse(j['location']),
       notice = LocalText.parse(j['notice']),
+      fee = LocalText.parse(j['fee']),
+      processingTime = LocalText.parse(j['processingTime']),
+      validity = LocalText.parse(j['validity']),
       steps = (j['steps'] as List).map((e) => ProcessStep(e)).toList(),
       requirements = (j['requirements'] as List)
           .map((e) => Requirement(e))
           .toList(),
+      acceptedIds = (j['acceptedIds'] as List).map(LocalText.parse).toList(),
+      tips = (j['tips'] as List).map(LocalText.parse).toList(),
       sources = List<String>.from(j['sources']);
 }
 
 class Choice {
   final String id, next;
   final LocalText text;
+  final LocalText? detail;
   Choice(Json j)
     : id = j['id'],
       next = j['next'],
-      text = LocalText.parse(j['text']);
+      text = LocalText.parse(j['text']),
+      detail = j['detail'] == null ? null : LocalText.parse(j['detail']);
 }
 
 class Question {
   final String id;
   final LocalText text;
+  final LocalText? hint;
   final List<Choice> choices;
   Question(Json j)
     : id = j['id'],
       text = LocalText.parse(j['text']),
+      hint = j['hint'] == null ? null : LocalText.parse(j['hint']),
       choices = (j['choices'] as List).map((e) => Choice(e)).toList();
 }
 
 class Referral {
   final String id, url;
   final LocalText reason;
+  final LocalText? compare;
+  final List<String> suggestedServices;
   Referral(Json j)
     : id = j['id'],
       url = j['url'],
-      reason = LocalText.parse(j['reason']);
+      reason = LocalText.parse(j['reason']),
+      compare = j['compare'] == null ? null : LocalText.parse(j['compare']),
+      suggestedServices = List<String>.from(
+        j['suggestedServices'] ?? const <String>[],
+      );
+}
+
+class Office {
+  final String id, serviceId, name, city, address;
+  final double lat, lng;
+  final LocalText hours, note;
+  Office(Json j)
+    : id = j['id'],
+      serviceId = j['serviceId'],
+      name = j['name'],
+      city = j['city'],
+      address = j['address'],
+      lat = (j['lat'] as num).toDouble(),
+      lng = (j['lng'] as num).toDouble(),
+      hours = LocalText.parse(j['hours']),
+      note = LocalText.parse(j['note']);
 }
 
 class Catalog {
@@ -98,15 +145,27 @@ class Catalog {
   final List<Source> sources;
   final List<Question> questions;
   final List<Referral> referrals;
+  final List<Office> offices;
   Catalog(Json j)
     : services = (j['services'] as List).map((e) => Service(e)).toList(),
       sources = (j['sources'] as List).map((e) => Source(e)).toList(),
       questions = (j['questions'] as List).map((e) => Question(e)).toList(),
-      referrals = (j['referrals'] as List).map((e) => Referral(e)).toList() {
+      referrals = (j['referrals'] as List).map((e) => Referral(e)).toList(),
+      offices = (j['offices'] as List).map((e) => Office(e)).toList() {
     validate();
   }
   Service service(String id) => services.firstWhere((s) => s.id == id);
   Question question(String id) => questions.firstWhere((q) => q.id == id);
+  List<Office> officesFor(String serviceId) =>
+      offices.where((o) => o.serviceId == serviceId).toList();
+  List<String> get officeCities {
+    final seen = <String>{};
+    return [
+      for (final o in offices)
+        if (seen.add(o.city)) o.city,
+    ];
+  }
+
   void validate() {
     void unique(Iterable<String> ids) {
       final values = ids.toList();
@@ -133,6 +192,10 @@ class Catalog {
       }
     }
     for (final s in services) {
+      if (!Service.categories.contains(s.category)) {
+        throw const FormatException('Invalid service category');
+      }
+      unique(s.steps.map((st) => st.id));
       unique(s.requirements.map((r) => r.id));
       if (!validUrl(s.url) ||
           s.sources.isEmpty ||
@@ -150,6 +213,26 @@ class Catalog {
       if (!validUrl(r.url)) {
         throw const FormatException('Invalid referral');
       }
+      if (r.suggestedServices.any((id) => !services.any((s) => s.id == id))) {
+        throw const FormatException('Invalid referral service');
+      }
+    }
+    unique(offices.map((o) => o.id));
+    for (final o in offices) {
+      if (!services.any((s) => s.id == o.serviceId)) {
+        throw const FormatException('Invalid office service');
+      }
+      if (o.name.trim().isEmpty ||
+          o.city.trim().isEmpty ||
+          o.address.trim().isEmpty) {
+        throw const FormatException('Empty office metadata');
+      }
+      if (o.lat < -90 || o.lat > 90 || o.lng < -180 || o.lng > 180) {
+        throw const FormatException('Invalid office coordinates');
+      }
+    }
+    if (services.any((s) => officesFor(s.id).isEmpty)) {
+      throw const FormatException('Missing service office');
     }
     final visited = <String>{};
     void visit(String id, Set<String> path) {

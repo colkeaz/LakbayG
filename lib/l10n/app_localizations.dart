@@ -122,12 +122,6 @@ abstract class AppLocalizations {
   /// **'Know where to go. Arrive prepared.'**
   String get tagline;
 
-  /// No description provided for @intro.
-  ///
-  /// In en, this message translates to:
-  /// **'A little guidance for your next government document.'**
-  String get intro;
-
   /// No description provided for @findService.
   ///
   /// In en, this message translates to:
@@ -157,24 +151,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Official confirmation needed'**
   String get pending;
-
-  /// No description provided for @roadmap.
-  ///
-  /// In en, this message translates to:
-  /// **'Process roadmap'**
-  String get roadmap;
-
-  /// No description provided for @requirements.
-  ///
-  /// In en, this message translates to:
-  /// **'What to prepare'**
-  String get requirements;
-
-  /// No description provided for @prepare.
-  ///
-  /// In en, this message translates to:
-  /// **'Prepare my checklist'**
-  String get prepare;
 
   /// No description provided for @sources.
   ///
@@ -212,12 +188,6 @@ abstract class AppLocalizations {
   /// **'Continue'**
   String get next;
 
-  /// No description provided for @back.
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get back;
-
   /// No description provided for @restart.
   ///
   /// In en, this message translates to:
@@ -248,12 +218,6 @@ abstract class AppLocalizations {
   /// **'Let’s confirm with the right source'**
   String get referral;
 
-  /// No description provided for @viewRoadmap.
-  ///
-  /// In en, this message translates to:
-  /// **'View roadmap'**
-  String get viewRoadmap;
-
   /// No description provided for @missingOnly.
   ///
   /// In en, this message translates to:
@@ -269,7 +233,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetConfirm.
   ///
   /// In en, this message translates to:
-  /// **'Clear all prepared items for this service?'**
+  /// **'Clear all checked items and step progress for this service?'**
   String get resetConfirm;
 
   /// No description provided for @cancel.
@@ -293,13 +257,13 @@ abstract class AppLocalizations {
   /// No description provided for @complete.
   ///
   /// In en, this message translates to:
-  /// **'All items prepared. This does not guarantee eligibility or approval.'**
+  /// **'All items prepared. Confirm final rules with the agency before visiting.'**
   String get complete;
 
   /// No description provided for @empty.
   ///
   /// In en, this message translates to:
-  /// **'Your preparation starts here. Open a journey to build its checklist.'**
+  /// **'Your preparation starts here. Open a guide to track steps, details, and what to bring.'**
   String get empty;
 
   /// No description provided for @language.
@@ -313,6 +277,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose your language'**
   String get chooseLanguage;
+
+  /// No description provided for @bilingualPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language / Piliin ang iyong wika'**
+  String get bilingualPrompt;
 
   /// No description provided for @languageHelp.
   ///
@@ -353,14 +323,8 @@ abstract class AppLocalizations {
   /// No description provided for @aboutBody.
   ///
   /// In en, this message translates to:
-  /// **'LakbayG helps you identify a service, review official guidance and save a readiness checklist. Your checklist and language stay on this device. No accounts or personal documents are collected.'**
+  /// **'LakbayG helps you identify the right government service, follow verified steps, save appointment details, and prepare a readiness checklist offline. Everything stays on this device—no accounts or personal uploads.'**
   String get aboutBody;
-
-  /// No description provided for @reviewNotice.
-  ///
-  /// In en, this message translates to:
-  /// **'Content and Filipino wording still require independent team review. The Taal procedure is not release-ready.'**
-  String get reviewNotice;
 
   /// No description provided for @retry.
   ///
@@ -374,58 +338,22 @@ abstract class AppLocalizations {
   /// **'LakbayG could not load its local content or saved data. Retry without clearing app data.'**
   String get loadError;
 
-  /// No description provided for @step.
-  ///
-  /// In en, this message translates to:
-  /// **'Step'**
-  String get step;
-
-  /// No description provided for @offline.
-  ///
-  /// In en, this message translates to:
-  /// **'Guidance available offline'**
-  String get offline;
-
   /// No description provided for @linksNeedInternet.
   ///
   /// In en, this message translates to:
   /// **'Official websites need an internet connection.'**
   String get linksNeedInternet;
 
-  /// No description provided for @greeting.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome to LakbayG'**
-  String get greeting;
-
-  /// No description provided for @quickActions.
-  ///
-  /// In en, this message translates to:
-  /// **'Quick actions'**
-  String get quickActions;
-
-  /// No description provided for @myGuides.
-  ///
-  /// In en, this message translates to:
-  /// **'My guides'**
-  String get myGuides;
-
   /// No description provided for @searchHint.
   ///
   /// In en, this message translates to:
-  /// **'Search a service or agency'**
+  /// **'Search service, agency, or keyword (e.g., first job)'**
   String get searchHint;
-
-  /// No description provided for @notSure.
-  ///
-  /// In en, this message translates to:
-  /// **'Not sure which service? Answer a few questions.'**
-  String get notSure;
 
   /// No description provided for @noResults.
   ///
   /// In en, this message translates to:
-  /// **'No matching service found. Try another word.'**
+  /// **'No matching service found. Try another keyword.'**
   String get noResults;
 
   /// No description provided for @steps.
@@ -446,31 +374,13 @@ abstract class AppLocalizations {
   /// **'Go to'**
   String get goTo;
 
-  /// No description provided for @progress.
-  ///
-  /// In en, this message translates to:
-  /// **'Your progress'**
-  String get progress;
-
-  /// No description provided for @itemsReady.
-  ///
-  /// In en, this message translates to:
-  /// **'items ready'**
-  String get itemsReady;
-
-  /// No description provided for @guidesStarted.
-  ///
-  /// In en, this message translates to:
-  /// **'guides started'**
-  String get guidesStarted;
-
   /// No description provided for @openGuide.
   ///
   /// In en, this message translates to:
   /// **'Open guide'**
   String get openGuide;
 
-  /// Progress label in the service questionnaire. A decision tree has no fixed length, so no total is shown.
+  /// Progress label in the service questionnaire.
   ///
   /// In en, this message translates to:
   /// **'Question {count}'**
@@ -481,6 +391,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What document do you need?'**
   String get documentQuestion;
+
+  /// No description provided for @pipWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsure which document you need? I’m Pip. Let’s find it together.'**
+  String get pipWelcome;
 
   /// No description provided for @resumeGuide.
   ///
@@ -499,6 +415,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prepared'**
   String get readyGroup;
+
+  /// No description provided for @catAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get catAll;
+
+  /// No description provided for @catClearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Clearances'**
+  String get catClearance;
+
+  /// No description provided for @catCivil.
+  ///
+  /// In en, this message translates to:
+  /// **'Civil Registry'**
+  String get catCivil;
+
+  /// No description provided for @catId.
+  ///
+  /// In en, this message translates to:
+  /// **'Gov IDs'**
+  String get catId;
+
+  /// No description provided for @catBenefits.
+  ///
+  /// In en, this message translates to:
+  /// **'First Job'**
+  String get catBenefits;
+
+  /// No description provided for @estimatedFee.
+  ///
+  /// In en, this message translates to:
+  /// **'Fee'**
+  String get estimatedFee;
+
+  /// No description provided for @processingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get processingTime;
+
+  /// No description provided for @validity.
+  ///
+  /// In en, this message translates to:
+  /// **'Validity'**
+  String get validity;
+
+  /// No description provided for @stepsDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} / {total} steps done'**
+  String stepsDone(Object done, Object total);
+
+  /// No description provided for @tapToMarkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a step number to mark it done'**
+  String get tapToMarkDone;
+
+  /// No description provided for @goToChecklist.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare what to bring'**
+  String get goToChecklist;
+
+  /// No description provided for @acceptedIds.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted valid IDs'**
+  String get acceptedIds;
+
+  /// No description provided for @goodToKnow.
+  ///
+  /// In en, this message translates to:
+  /// **'Good to know & tips'**
+  String get goodToKnow;
+
+  /// No description provided for @myItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Your added items'**
+  String get myItems;
+
+  /// No description provided for @addItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get addItem;
+
+  /// No description provided for @addItemHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Black pen, ID photocopy'**
+  String get addItemHint;
+
+  /// No description provided for @emptyItemError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an item name.'**
+  String get emptyItemError;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @myApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'My application details'**
+  String get myApplication;
+
+  /// No description provided for @trackerEmptyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your branch, schedule, or reference number offline on this phone.'**
+  String get trackerEmptyHint;
+
+  /// No description provided for @editDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit details'**
+  String get editDetails;
+
+  /// No description provided for @addDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Add appointment details'**
+  String get addDetails;
+
+  /// No description provided for @branchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Branch or station'**
+  String get branchLabel;
+
+  /// No description provided for @branchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., NBI Batangas City / Taal PNP'**
+  String get branchHint;
+
+  /// No description provided for @appointmentDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment date'**
+  String get appointmentDate;
+
+  /// No description provided for @pickDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose date'**
+  String get pickDate;
+
+  /// No description provided for @clearDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear date'**
+  String get clearDate;
+
+  /// No description provided for @referenceNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference / Transaction #'**
+  String get referenceNumber;
+
+  /// No description provided for @notesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal notes'**
+  String get notesLabel;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @clearDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear details'**
+  String get clearDetails;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get copied;
+
+  /// No description provided for @saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved offline on this device'**
+  String get saved;
+
+  /// No description provided for @quickComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick comparison'**
+  String get quickComparison;
+
+  /// No description provided for @relatedGuides.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended guides to explore'**
+  String get relatedGuides;
+
+  /// No description provided for @readyBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get readyBadge;
+
+  /// No description provided for @guidesStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'guides started'**
+  String get guidesStarted;
+
+  /// No description provided for @stepsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'steps'**
+  String get stepsLabel;
+
+  /// No description provided for @itemsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'items'**
+  String get itemsLabel;
+
+  /// No description provided for @offlineNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Works offline · Saved only on this device · Independent student guide; confirm final instructions with the agency.'**
+  String get offlineNote;
+
+  /// No description provided for @mapTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get mapTab;
+
+  /// No description provided for @navChecklists.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklists'**
+  String get navChecklists;
+
+  /// No description provided for @navSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get navSettings;
+
+  /// No description provided for @officeMapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Government Offices'**
+  String get officeMapTitle;
+
+  /// No description provided for @mapView.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get mapView;
+
+  /// No description provided for @listView.
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get listView;
+
+  /// No description provided for @allServices.
+  ///
+  /// In en, this message translates to:
+  /// **'All services'**
+  String get allServices;
+
+  /// No description provided for @allAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'All areas'**
+  String get allAreas;
+
+  /// No description provided for @officeHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical hours'**
+  String get officeHours;
+
+  /// No description provided for @getDirections.
+  ///
+  /// In en, this message translates to:
+  /// **'Get directions'**
+  String get getDirections;
+
+  /// No description provided for @useAsBranch.
+  ///
+  /// In en, this message translates to:
+  /// **'Use as my branch'**
+  String get useAsBranch;
+
+  /// No description provided for @branchSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved as your branch in checklist tracker.'**
+  String get branchSaved;
+
+  /// No description provided for @viewOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'View on map'**
+  String get viewOnMap;
+
+  /// No description provided for @viewOfficesOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'View offices on map ({count})'**
+  String viewOfficesOnMap(Object count);
+
+  /// No description provided for @distanceKm.
+  ///
+  /// In en, this message translates to:
+  /// **'{km} km away'**
+  String distanceKm(Object km);
+
+  /// No description provided for @locateMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Locate me'**
+  String get locateMe;
+
+  /// No description provided for @fitPins.
+  ///
+  /// In en, this message translates to:
+  /// **'Fit all pins'**
+  String get fitPins;
+
+  /// No description provided for @locationOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are turned off. Showing Batangas map.'**
+  String get locationOff;
+
+  /// No description provided for @locationDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission denied. You can still browse and filter offices.'**
+  String get locationDenied;
+
+  /// No description provided for @locationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not get current location right now.'**
+  String get locationUnavailable;
+
+  /// No description provided for @mapOfflineHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Map tiles need internet · Office directory & pins work offline'**
+  String get mapOfflineHint;
+
+  /// No description provided for @noOffices.
+  ///
+  /// In en, this message translates to:
+  /// **'No offices match your current filters.'**
+  String get noOffices;
+
+  /// No description provided for @osmAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'© OpenStreetMap'**
+  String get osmAttribution;
 }
 
 class _AppLocalizationsDelegate
